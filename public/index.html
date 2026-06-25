@@ -2,925 +2,133 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>کلینیک سپنتا</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
     <style>
-        @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Vazirmatn', Tahoma, sans-serif;
-        }
-        
-        :root {
-            --primary: #0d9488;
-            --primary-dark: #0f766e;
-            --primary-light: #ccfbf1;
-            --secondary: #6366f1;
-            --danger: #ef4444;
-            --success: #22c55e;
-            --warning: #f59e0b;
-            --bg: linear-gradient(135deg, #f0fdf4 0%, #ecfeff 50%, #f0f9ff 100%);
-            --card: rgba(255, 255, 255, 0.9);
-            --text: #1e293b;
-            --text-light: #64748b;
-            --border: #e2e8f0;
-        }
-        
-        body {
-            background: var(--bg);
-            min-height: 100vh;
-            color: var(--text);
-            padding-bottom: 80px;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tahoma', sans-serif; }
+        body { background: #f0fdf4; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
+        .container { width: 100%; max-width: 400px; padding: 20px; }
+        .card { background: white; border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .logo { text-align: center; margin-bottom: 20px; }
+        .logo .icon { font-size: 60px; display: block; }
+        .logo h1 { color: #0f766e; font-size: 22px; }
+        .logo p { color: #64748b; font-size: 13px; }
+        .toggle-group { display: flex; gap: 8px; background: #f1f5f9; padding: 4px; border-radius: 12px; margin-bottom: 20px; }
+        .toggle-btn { flex: 1; padding: 10px; border: none; border-radius: 10px; background: transparent; cursor: pointer; font-weight: 500; color: #64748b; }
+        .toggle-btn.active { background: white; color: #0f766e; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; font-size: 13px; color: #64748b; margin-bottom: 5px; }
+        .input-group input { width: 100%; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 14px; }
+        .input-group input:focus { outline: none; border-color: #0d9488; }
+        .btn { width: 100%; padding: 14px; background: #0d9488; color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; }
+        .btn:hover { background: #0f766e; }
+        .text-link { background: none; border: none; color: #0d9488; cursor: pointer; font-size: 13px; margin-top: 15px; }
         .hidden { display: none !important; }
-        
-        .header {
-            background: var(--card);
-            backdrop-filter: blur(12px);
-            padding: 12px 16px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        
-        .header-content {
-            max-width: 500px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .logo-icon { font-size: 28px; }
-        
-        .logo-text h1 {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--primary-dark);
-        }
-        
-        .logo-text p {
-            font-size: 10px;
-            color: var(--text-light);
-        }
-        
-        .logout-btn {
-            background: none;
-            border: none;
-            color: var(--danger);
-            font-size: 13px;
-            cursor: pointer;
-            font-family: inherit;
-        }
-        
-        .main {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 16px;
-        }
-        
-        .card {
-            background: var(--card);
-            backdrop-filter: blur(12px);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            border: 1px solid rgba(255,255,255,0.6);
-        }
-        
-        .card-title {
-            font-size: 15px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .welcome-card {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            border-radius: 20px;
-            padding: 24px;
-            margin-bottom: 16px;
-        }
-        
-        .welcome-card h2 {
-            font-size: 18px;
-            margin-bottom: 4px;
-        }
-        
-        .welcome-card .date {
-            font-size: 13px;
-            opacity: 0.9;
-        }
-        
-        .stats-row {
-            display: flex;
-            gap: 12px;
-            margin-top: 16px;
-        }
-        
-        .stat-box {
-            flex: 1;
-            background: rgba(255,255,255,0.2);
-            border-radius: 12px;
-            padding: 12px;
-            text-align: center;
-        }
-        
-        .stat-box .num {
-            font-size: 24px;
-            font-weight: 700;
-        }
-        
-        .stat-box .label {
-            font-size: 10px;
-            opacity: 0.9;
-        }
-        
-        .input-group { margin-bottom: 16px; }
-        
-        .input-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-light);
-            margin-bottom: 6px;
-        }
-        
-        .input-field {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            font-size: 14px;
-            font-family: inherit;
-            transition: border-color 0.3s;
-            background: white;
-        }
-        
-        .input-field:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        
-        textarea.input-field {
-            resize: vertical;
-            min-height: 80px;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 12px 24px;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 600;
-            font-family: inherit;
-            cursor: pointer;
-            border: none;
-            transition: all 0.3s;
-            width: 100%;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
-        }
-        
-        .btn-danger {
-            background: linear-gradient(135deg, var(--danger), #dc2626);
-            color: white;
-            padding: 8px 16px;
-            font-size: 12px;
-        }
-        
-        .btn-sm {
-            padding: 8px 16px;
-            font-size: 12px;
-        }
-        
-        .toggle-group {
-            display: flex;
-            gap: 8px;
-            background: #f1f5f9;
-            padding: 4px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-        }
-        
-        .toggle-btn {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            background: transparent;
-            border-radius: 10px;
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            font-family: inherit;
-            transition: all 0.3s;
-            color: var(--text-light);
-        }
-        
-        .toggle-btn.active {
-            background: white;
-            color: var(--primary-dark);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        
-        .staff-item, .list-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px;
-            background: #f8fafc;
-            border-radius: 12px;
-            margin-bottom: 8px;
-        }
-        
-        .staff-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .staff-icon { font-size: 24px; }
-        
-        .staff-name {
-            font-size: 14px;
-            font-weight: 600;
-        }
-        
-        .staff-role {
-            font-size: 11px;
-            color: var(--text-light);
-        }
-        
-        .badge {
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-        }
-        
+        .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); padding: 12px 24px; border-radius: 12px; z-index: 999; font-weight: 500; }
+        .toast.success { background: #22c55e; color: white; }
+        .toast.error { background: #ef4444; color: white; }
+        .page { display: none; }
+        .page.active { display: block; }
+        .header { background: white; padding: 15px 20px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
+        .header h2 { font-size: 16px; color: #0f766e; }
+        .header button { background: none; border: none; color: #ef4444; cursor: pointer; }
+        .content { padding: 20px; max-width: 500px; margin: 0 auto; }
+        .welcome-card { background: linear-gradient(135deg, #0d9488, #0f766e); color: white; border-radius: 16px; padding: 20px; margin-bottom: 20px; }
+        .welcome-card h2 { font-size: 18px; }
+        .welcome-card p { font-size: 13px; opacity: 0.9; }
+        .stats { display: flex; gap: 10px; margin-top: 15px; }
+        .stats .stat { flex: 1; background: rgba(255,255,255,0.2); border-radius: 12px; padding: 10px; text-align: center; }
+        .stats .stat .num { font-size: 22px; font-weight: 700; }
+        .stats .stat .label { font-size: 10px; opacity: 0.8; }
+        .staff-item, .appt-card { background: #f8fafc; border-radius: 12px; padding: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+        .badge { padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+        .badge-admin { background: #ccfbf1; color: #0f766e; }
         .badge-ot { background: #dbeafe; color: #1e40af; }
         .badge-slp { background: #f3e8ff; color: #7c3aed; }
-        .badge-psy { background: #fef3c7; color: #92400e; }
-        .badge-admin { background: #ccfbf1; color: #0f766e; }
-        .badge-sec { background: #f1f5f9; color: #475569; }
-        .badge-confirmed { background: #dcfce7; color: #166534; }
-        .badge-cancelled { background: #fee2e2; color: #991b1b; }
-        .badge-pending { background: #fef3c7; color: #92400e; }
-        
-        .date-grid, .time-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            max-height: 150px;
-            overflow-y: auto;
-            padding: 4px;
-        }
-        
-        .date-item, .time-item {
-            padding: 8px 12px;
-            border: 2px solid var(--border);
-            border-radius: 10px;
-            font-size: 12px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            background: white;
-        }
-        
-        .date-item:hover, .time-item:hover {
-            border-color: var(--primary);
-            background: var(--primary-light);
-        }
-        
-        .date-item.selected, .time-item.selected {
-            border-color: var(--primary);
-            background: var(--primary);
-            color: white;
-        }
-        
-        .date-item .day-name {
-            font-size: 10px;
-            opacity: 0.8;
-        }
-        
-        .therapist-btn {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 14px;
-            border: 2px solid var(--border);
-            border-radius: 14px;
-            background: white;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-bottom: 8px;
-            text-align: right;
-        }
-        
-        .therapist-btn:hover { border-color: var(--primary); }
-        
-        .therapist-btn.selected {
-            border-color: var(--primary);
-            background: var(--primary-light);
-        }
-        
-        .duration-toggle {
-            display: flex;
-            gap: 12px;
-        }
-        
-        .duration-btn {
-            flex: 1;
-            padding: 14px;
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            background: white;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: inherit;
-        }
-        
-        .duration-btn.selected {
-            border-color: var(--primary);
-            background: var(--primary-light);
-            color: var(--primary-dark);
-        }
-        
-        .appt-card {
-            background: #f8fafc;
-            border-radius: 12px;
-            padding: 14px;
-            margin-bottom: 10px;
-            border: 1px solid var(--border);
-        }
-        
-        .appt-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 8px;
-        }
-        
-        .appt-patient {
-            font-weight: 600;
-            font-size: 14px;
-        }
-        
-        .appt-staff {
-            font-size: 12px;
-            color: var(--text-light);
-        }
-        
-        .appt-details {
-            display: flex;
-            gap: 16px;
-            font-size: 12px;
-            color: var(--text-light);
-        }
-        
-        .appt-actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 10px;
-        }
-        
-        .appt-action-btn {
-            padding: 6px 12px;
-            border: none;
-            border-radius: 8px;
-            font-size: 11px;
-            cursor: pointer;
-            font-family: inherit;
-        }
-        
-        .appt-action-btn.edit { background: #dbeafe; color: #1e40af; }
-        .appt-action-btn.cancel { background: #fee2e2; color: #991b1b; }
-        .appt-action-btn.delete { background: #fecaca; color: #b91c1c; }
-        
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: var(--card);
-            backdrop-filter: blur(12px);
-            border-top: 1px solid var(--border);
-            padding: 8px 0;
-            z-index: 100;
-        }
-        
-        .nav-content {
-            max-width: 500px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-around;
-        }
-        
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2px;
-            padding: 8px 12px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.2s;
-            background: none;
-            border: none;
-            font-family: inherit;
-            color: var(--text-light);
-            min-width: 60px;
-        }
-        
-        .nav-item.active {
-            color: var(--primary);
-            background: var(--primary-light);
-        }
-        
-        .nav-item .nav-icon { font-size: 20px; }
-        .nav-item .nav-label { font-size: 10px; font-weight: 500; }
-        
-        .toast {
-            position: fixed;
-            top: 16px;
-            left: 16px;
-            right: 16px;
-            padding: 14px 20px;
-            border-radius: 12px;
-            text-align: center;
-            font-size: 14px;
-            font-weight: 500;
-            z-index: 1000;
-            animation: slideDown 0.3s ease;
-        }
-        
-        .toast.error { background: var(--danger); color: white; }
-        .toast.success { background: var(--success); color: white; }
-        
-        @keyframes slideDown {
-            from { transform: translateY(-20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        
-        .login-container {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        
-        .login-card {
-            width: 100%;
-            max-width: 380px;
-        }
-        
-        .login-logo {
-            text-align: center;
-            margin-bottom: 24px;
-        }
-        
-        .login-logo .icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #2dd4bf, var(--primary-dark));
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-            margin: 0 auto 12px;
-            box-shadow: 0 8px 24px rgba(13, 148, 136, 0.3);
-        }
-        
-        .login-logo h1 {
-            font-size: 20px;
-            color: var(--primary-dark);
-        }
-        
-        .login-logo p {
-            font-size: 12px;
-            color: var(--text-light);
-        }
-        
-        .text-link {
-            background: none;
-            border: none;
-            color: var(--primary);
-            font-size: 13px;
-            cursor: pointer;
-            font-family: inherit;
-            font-weight: 500;
-        }
-        
-        .info-box {
-            background: linear-gradient(135deg, #fef3c7, #fef9c3);
-            border: 1px solid #fcd34d;
-            border-radius: 12px;
-            padding: 14px;
-            margin-bottom: 16px;
-        }
-        
-        .info-box .title {
-            font-size: 13px;
-            font-weight: 600;
-            color: #92400e;
-            margin-bottom: 4px;
-        }
-        
-        .info-box .text {
-            font-size: 12px;
-            color: #a16207;
-        }
-        
-        .receipt-preview {
-            width: 100%;
-            max-height: 200px;
-            object-fit: contain;
-            border-radius: 12px;
-            border: 2px solid var(--border);
-            margin-top: 10px;
-        }
-        
-        .filter-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-        
-        select.input-field { cursor: pointer; }
-        
-        .empty-state {
-            text-align: center;
-            padding: 32px 16px;
-            color: var(--text-light);
-            font-size: 14px;
-        }
-        
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.5);
-            z-index: 200;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        
-        .modal-content {
-            background: white;
-            border-radius: 20px;
-            padding: 24px;
-            width: 100%;
-            max-width: 400px;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-        
-        .modal-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+        .empty-state { text-align: center; padding: 30px; color: #94a3b8; font-size: 14px; }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; border-top: 1px solid #e2e8f0; display: flex; padding: 8px 0; }
+        .bottom-nav .nav-item { flex: 1; text-align: center; background: none; border: none; cursor: pointer; padding: 4px 0; color: #94a3b8; font-size: 11px; }
+        .bottom-nav .nav-item.active { color: #0d9488; }
+        .bottom-nav .nav-item .icon { font-size: 20px; display: block; }
+        .date-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+        .date-item { padding: 8px 12px; border: 2px solid #e2e8f0; border-radius: 10px; cursor: pointer; font-size: 12px; }
+        .date-item.selected { border-color: #0d9488; background: #ccfbf1; }
+        .therapist-btn { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 12px; background: white; cursor: pointer; margin-bottom: 8px; text-align: right; }
+        .therapist-btn.selected { border-color: #0d9488; background: #ccfbf1; }
+        .duration-btn { padding: 10px 16px; border: 2px solid #e2e8f0; border-radius: 10px; background: white; cursor: pointer; }
+        .duration-btn.selected { border-color: #0d9488; background: #ccfbf1; }
+        .time-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+        .time-item { padding: 8px 14px; border: 2px solid #e2e8f0; border-radius: 10px; cursor: pointer; font-size: 12px; }
+        .time-item.selected { border-color: #0d9488; background: #0d9488; color: white; }
     </style>
 </head>
 <body>
     <div id="toast" class="toast hidden"></div>
-    
-    <div id="loginPage" class="login-container">
-        <div class="card login-card">
-            <div class="login-logo">
-                <div class="icon">🏥</div>
+
+    <!-- صفحه ورود -->
+    <div id="loginPage" class="container">
+        <div class="card">
+            <div class="logo">
+                <span class="icon">🏥</span>
                 <h1>کلینیک سپنتا</h1>
                 <p>کاردرمانی، گفتاردرمانی و روانشناسی</p>
             </div>
-            
             <div class="toggle-group">
                 <button class="toggle-btn active" onclick="setLoginType('patient')">🧑‍⚕️ بیمار</button>
                 <button class="toggle-btn" onclick="setLoginType('staff')">👨‍💼 کادر درمان</button>
             </div>
-            
             <div class="input-group">
                 <label>شماره تماس</label>
-                <input type="tel" id="loginPhone" class="input-field" placeholder="09xxxxxxxxx" dir="ltr">
+                <input type="text" id="loginPhone" placeholder="09xxxxxxxxx">
             </div>
-            
             <div class="input-group">
                 <label>رمز عبور</label>
-                <input type="password" id="loginPassword" class="input-field" placeholder="رمز عبور">
+                <input type="password" id="loginPassword" placeholder="رمز عبور">
             </div>
-            
-            <button class="btn btn-primary" onclick="login()">ورود</button>
-            
-            <div id="registerLink" style="text-align: center; margin-top: 16px;">
-                <button class="text-link" onclick="showPage('registerPage')">حساب ندارید؟ ثبت‌نام کنید ←</button>
-            </div>
-        </div>
-    </div>
-    
-    <div id="registerPage" class="login-container hidden">
-        <div class="card login-card">
-            <div class="login-logo">
-                <div class="icon">📝</div>
-                <h1>ثبت‌نام بیمار</h1>
-                <p>کلینیک سپنتا</p>
-            </div>
-            
-            <div class="input-group">
-                <label>نام و نام خانوادگی</label>
-                <input type="text" id="regName" class="input-field" placeholder="نام کامل">
-            </div>
-            
-            <div class="input-group">
-                <label>شماره تماس</label>
-                <input type="tel" id="regPhone" class="input-field" placeholder="09xxxxxxxxx" dir="ltr">
-            </div>
-            
-            <div class="input-group">
-                <label>تشخیص / بیماری</label>
-                <textarea id="regDiagnosis" class="input-field" placeholder="توضیحات بیماری"></textarea>
-            </div>
-            
-            <div class="input-group">
-                <label>رمز عبور</label>
-                <input type="password" id="regPassword" class="input-field" placeholder="یک رمز عبور انتخاب کنید">
-            </div>
-            
-            <button class="btn btn-primary" onclick="register()">ثبت‌نام</button>
-            
-            <div style="text-align: center; margin-top: 16px;">
-                <button class="text-link" onclick="showPage('loginPage')">بازگشت به ورود ←</button>
-            </div>
-        </div>
-    </div>
-    
-    <div id="mainApp" class="hidden">
-        <header class="header">
-            <div class="header-content">
-                <div class="logo-section">
-                    <span class="logo-icon">🏥</span>
-                    <div class="logo-text">
-                        <h1>کلینیک سپنتا</h1>
-                        <p id="headerUserInfo"></p>
-                    </div>
-                </div>
-                <button class="logout-btn" onclick="logout()">خروج ↩</button>
-            </div>
-        </header>
-        
-        <main class="main">
-            <div id="adminDashboard" class="page hidden">
-                <div class="welcome-card">
-                    <h2 id="welcomeName">سلام! 👋</h2>
-                    <p class="date" id="todayDate"></p>
-                    <div class="stats-row">
-                        <div class="stat-box">
-                            <div class="num" id="statTodayAppts">0</div>
-                            <div class="label">نوبت امروز</div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="num" id="statPatients">0</div>
-                            <div class="label">بیمار ثبت‌شده</div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="num" id="statStaff">5</div>
-                            <div class="label">کادر درمان</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h3 class="card-title">👥 کادر درمان</h3>
-                    <div id="staffList"></div>
-                </div>
-                
-                <div class="card">
-                    <h3 class="card-title">📅 نوبت‌های امروز</h3>
-                    <div id="todayAppointments"></div>
-                </div>
-            </div>
-            
-            <div id="staffSchedule" class="page hidden">
-                <div class="card">
-                    <h3 class="card-title">🕐 تنظیم برنامه کاری</h3>
-                    
-                    <div class="input-group">
-                        <label>انتخاب تاریخ</label>
-                        <div class="date-grid" id="scheduleDateGrid"></div>
-                    </div>
-                    
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-                        <div class="input-group">
-                            <label>ساعت شروع</label>
-                            <input type="time" id="scheduleStart" class="input-field" value="08:00" dir="ltr">
-                        </div>
-                        <div class="input-group">
-                            <label>ساعت پایان</label>
-                            <input type="time" id="scheduleEnd" class="input-field" value="17:00" dir="ltr">
-                        </div>
-                    </div>
-                    
-                    <button class="btn btn-primary" onclick="saveSchedule()">ذخیره برنامه</button>
-                </div>
-                
-                <div class="card">
-                    <h3 class="card-title">📋 برنامه‌های ثبت شده</h3>
-                    <div id="mySchedules"></div>
-                </div>
-            </div>
-            
-            <div id="staffAppointments" class="page hidden">
-                <div class="card">
-                    <h3 class="card-title">📅 نوبت‌های من</h3>
-                    <div id="myStaffAppts"></div>
-                </div>
-            </div>
-            
-            <div id="patientBooking" class="page hidden">
-                <div class="card">
-                    <h3 class="card-title">📅 رزرو نوبت</h3>
-                    
-                    <div class="input-group">
-                        <label>۱. انتخاب درمانگر</label>
-                        <div id="therapistList"></div>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label>۲. مدت جلسه</label>
-                        <div class="duration-toggle">
-                            <button class="duration-btn selected" onclick="setDuration(30)">⏱️ ۳۰ دقیقه</button>
-                            <button class="duration-btn" onclick="setDuration(45)">⏱️ ۴۵ دقیقه</button>
-                        </div>
-                    </div>
-                    
-                    <div class="input-group" id="bookingDateSection" style="display: none;">
-                        <label>۳. انتخاب تاریخ</label>
-                        <div class="date-grid" id="bookingDateGrid"></div>
-                    </div>
-                    
-                    <div class="input-group" id="bookingTimeSection" style="display: none;">
-                        <label>۴. انتخاب ساعت</label>
-                        <div class="time-grid" id="bookingTimeGrid"></div>
-                    </div>
-                    
-                    <button class="btn btn-primary" id="bookBtn" style="display: none;" onclick="bookAppointment()">✅ ثبت نوبت</button>
-                </div>
-            </div>
-            
-            <div id="patientAppointments" class="page hidden">
-                <div class="card">
-                    <h3 class="card-title">📋 نوبت‌های من</h3>
-                    <div id="myPatientAppts"></div>
-                </div>
-            </div>
-            
-            <div id="patientPayment" class="page hidden">
-                <div class="card">
-                    <h3 class="card-title">💳 ارسال رسید پرداخت</h3>
-                    
-                    <div class="info-box">
-                        <div class="title">💡 راهنمای پرداخت</div>
-                        <div class="text">لطفا مبلغ جلسه را کارت‌به‌کارت کرده و تصویر رسید را بارگذاری کنید</div>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label>مبلغ (تومان)</label>
-                        <input type="text" id="paymentAmount" class="input-field" placeholder="مبلغ واریزی" dir="ltr">
-                    </div>
-                    
-                    <div class="input-group">
-                        <label>توضیحات</label>
-                        <textarea id="paymentDesc" class="input-field" placeholder="توضیحات (اختیاری)"></textarea>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label>تصویر رسید پرداخت</label>
-                        <input type="file" id="paymentFile" class="input-field" accept="image/*" onchange="previewReceipt()">
-                        <img id="receiptPreview" class="receipt-preview hidden">
-                    </div>
-                    
-                    <button class="btn btn-primary" onclick="submitPayment()">📤 ارسال رسید</button>
-                </div>
-                
-                <div class="card">
-                    <h3 class="card-title">📋 تاریخچه پرداخت‌ها</h3>
-                    <div id="myPayments"></div>
-                </div>
-            </div>
-            
-            <div id="adminPatients" class="page hidden">
-                <div class="card">
-                    <h3 class="card-title">👥 لیست بیماران</h3>
-                    <div class="input-group">
-                        <input type="text" id="patientSearch" class="input-field" placeholder="🔍 جستجو نام، شماره یا تشخیص..." oninput="filterPatients()">
-                    </div>
-                    <div id="patientsList"></div>
-                </div>
-            </div>
-            
-            <div id="adminPayments" class="page hidden">
-                <div class="card">
-                    <h3 class="card-title">💳 مدیریت پرداخت‌ها</h3>
-                    <div id="allPayments"></div>
-                </div>
-            </div>
-            
-            <div id="adminAllAppts" class="page hidden">
-                <div class="card">
-                    <h3 class="card-title">🔍 فیلتر نوبت‌ها</h3>
-                    <div class="filter-row">
-                        <div class="input-group" style="margin: 0;">
-                            <label>تاریخ</label>
-                            <select id="filterDate" class="input-field" onchange="loadAllAppointments()"></select>
-                        </div>
-                        <div class="input-group" style="margin: 0;">
-                            <label>درمانگر</label>
-                            <select id="filterStaff" class="input-field" onchange="loadAllAppointments()"></select>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h3 class="card-title">📅 نوبت‌ها</h3>
-                    <div id="filteredAppts"></div>
-                </div>
-            </div>
-        </main>
-        
-        <nav class="bottom-nav">
-            <div class="nav-content" id="bottomNav"></div>
-        </nav>
-    </div>
-    
-    <div id="editModal" class="modal-overlay hidden" onclick="closeEditModal(event)">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <h3 class="modal-title">✏️ ویرایش نوبت</h3>
-            <p id="editModalInfo" style="font-size: 13px; margin-bottom: 16px; color: var(--text-light);"></p>
-            
-            <div class="input-group">
-                <label>تاریخ</label>
-                <select id="editDate" class="input-field"></select>
-            </div>
-            
-            <div class="input-group">
-                <label>ساعت شروع</label>
-                <input type="time" id="editTime" class="input-field" dir="ltr">
-            </div>
-            
-            <div class="input-group">
-                <label>مدت</label>
-                <div class="duration-toggle">
-                    <button class="duration-btn" id="editDur30" onclick="setEditDuration(30)">۳۰ دقیقه</button>
-                    <button class="duration-btn" id="editDur45" onclick="setEditDuration(45)">۴۵ دقیقه</button>
-                </div>
-            </div>
-            
-            <div style="display: flex; gap: 12px;">
-                <button class="btn btn-primary" style="flex: 1;" onclick="saveEditedAppt()">ذخیره</button>
-                <button class="btn btn-danger" style="flex: 1;" onclick="closeEditModal()">انصراف</button>
+            <button class="btn" onclick="login()">ورود</button>
+            <div style="text-align:center;margin-top:12px;">
+                <button class="text-link" onclick="showRegister()">حساب ندارید؟ ثبت‌نام کنید</button>
             </div>
         </div>
     </div>
 
+    <!-- صفحه ثبت‌نام -->
+    <div id="registerPage" class="container hidden">
+        <div class="card">
+            <div class="logo">
+                <span class="icon">📝</span>
+                <h1>ثبت‌نام بیمار</h1>
+            </div>
+            <div class="input-group"><label>نام و نام خانوادگی</label><input type="text" id="regName" placeholder="نام کامل"></div>
+            <div class="input-group"><label>شماره تماس</label><input type="text" id="regPhone" placeholder="09xxxxxxxxx"></div>
+            <div class="input-group"><label>تشخیص</label><input type="text" id="regDiagnosis" placeholder="توضیحات بیماری"></div>
+            <div class="input-group"><label>رمز عبور</label><input type="password" id="regPassword" placeholder="رمز عبور"></div>
+            <button class="btn" onclick="register()">ثبت‌نام</button>
+            <div style="text-align:center;margin-top:12px;">
+                <button class="text-link" onclick="showLogin()">بازگشت به ورود</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- اپ اصلی -->
+    <div id="mainApp" class="hidden">
+        <div class="header">
+            <h2>🏥 کلینیک سپنتا</h2>
+            <div>
+                <span id="headerUser" style="font-size:13px;color:#64748b;margin-left:10px;"></span>
+                <button onclick="logout()">خروج</button>
+            </div>
+        </div>
+        <div class="content" id="pageContent">
+            <!-- صفحات توسط جاوااسکریپت پر می‌شوند -->
+        </div>
+        <div class="bottom-nav" id="bottomNav"></div>
+    </div>
+
     <script>
+        // ============================================================
+        // داده‌های پیش‌فرض
+        // ============================================================
         const DEFAULT_STAFF = [
             { id: 1, name: 'فاطمه بغدادی', role: 'admin', phone: '09120000001', password: 'admin123' },
             { id: 2, name: 'آقای رحمانی', role: 'ot', phone: '09120000002', password: 'staff123' },
@@ -928,33 +136,70 @@
             { id: 4, name: 'خانم شعبانی', role: 'psychologist', phone: '09120000004', password: 'staff123' },
             { id: 5, name: 'خانم علیخانی', role: 'secretary', phone: '09120000005', password: 'staff123' }
         ];
-        
+
         const ROLE_LABELS = {
-            admin: 'کاردرمانگر (مدیر)',
+            admin: 'مدیر',
             ot: 'کاردرمانگر',
             slp: 'گفتاردرمانگر',
             psychologist: 'روانشناس',
             secretary: 'منشی'
         };
-        
         const ROLE_ICONS = { admin: '🧠', ot: '🤲', slp: '🗣️', psychologist: '💆', secretary: '📋' };
-        const ROLE_BADGES = { admin: 'badge-admin', ot: 'badge-ot', slp: 'badge-slp', psychologist: 'badge-psy', secretary: 'badge-sec' };
-        
-        function initData() {
-            if (!localStorage.getItem('sepanta_staff')) localStorage.setItem('sepanta_staff', JSON.stringify(DEFAULT_STAFF));
-            if (!localStorage.getItem('sepanta_patients')) localStorage.setItem('sepanta_patients', JSON.stringify([]));
-            if (!localStorage.getItem('sepanta_schedules')) localStorage.setItem('sepanta_schedules', JSON.stringify([]));
-            if (!localStorage.getItem('sepanta_appointments')) localStorage.setItem('sepanta_appointments', JSON.stringify([]));
-            if (!localStorage.getItem('sepanta_payments')) localStorage.setItem('sepanta_payments', JSON.stringify([]));
+        const ROLE_BADGES = { admin: 'badge-admin', ot: 'badge-ot', slp: 'badge-slp', psychologist: 'badge-admin', secretary: 'badge-admin' };
+
+        // ============================================================
+        // متغیرهای عمومی
+        // ============================================================
+        let currentUser = null;
+        let loginType = 'patient';
+        let cachedData = { staff: [], patients: [], schedules: [], appointments: [], payments: [] };
+        let selectedTherapist = 0, selectedDuration = 30, selectedDate = '', selectedTime = '';
+        let editingId = null, editDuration = 30;
+        let receiptBase64 = '';
+
+        // ============================================================
+        // توابع کمکی
+        // ============================================================
+        function showToast(msg, type = 'error') {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.className = `toast ${type}`;
+            t.classList.remove('hidden');
+            setTimeout(() => t.classList.add('hidden'), 3000);
         }
-        
-        function getData(key) { return JSON.parse(localStorage.getItem('sepanta_' + key) || '[]'); }
-        function setData(key, data) { localStorage.setItem('sepanta_' + key, JSON.stringify(data)); }
-        
+
+        function showLogin() {
+            document.getElementById('loginPage').classList.remove('hidden');
+            document.getElementById('registerPage').classList.add('hidden');
+            document.getElementById('mainApp').classList.add('hidden');
+        }
+
+        function showRegister() {
+            document.getElementById('loginPage').classList.add('hidden');
+            document.getElementById('registerPage').classList.remove('hidden');
+            document.getElementById('mainApp').classList.add('hidden');
+        }
+
+        function setLoginType(type) {
+            loginType = type;
+            document.querySelectorAll('.toggle-btn').forEach((b, i) => {
+                b.classList.toggle('active', (i === 0 && type === 'patient') || (i === 1 && type === 'staff'));
+            });
+        }
+
+        // ============================================================
+        // توابع تاریخ شمسی
+        // ============================================================
+        function todayJalaali() {
+            const d = new Date();
+            const j = gregorianToJalaali(d.getFullYear(), d.getMonth() + 1, d.getDate());
+            return `${j.jy}/${String(j.jm).padStart(2,'0')}/${String(j.jd).padStart(2,'0')}`;
+        }
+
         function gregorianToJalaali(gy, gm, gd) {
-            const g_d_m = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+            const g_d_m = [0,31,59,90,120,151,181,212,243,273,304,334];
             let gy2 = gm > 2 ? gy + 1 : gy;
-            let days = 355666 + 365 * gy + Math.floor((gy2 + 3) / 4) - Math.floor((gy2 + 99) / 100) + Math.floor((gy2 + 399) / 400) + gd + g_d_m[gm - 1];
+            let days = 355666 + 365 * gy + Math.floor((gy2 + 3) / 4) - Math.floor((gy2 + 99) / 100) + Math.floor((gy2 + 399) / 400) + gd + g_d_m[gm-1];
             let jy = -1595 + 33 * Math.floor(days / 12053);
             days %= 12053;
             jy += 4 * Math.floor(days / 1461);
@@ -965,11 +210,17 @@
             else { jm = 7 + Math.floor((days - 186) / 30); jd = 1 + ((days - 186) % 30); }
             return { jy, jm, jd };
         }
-        
+
+        function jalaaliDayName(jy, jm, jd) {
+            const g = jalaaliToGregorian(jy, jm, jd);
+            const d = new Date(g.gy, g.gm - 1, g.gd);
+            return ['یکشنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنجشنبه','جمعه','شنبه'][d.getDay()];
+        }
+
         function jalaaliToGregorian(jy, jm, jd) {
             let jy2 = jy + 979;
-            const j_days_in_month = [31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29];
-            const g_days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+            const j_days_in_month = [31,31,31,31,31,31,30,30,30,30,30,29];
+            const g_days_in_month = [31,28,31,30,31,30,31,31,30,31,30,31];
             let j_day_no = 365 * jy2 + Math.floor(jy2 / 33) * 8 + Math.floor(((jy2 % 33) + 3) / 4);
             for (let i = 0; i < jm - 1; ++i) j_day_no += j_days_in_month[i];
             j_day_no += jd - 1;
@@ -987,468 +238,511 @@
             for (let i = 0; i < 12 && g_day_no >= g_d_m2[i]; ++i) { g_day_no -= g_d_m2[i]; gm++; }
             return { gy, gm: gm + 1, gd: g_day_no + 1 };
         }
-        
-        function todayJalaali() {
-            const d = new Date();
-            const { jy, jm, jd } = gregorianToJalaali(d.getFullYear(), d.getMonth() + 1, d.getDate());
-            return `${jy}/${String(jm).padStart(2, '0')}/${String(jd).padStart(2, '0')}`;
-        }
-        
-        function jalaaliDayName(jy, jm, jd) {
-            const { gy, gm, gd } = jalaaliToGregorian(jy, jm, jd);
-            const d = new Date(gy, gm - 1, gd);
-            const days = ['یکشنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه', 'شنبه'];
-            return days[d.getDay()];
-        }
-        
+
         function getNext30Days() {
             const result = [];
             const today = new Date();
             for (let i = 0; i < 30; i++) {
                 const d = new Date(today); d.setDate(d.getDate() + i);
-                const { jy, jm, jd } = gregorianToJalaali(d.getFullYear(), d.getMonth() + 1, d.getDate());
-                const dateStr = `${jy}/${String(jm).padStart(2, '0')}/${String(jd).padStart(2, '0')}`;
-                result.push({ dateStr, dayName: jalaaliDayName(jy, jm, jd) });
+                const j = gregorianToJalaali(d.getFullYear(), d.getMonth() + 1, d.getDate());
+                const dateStr = `${j.jy}/${String(j.jm).padStart(2,'0')}/${String(j.jd).padStart(2,'0')}`;
+                result.push({ dateStr, dayName: jalaaliDayName(j.jy, j.jm, j.jd) });
             }
             return result;
         }
-        
-        function showToast(message, type = 'error') {
-            const toast = document.getElementById('toast');
-            toast.textContent = (type === 'error' ? '❌ ' : '✅ ') + message;
-            toast.className = `toast ${type}`;
-            setTimeout(() => toast.classList.add('hidden'), 3000);
-        }
-        
-        function showPage(pageId) {
-            document.querySelectorAll('.login-container, #mainApp').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.page').forEach(el => el.classList.add('hidden'));
-            if (pageId === 'loginPage' || pageId === 'registerPage') document.getElementById(pageId).classList.remove('hidden');
-            else { document.getElementById('mainApp').classList.remove('hidden'); document.getElementById(pageId).classList.remove('hidden'); }
-        }
-        
-        let currentUser = null;
-        let loginType = 'patient';
-        
-        function setLoginType(type) {
-            loginType = type;
-            document.querySelectorAll('.toggle-btn').forEach((btn, i) => btn.classList.toggle('active', (i === 0 && type === 'patient') || (i === 1 && type === 'staff')));
-            document.getElementById('registerLink').style.display = type === 'patient' ? 'block' : 'none';
-        }
-        
-        function login() {
-            const phone = document.getElementById('loginPhone').value.trim();
-            const password = document.getElementById('loginPassword').value;
-            if (!phone || !password) { showToast('لطفا شماره تماس و رمز عبور را وارد کنید'); return; }
-            if (loginType === 'staff') {
-                const user = getData('staff').find(s => s.phone === phone && s.password === password);
-                if (!user) { showToast('شماره تماس یا رمز عبور اشتباه است'); return; }
-                currentUser = { ...user, userType: 'staff' };
-            } else {
-                const user = getData('patients').find(p => p.phone === phone && p.password === password);
-                if (!user) { showToast('بیمار یافت نشد. لطفا ابتدا ثبت‌نام کنید'); return; }
-                currentUser = { ...user, userType: 'patient' };
-            }
-            localStorage.setItem('sepanta_currentUser', JSON.stringify(currentUser));
-            initApp();
-        }
-        
-        function register() {
-            const name = document.getElementById('regName').value.trim();
-            const phone = document.getElementById('regPhone').value.trim();
-            const diagnosis = document.getElementById('regDiagnosis').value.trim();
-            const password = document.getElementById('regPassword').value;
-            if (!name || !phone || !diagnosis || !password) { showToast('لطفا تمام فیلدها را تکمیل کنید'); return; }
-            const patients = getData('patients');
-            if (patients.find(p => p.phone === phone)) { showToast('این شماره تماس قبلا ثبت شده است'); return; }
-            const newPatient = { id: Date.now(), name, phone, diagnosis, password, createdAt: new Date().toISOString() };
-            patients.push(newPatient);
-            setData('patients', patients);
-            currentUser = { ...newPatient, userType: 'patient' };
-            localStorage.setItem('sepanta_currentUser', JSON.stringify(currentUser));
-            showToast('ثبت‌نام موفقیت‌آمیز بود!', 'success');
-            initApp();
-        }
-        
-        function logout() {
-            currentUser = null;
-            localStorage.removeItem('sepanta_currentUser');
-            showPage('loginPage');
-            document.getElementById('loginPhone').value = '';
-            document.getElementById('loginPassword').value = '';
-        }
-        
-        function initApp() {
-            document.getElementById('headerUserInfo').textContent = `${currentUser.name} | ${currentUser.userType === 'staff' ? ROLE_LABELS[currentUser.role] : 'بیمار'}`;
-            setupNavigation();
-            if (currentUser.userType === 'staff') {
-                if (currentUser.role === 'admin' || currentUser.role === 'secretary') navigateTo('adminDashboard');
-                else navigateTo('staffSchedule');
-            } else navigateTo('patientBooking');
-        }
-        
-        function setupNavigation() {
-            const nav = document.getElementById('bottomNav');
-            let items = [];
-            if (currentUser.userType === 'staff') {
-                if (currentUser.role === 'admin' || currentUser.role === 'secretary') {
-                    items = [
-                        { id: 'adminDashboard', icon: '📊', label: 'داشبورد' },
-                        { id: 'adminAllAppts', icon: '📅', label: 'نوبت‌ها' },
-                        { id: 'adminPatients', icon: '👥', label: 'بیماران' },
-                        { id: 'adminPayments', icon: '💳', label: 'پرداخت‌ها' }
-                    ];
-                    if (currentUser.role === 'admin') items.push({ id: 'staffSchedule', icon: '🕐', label: 'برنامه کاری' });
-                } else {
-                    items = [
-                        { id: 'staffSchedule', icon: '🕐', label: 'برنامه کاری' },
-                        { id: 'staffAppointments', icon: '📅', label: 'نوبت‌های من' }
-                    ];
-                }
-            } else {
-                items = [
-                    { id: 'patientBooking', icon: '📅', label: 'رزرو نوبت' },
-                    { id: 'patientAppointments', icon: '📋', label: 'نوبت‌های من' },
-                    { id: 'patientPayment', icon: '💳', label: 'پرداخت' }
-                ];
-            }
-            nav.innerHTML = items.map(item => `<button class="nav-item" data-page="${item.id}" onclick="navigateTo('${item.id}')"><span class="nav-icon">${item.icon}</span><span class="nav-label">${item.label}</span></button>`).join('');
-        }
-        
-        let currentPage = '';
-        
-        function navigateTo(pageId) {
-            currentPage = pageId;
-            document.querySelectorAll('.page').forEach(el => el.classList.add('hidden'));
-            document.getElementById(pageId).classList.remove('hidden');
-            document.querySelectorAll('.nav-item').forEach(btn => btn.classList.toggle('active', btn.dataset.page === pageId));
-            switch(pageId) {
-                case 'adminDashboard': loadAdminDashboard(); break;
-                case 'staffSchedule': loadStaffSchedule(); break;
-                case 'staffAppointments': loadStaffAppointments(); break;
-                case 'patientBooking': loadPatientBooking(); break;
-                case 'patientAppointments': loadPatientAppointments(); break;
-                case 'patientPayment': loadPatientPayment(); break;
-                case 'adminPatients': loadAdminPatients(); break;
-                case 'adminPayments': loadAdminPayments(); break;
-                case 'adminAllAppts': loadAllAppointments(); break;
-            }
-        }
-        
-        function loadAdminDashboard() {
-            const today = todayJalaali();
-            const appointments = getData('appointments');
-            const patients = getData('patients');
-            const staff = getData('staff');
-            document.getElementById('welcomeName').textContent = `سلام، ${currentUser.name} 👋`;
-            document.getElementById('todayDate').textContent = `امروز ${today}`;
-            const todayAppts = appointments.filter(a => a.dateStr === today && a.status === 'confirmed');
-            document.getElementById('statTodayAppts').textContent = todayAppts.length;
-            document.getElementById('statPatients').textContent = patients.length;
-            document.getElementById('statStaff').textContent = staff.length;
-            document.getElementById('staffList').innerHTML = staff.map(s => `<div class="staff-item"><div class="staff-info"><span class="staff-icon">${ROLE_ICONS[s.role]}</span><div><div class="staff-name">${s.name}</div><div class="staff-role">${s.phone}</div></div></div><span class="badge ${ROLE_BADGES[s.role]}">${ROLE_LABELS[s.role]}</span></div>`).join('');
-            if (todayAppts.length === 0) document.getElementById('todayAppointments').innerHTML = '<div class="empty-state">نوبتی برای امروز ثبت نشده</div>';
-            else document.getElementById('todayAppointments').innerHTML = todayAppts.map(a => {
-                const patient = patients.find(p => p.id === a.patientId) || {};
-                const staffMember = staff.find(s => s.id === a.staffId) || {};
-                return `<div class="appt-card"><div class="appt-header"><div><div class="appt-patient">${ROLE_ICONS[staffMember.role] || ''} ${patient.name || 'نامشخص'}</div><div class="appt-staff">${staffMember.name || ''} - ${ROLE_LABELS[staffMember.role] || ''}</div></div><span class="badge badge-confirmed">تأیید شده</span></div><div class="appt-details"><span>🕐 ${a.startTime} - ${a.endTime}</span><span>⏱️ ${a.duration} دقیقه</span></div></div>`;
-            }).join('');
-        }
-        
-        let selectedScheduleDate = '';
-        
-        function loadStaffSchedule() {
-            const days = getNext30Days();
-            document.getElementById('scheduleDateGrid').innerHTML = days.map(d => `<div class="date-item ${selectedScheduleDate === d.dateStr ? 'selected' : ''}" onclick="selectScheduleDate('${d.dateStr}')"><div class="day-name">${d.dayName}</div><div>${d.dateStr.split('/').slice(1).join('/')}</div></div>`).join('');
-            loadMySchedules();
-        }
-        
-        function selectScheduleDate(dateStr) { selectedScheduleDate = dateStr; loadStaffSchedule(); }
-        
-        function saveSchedule() {
-            if (!selectedScheduleDate) { showToast('لطفا تاریخ را انتخاب کنید'); return; }
-            const startTime = document.getElementById('scheduleStart').value;
-            const endTime = document.getElementById('scheduleEnd').value;
-            const schedules = getData('schedules');
-            const filtered = schedules.filter(s => !(s.staffId === currentUser.id && s.dateStr === selectedScheduleDate));
-            filtered.push({ id: Date.now(), staffId: currentUser.id, dateStr: selectedScheduleDate, startTime, endTime });
-            setData('schedules', filtered);
-            showToast('برنامه کاری ذخیره شد', 'success');
-            loadMySchedules();
-        }
-        
-        function loadMySchedules() {
-            const schedules = getData('schedules').filter(s => s.staffId === currentUser.id);
-            if (schedules.length === 0) { document.getElementById('mySchedules').innerHTML = '<div class="empty-state">برنامه‌ای ثبت نشده</div>'; return; }
-            document.getElementById('mySchedules').innerHTML = schedules.map(s => `<div class="list-item"><div><div style="font-weight: 600; font-size: 14px;">📅 ${s.dateStr}</div><div style="font-size: 12px; color: var(--text-light);" dir="ltr">${s.startTime} - ${s.endTime}</div></div><button class="btn btn-danger btn-sm" onclick="deleteSchedule(${s.id})">🗑️ حذف</button></div>`).join('');
-        }
-        
-        function deleteSchedule(id) {
-            setData('schedules', getData('schedules').filter(s => s.id !== id));
-            showToast('برنامه حذف شد', 'success');
-            loadMySchedules();
-        }
-        
-        function loadStaffAppointments() {
-            const appointments = getData('appointments').filter(a => a.staffId === currentUser.id);
-            const patients = getData('patients');
-            if (appointments.length === 0) { document.getElementById('myStaffAppts').innerHTML = '<div class="empty-state">نوبتی ثبت نشده</div>'; return; }
-            document.getElementById('myStaffAppts').innerHTML = appointments.map(a => {
-                const patient = patients.find(p => p.id === a.patientId) || {};
-                return `<div class="appt-card"><div class="appt-header"><div><div class="appt-patient">👤 ${patient.name || 'نامشخص'}</div><div class="appt-staff">📞 ${patient.phone || ''}</div></div><span class="badge ${a.status === 'confirmed' ? 'badge-confirmed' : 'badge-cancelled'}">${a.status === 'confirmed' ? 'تأیید شده' : 'لغو شده'}</span></div><div class="appt-details"><span>📅 ${a.dateStr}</span><span>🕐 ${a.startTime} - ${a.endTime}</span><span>⏱️ ${a.duration} دقیقه</span></div>${a.status === 'confirmed' ? `<div class="appt-actions"><button class="appt-action-btn cancel" onclick="cancelAppointment(${a.id})">🚫 لغو</button></div>` : ''}</div>`;
-            }).join('');
-        }
-        
-        let selectedTherapist = 0, selectedDuration = 30, selectedBookingDate = '', selectedBookingTime = '';
-        
-        function loadPatientBooking() {
-            const staff = getData('staff').filter(s => s.role !== 'secretary');
-            document.getElementById('therapistList').innerHTML = staff.map(s => `<button class="therapist-btn ${selectedTherapist === s.id ? 'selected' : ''}" onclick="selectTherapist(${s.id})"><span style="font-size: 24px;">${ROLE_ICONS[s.role]}</span><div><div style="font-weight: 600; font-size: 14px;">${s.name}</div><div style="font-size: 12px; color: var(--text-light);">${ROLE_LABELS[s.role]}</div></div></button>`).join('');
-            updateBookingUI();
-        }
-        
-        function selectTherapist(id) { selectedTherapist = id; selectedBookingDate = ''; selectedBookingTime = ''; loadPatientBooking(); }
-        
-        function setDuration(dur) {
-            selectedDuration = dur;
-            document.querySelectorAll('.duration-btn').forEach((btn, i) => btn.classList.toggle('selected', (i === 0 && dur === 30) || (i === 1 && dur === 45)));
-            if (selectedBookingDate) loadAvailableSlots();
-        }
-        
-        function updateBookingUI() {
-            const dateSection = document.getElementById('bookingDateSection');
-            const timeSection = document.getElementById('bookingTimeSection');
-            const bookBtn = document.getElementById('bookBtn');
-            if (selectedTherapist) {
-                dateSection.style.display = 'block';
-                const days = getNext30Days();
-                document.getElementById('bookingDateGrid').innerHTML = days.map(d => `<div class="date-item ${selectedBookingDate === d.dateStr ? 'selected' : ''}" onclick="selectBookingDate('${d.dateStr}')"><div class="day-name">${d.dayName}</div><div>${d.dateStr.split('/').slice(1).join('/')}</div></div>`).join('');
-            } else dateSection.style.display = 'none';
-            if (selectedBookingDate) { timeSection.style.display = 'block'; loadAvailableSlots(); } else timeSection.style.display = 'none';
-            bookBtn.style.display = selectedBookingTime ? 'block' : 'none';
-        }
-        
-        function selectBookingDate(dateStr) { selectedBookingDate = dateStr; selectedBookingTime = ''; updateBookingUI(); }
-        
-        function loadAvailableSlots() {
-            const schedules = getData('schedules');
-            const appointments = getData('appointments');
-            const schedule = schedules.find(s => s.staffId === selectedTherapist && s.dateStr === selectedBookingDate);
-            if (!schedule) { document.getElementById('bookingTimeGrid').innerHTML = '<div class="empty-state">⚠️ زمان خالی در این تاریخ وجود ندارد</div>'; return; }
-            const existingAppts = appointments.filter(a => a.staffId === selectedTherapist && a.dateStr === selectedBookingDate && a.status === 'confirmed');
-            const slots = [];
-            const toMin = t => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
-            const toTime = m => `${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
-            let current = toMin(schedule.startTime);
-            const end = toMin(schedule.endTime);
-            while (current + selectedDuration <= end) {
-                const startTime = toTime(current);
-                const endTime = toTime(current + selectedDuration);
-                let conflict = false;
-                for (const appt of existingAppts) {
-                    const apptStart = toMin(appt.startTime);
-                    const apptEnd = toMin(appt.endTime);
-                    if (current < apptEnd && current + selectedDuration > apptStart) { conflict = true; break; }
-                }
-                if (!conflict) slots.push({ startTime, endTime });
-                current += 15;
-            }
-            if (slots.length === 0) { document.getElementById('bookingTimeGrid').innerHTML = '<div class="empty-state">⚠️ زمان خالی در این تاریخ وجود ندارد</div>'; return; }
-            document.getElementById('bookingTimeGrid').innerHTML = slots.map(s => `<div class="time-item ${selectedBookingTime === s.startTime ? 'selected' : ''}" onclick="selectBookingTime('${s.startTime}')">${s.startTime} - ${s.endTime}</div>`).join('');
-        }
-        
-        function selectBookingTime(time) { selectedBookingTime = time; updateBookingUI(); }
-        
+
         function addMinutes(time, mins) {
             const [h, m] = time.split(':').map(Number);
             const total = h * 60 + m + mins;
             return `${String(Math.floor(total / 60)).padStart(2, '0')}:${String(total % 60).padStart(2, '0')}`;
         }
-        
-        function bookAppointment() {
-            if (!selectedTherapist || !selectedBookingDate || !selectedBookingTime) { showToast('لطفا درمانگر، تاریخ و ساعت را انتخاب کنید'); return; }
-            const appointments = getData('appointments');
-            const staff = getData('staff');
-            const toMin = t => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
-            const endTime = addMinutes(selectedBookingTime, selectedDuration);
-            const currentStaff = staff.find(s => s.id === selectedTherapist);
-            const currentRole = currentStaff?.role;
-            const patientAppts = appointments.filter(a => a.patientId === currentUser.id && a.dateStr === selectedBookingDate && a.status === 'confirmed');
-            for (const appt of patientAppts) {
-                const startMin = toMin(selectedBookingTime);
-                const endMin = toMin(endTime);
-                const apptStart = toMin(appt.startTime);
-                const apptEnd = toMin(appt.endTime);
-                if (startMin < apptEnd && endMin > apptStart) { showToast('بیمار در این زمان نوبت دیگری دارد'); return; }
+
+        // ============================================================
+        // توابع API (ساده شده)
+        // ============================================================
+        async function apiCall(method, url, data) {
+            try {
+                const options = { method, headers: { 'Content-Type': 'application/json' } };
+                if (data) options.body = JSON.stringify(data);
+                const res = await fetch(url, options);
+                if (!res.ok) throw new Error('خطا در ارتباط با سرور');
+                return await res.json();
+            } catch(e) {
+                showToast('❌ ' + e.message);
+                throw e;
             }
-            const otRoles = ['admin', 'ot'];
-            const isCurrentOT = otRoles.includes(currentRole);
-            const isCurrentSLP = currentRole === 'slp';
-            for (const appt of patientAppts) {
-                const apptStaff = staff.find(s => s.id === appt.staffId);
-                const isApptOT = otRoles.includes(apptStaff?.role);
-                const isApptSLP = apptStaff?.role === 'slp';
-                if ((isCurrentOT && isApptSLP) || (isCurrentSLP && isApptOT)) {
-                    const consecutive = appt.endTime === selectedBookingTime || endTime === appt.startTime;
-                    if (!consecutive) { showToast('جلسات کاردرمانی و گفتاردرمانی بیمار باید بلافاصله پشت سر هم باشند'); return; }
+        }
+
+        async function fetchAllData() {
+            try {
+                const [staff, patients, schedules, appointments, payments] = await Promise.all([
+                    apiCall('GET', '/api/staff'),
+                    apiCall('GET', '/api/patients'),
+                    apiCall('GET', '/api/schedules'),
+                    apiCall('GET', '/api/appointments'),
+                    apiCall('GET', '/api/payments')
+                ]);
+                cachedData = { staff, patients, schedules, appointments, payments };
+                return cachedData;
+            } catch(e) {
+                return null;
+            }
+        }
+
+        // ============================================================
+        // توابع ورود و خروج
+        // ============================================================
+        async function login() {
+            const phone = document.getElementById('loginPhone').value.trim();
+            const password = document.getElementById('loginPassword').value.trim();
+            if (!phone || !password) { showToast('لطفا شماره و رمز را وارد کنید'); return; }
+
+            try {
+                const result = await apiCall('POST', '/api/login', { phone, password, type: loginType });
+                if (result.error) { showToast(result.error); return; }
+                currentUser = { ...result, userType: loginType };
+                localStorage.setItem('sepanta_user', JSON.stringify(currentUser));
+                showToast('ورود موفق ✅', 'success');
+                await initApp();
+            } catch(e) {
+                showToast('خطا در ورود');
+            }
+        }
+
+        async function register() {
+            const name = document.getElementById('regName').value.trim();
+            const phone = document.getElementById('regPhone').value.trim();
+            const diagnosis = document.getElementById('regDiagnosis').value.trim();
+            const password = document.getElementById('regPassword').value.trim();
+            if (!name || !phone || !diagnosis || !password) { showToast('لطفا تمام فیلدها را پر کنید'); return; }
+
+            try {
+                const result = await apiCall('POST', '/api/patients', { name, phone, diagnosis, password });
+                if (result.error) { showToast(result.error); return; }
+                currentUser = { ...result, userType: 'patient' };
+                localStorage.setItem('sepanta_user', JSON.stringify(currentUser));
+                showToast('ثبت‌نام موفق ✅', 'success');
+                await initApp();
+            } catch(e) {
+                showToast('خطا در ثبت‌نام');
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('sepanta_user');
+            document.getElementById('loginPage').classList.remove('hidden');
+            document.getElementById('mainApp').classList.add('hidden');
+            showToast('خارج شدید', 'success');
+        }
+
+        // ============================================================
+        // راه‌اندازی اپ
+        // ============================================================
+        async function initApp() {
+            document.getElementById('loginPage').classList.add('hidden');
+            document.getElementById('registerPage').classList.add('hidden');
+            document.getElementById('mainApp').classList.remove('hidden');
+
+            const data = await fetchAllData();
+            if (!data) { showToast('خطا در دریافت داده‌ها'); return; }
+
+            document.getElementById('headerUser').textContent = currentUser.name;
+
+            // منوی پایین
+            const nav = document.getElementById('bottomNav');
+            let items = [];
+            if (currentUser.userType === 'staff') {
+                if (currentUser.role === 'admin' || currentUser.role === 'secretary') {
+                    items = [
+                        { id: 'dashboard', icon: '📊', label: 'داشبورد' },
+                        { id: 'appointments', icon: '📅', label: 'نوبت‌ها' },
+                        { id: 'patients', icon: '👥', label: 'بیماران' },
+                        { id: 'payments', icon: '💳', label: 'پرداخت‌ها' }
+                    ];
+                } else {
+                    items = [
+                        { id: 'schedule', icon: '🕐', label: 'برنامه' },
+                        { id: 'myappts', icon: '📋', label: 'نوبت‌ها' }
+                    ];
                 }
+            } else {
+                items = [
+                    { id: 'booking', icon: '📅', label: 'رزرو' },
+                    { id: 'myappts', icon: '📋', label: 'نوبت‌ها' },
+                    { id: 'payment', icon: '💳', label: 'پرداخت' }
+                ];
             }
-            const newAppt = { id: Date.now(), patientId: currentUser.id, staffId: selectedTherapist, dateStr: selectedBookingDate, startTime: selectedBookingTime, endTime: endTime, duration: selectedDuration, status: 'confirmed', createdAt: new Date().toISOString() };
-            appointments.push(newAppt);
-            setData('appointments', appointments);
-            showToast('نوبت با موفقیت ثبت شد! ✅', 'success');
-            selectedBookingTime = '';
-            updateBookingUI();
+            nav.innerHTML = items.map(item =>
+                `<button class="nav-item" onclick="navigateTo('${item.id}')">
+                    <span class="icon">${item.icon}</span>
+                    ${item.label}
+                </button>`
+            ).join('');
+
+            navigateTo(items[0].id);
         }
-        
-        function loadPatientAppointments() {
-            const appointments = getData('appointments').filter(a => a.patientId === currentUser.id);
-            const staff = getData('staff');
-            if (appointments.length === 0) { document.getElementById('myPatientAppts').innerHTML = '<div class="empty-state">نوبتی ثبت نشده</div>'; return; }
-            document.getElementById('myPatientAppts').innerHTML = appointments.map(a => {
-                const staffMember = staff.find(s => s.id === a.staffId) || {};
-                return `<div class="appt-card"><div class="appt-header"><div><div class="appt-patient">${ROLE_ICONS[staffMember.role] || ''} ${staffMember.name || 'نامشخص'}</div><div class="appt-staff">${ROLE_LABELS[staffMember.role] || ''}</div></div><span class="badge ${a.status === 'confirmed' ? 'badge-confirmed' : 'badge-cancelled'}">${a.status === 'confirmed' ? 'تأیید شده' : 'لغو شده'}</span></div><div class="appt-details"><span>📅 ${a.dateStr}</span><span>🕐 ${a.startTime} - ${a.endTime}</span><span>⏱️ ${a.duration} دقیقه</span></div></div>`;
-            }).join('');
+
+        // ============================================================
+        // هدایت بین صفحات
+        // ============================================================
+        function navigateTo(pageId) {
+            document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(b => {
+                if (b.textContent.trim().includes(pageId) || b.querySelector('.icon')?.textContent ===
+                    document.querySelector(`[onclick="navigateTo('${pageId}')"]`)?.querySelector('.icon')?.textContent) {
+                    b.classList.add('active');
+                }
+            });
+
+            const content = document.getElementById('pageContent');
+            switch(pageId) {
+                case 'dashboard': renderDashboard(); break;
+                case 'appointments': renderAllAppointments(); break;
+                case 'patients': renderPatients(); break;
+                case 'payments': renderAllPayments(); break;
+                case 'schedule': renderSchedule(); break;
+                case 'myappts': renderMyAppointments(); break;
+                case 'booking': renderBooking(); break;
+                case 'payment': renderPayment(); break;
+                default: content.innerHTML = '<div class="empty-state">صفحه‌ای یافت نشد</div>';
+            }
         }
-        
-        let receiptBase64 = '';
-        
-        function loadPatientPayment() { loadMyPayments(); }
-        
+
+        // ============================================================
+        // رندر صفحات
+        // ============================================================
+        function renderDashboard() {
+            const content = document.getElementById('pageContent');
+            const today = todayJalaali();
+            const todayAppts = cachedData.appointments.filter(a => a.date_str === today && a.status === 'confirmed');
+
+            content.innerHTML = `
+                <div class="welcome-card">
+                    <h2>سلام ${currentUser.name} 👋</h2>
+                    <p>امروز ${today}</p>
+                    <div class="stats">
+                        <div class="stat"><div class="num">${todayAppts.length}</div><div class="label">نوبت امروز</div></div>
+                        <div class="stat"><div class="num">${cachedData.patients.length}</div><div class="label">بیماران</div></div>
+                        <div class="stat"><div class="num">${cachedData.staff.length}</div><div class="label">کادر</div></div>
+                    </div>
+                </div>
+                <h3 style="margin-bottom:10px;">👥 کادر درمان</h3>
+                ${cachedData.staff.map(s => `
+                    <div class="staff-item">
+                        <span>${ROLE_ICONS[s.role]} ${s.name}</span>
+                        <span class="badge ${ROLE_BADGES[s.role]}">${ROLE_LABELS[s.role]}</span>
+                    </div>
+                `).join('')}
+                <h3 style="margin:15px 0 10px;">📅 نوبت‌های امروز</h3>
+                ${todayAppts.length === 0 ? '<div class="empty-state">نوبتی ثبت نشده</div>' :
+                    todayAppts.map(a => {
+                        const p = cachedData.patients.find(pt => pt.id === a.patient_id) || {};
+                        const s = cachedData.staff.find(st => st.id === a.staff_id) || {};
+                        return `<div class="appt-card"><div><strong>${p.name || 'نامشخص'}</strong><br><small>${s.name} - ${a.start_time} تا ${a.end_time}</small></div><span class="badge badge-admin">تأیید</span></div>`;
+                    }).join('')}
+            `;
+        }
+
+        function renderAllAppointments() {
+            const content = document.getElementById('pageContent');
+            const appts = cachedData.appointments;
+            content.innerHTML = `
+                <h3>📅 همه نوبت‌ها</h3>
+                ${appts.length === 0 ? '<div class="empty-state">نوبتی ثبت نشده</div>' :
+                    appts.map(a => {
+                        const p = cachedData.patients.find(pt => pt.id === a.patient_id) || {};
+                        const s = cachedData.staff.find(st => st.id === a.staff_id) || {};
+                        return `<div class="appt-card">
+                            <div><strong>${p.name || 'نامشخص'}</strong><br><small>${s.name || ''} | ${a.date_str} ${a.start_time}-${a.end_time}</small></div>
+                            <span class="badge ${a.status === 'confirmed' ? 'badge-admin' : ''}">${a.status === 'confirmed' ? 'تأیید' : 'لغو'}</span>
+                        </div>`;
+                    }).join('')}
+            `;
+        }
+
+        function renderPatients() {
+            const content = document.getElementById('pageContent');
+            content.innerHTML = `
+                <h3>👥 لیست بیماران</h3>
+                ${cachedData.patients.length === 0 ? '<div class="empty-state">بیماری ثبت نشده</div>' :
+                    cachedData.patients.map(p => `
+                        <div class="appt-card">
+                            <div><strong>${p.name}</strong><br><small>📞 ${p.phone}</small></div>
+                            <span class="badge badge-admin">${p.diagnosis || 'بدون تشخیص'}</span>
+                        </div>
+                    `).join('')}
+            `;
+        }
+
+        function renderAllPayments() {
+            const content = document.getElementById('pageContent');
+            const payments = cachedData.payments;
+            content.innerHTML = `
+                <h3>💳 مدیریت پرداخت‌ها</h3>
+                ${payments.length === 0 ? '<div class="empty-state">پرداختی ثبت نشده</div>' :
+                    payments.map(p => {
+                        const patient = cachedData.patients.find(pt => pt.id === p.patient_id) || {};
+                        return `<div class="appt-card">
+                            <div><strong>${patient.name || 'نامشخص'}</strong><br><small>${p.amount || 'بدون مبلغ'} تومان</small></div>
+                            <span class="badge ${p.status === 'pending' ? '' : 'badge-admin'}">${p.status === 'pending' ? 'در انتظار' : 'تأیید'}</span>
+                        </div>`;
+                    }).join('')}
+            `;
+        }
+
+        function renderSchedule() {
+            const content = document.getElementById('pageContent');
+            const days = getNext30Days();
+            const mySchedules = cachedData.schedules.filter(s => s.staff_id === currentUser.id);
+
+            content.innerHTML = `
+                <h3>🕐 تنظیم برنامه کاری</h3>
+                <div class="date-grid">
+                    ${days.map(d => `
+                        <div class="date-item" onclick="selectScheduleDate('${d.dateStr}')">${d.dayName}<br>${d.dateStr.split('/').slice(1).join('/')}</div>
+                    `).join('')}
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0;">
+                    <div class="input-group"><label>شروع</label><input type="time" id="schedStart" value="08:00"></div>
+                    <div class="input-group"><label>پایان</label><input type="time" id="schedEnd" value="17:00"></div>
+                </div>
+                <button class="btn" onclick="saveSchedule()">ذخیره برنامه</button>
+                <h3 style="margin-top:20px;">📋 برنامه‌های ثبت شده</h3>
+                ${mySchedules.length === 0 ? '<div class="empty-state">برنامه‌ای ثبت نشده</div>' :
+                    mySchedules.map(s => `
+                        <div class="appt-card">
+                            <div><strong>📅 ${s.date_str}</strong><br><small>${s.start_time} - ${s.end_time}</small></div>
+                            <button onclick="deleteSchedule(${s.id})" style="background:#fee2e2;border:none;padding:4px 12px;border-radius:8px;color:#991b1b;cursor:pointer;">🗑️</button>
+                        </div>
+                    `).join('')}
+            `;
+        }
+
+        let selectedScheduleDate = '';
+
+        function selectScheduleDate(date) {
+            selectedScheduleDate = date;
+            renderSchedule();
+        }
+
+        async function saveSchedule() {
+            if (!selectedScheduleDate) { showToast('لطفا تاریخ را انتخاب کنید'); return; }
+            const start = document.getElementById('schedStart').value;
+            const end = document.getElementById('schedEnd').value;
+            try {
+                await apiCall('POST', '/api/schedules', { staffId: currentUser.id, dateStr: selectedScheduleDate, startTime: start, endTime: end });
+                showToast('برنامه ذخیره شد ✅', 'success');
+                await fetchAllData();
+                renderSchedule();
+            } catch(e) { showToast('خطا در ذخیره'); }
+        }
+
+        async function deleteSchedule(id) {
+            try {
+                await apiCall('DELETE', `/api/schedules/${id}`);
+                showToast('برنامه حذف شد', 'success');
+                await fetchAllData();
+                renderSchedule();
+            } catch(e) { showToast('خطا در حذف'); }
+        }
+
+        function renderMyAppointments() {
+            const content = document.getElementById('pageContent');
+            let appts = [];
+            if (currentUser.userType === 'staff') {
+                appts = cachedData.appointments.filter(a => a.staff_id === currentUser.id);
+            } else {
+                appts = cachedData.appointments.filter(a => a.patient_id === currentUser.id);
+            }
+
+            content.innerHTML = `
+                <h3>📋 نوبت‌های من</h3>
+                ${appts.length === 0 ? '<div class="empty-state">نوبتی ثبت نشده</div>' :
+                    appts.map(a => {
+                        const p = cachedData.patients.find(pt => pt.id === a.patient_id) || {};
+                        const s = cachedData.staff.find(st => st.id === a.staff_id) || {};
+                        return `<div class="appt-card">
+                            <div><strong>${currentUser.userType === 'staff' ? p.name : s.name}</strong><br><small>${a.date_str} ${a.start_time}-${a.end_time}</small></div>
+                            <span class="badge ${a.status === 'confirmed' ? 'badge-admin' : ''}">${a.status === 'confirmed' ? 'تأیید' : 'لغو'}</span>
+                        </div>`;
+                    }).join('')}
+            `;
+        }
+
+        function renderBooking() {
+            const content = document.getElementById('pageContent');
+            const staff = cachedData.staff.filter(s => s.role !== 'secretary');
+            const days = getNext30Days();
+
+            content.innerHTML = `
+                <h3>📅 رزرو نوبت</h3>
+                <div class="input-group"><label>۱. انتخاب درمانگر</label>
+                    ${staff.map(s => `
+                        <button class="therapist-btn ${selectedTherapist === s.id ? 'selected' : ''}" onclick="selectTherapist(${s.id})">
+                            ${ROLE_ICONS[s.role]} ${s.name} - ${ROLE_LABELS[s.role]}
+                        </button>
+                    `).join('')}
+                </div>
+                <div class="input-group"><label>۲. مدت جلسه</label>
+                    <div style="display:flex;gap:10px;">
+                        <button class="duration-btn ${selectedDuration === 30 ? 'selected' : ''}" onclick="setDuration(30)">۳۰ دقیقه</button>
+                        <button class="duration-btn ${selectedDuration === 45 ? 'selected' : ''}" onclick="setDuration(45)">۴۵ دقیقه</button>
+                    </div>
+                </div>
+                ${selectedTherapist ? `
+                    <div class="input-group"><label>۳. انتخاب تاریخ</label>
+                        <div class="date-grid">
+                            ${days.map(d => `
+                                <div class="date-item ${selectedDate === d.dateStr ? 'selected' : ''}" onclick="selectDate('${d.dateStr}')">
+                                    ${d.dayName}<br>${d.dateStr.split('/').slice(1).join('/')}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                ` : ''}
+                ${selectedDate ? `
+                    <div class="input-group"><label>۴. انتخاب ساعت</label>
+                        <div class="time-grid" id="timeGrid"></div>
+                    </div>
+                ` : ''}
+                ${selectedTime ? `<button class="btn" onclick="bookAppointment()">✅ ثبت نوبت</button>` : ''}
+            `;
+
+            if (selectedDate) loadAvailableSlots();
+        }
+
+        function selectTherapist(id) { selectedTherapist = id; selectedDate = ''; selectedTime = ''; renderBooking(); }
+        function setDuration(d) { selectedDuration = d; renderBooking(); }
+        function selectDate(d) { selectedDate = d; selectedTime = ''; renderBooking(); }
+
+        function loadAvailableSlots() {
+            const schedule = cachedData.schedules.find(s => s.staff_id === selectedTherapist && s.date_str === selectedDate);
+            if (!schedule) {
+                document.getElementById('timeGrid').innerHTML = '<div class="empty-state">زمان خالی نیست</div>';
+                return;
+            }
+
+            const existing = cachedData.appointments.filter(a => a.staff_id === selectedTherapist && a.date_str === selectedDate && a.status === 'confirmed');
+            const slots = [];
+            const toMin = t => { const [h,m] = t.split(':').map(Number); return h*60+m; };
+            const toTime = m => `${String(Math.floor(m/60)).padStart(2,'0')}:${String(m%60).padStart(2,'0')}`;
+            let current = toMin(schedule.start_time);
+            const end = toMin(schedule.end_time);
+
+            while (current + selectedDuration <= end) {
+                const start = toTime(current);
+                const endTime = toTime(current + selectedDuration);
+                let conflict = false;
+                for (const a of existing) {
+                    const as = toMin(a.start_time);
+                    const ae = toMin(a.end_time);
+                    if (current < ae && current + selectedDuration > as) { conflict = true; break; }
+                }
+                if (!conflict) slots.push({ start, end: endTime });
+                current += 15;
+            }
+
+            document.getElementById('timeGrid').innerHTML = slots.length === 0 ? '<div class="empty-state">زمان خالی نیست</div>' :
+                slots.map(s => `
+                    <div class="time-item ${selectedTime === s.start ? 'selected' : ''}" onclick="selectTime('${s.start}')">
+                        ${s.start} - ${s.end}
+                    </div>
+                `).join('');
+        }
+
+        function selectTime(time) { selectedTime = time; renderBooking(); }
+
+        async function bookAppointment() {
+            if (!selectedTherapist || !selectedDate || !selectedTime) { showToast('لطفا همه موارد را انتخاب کنید'); return; }
+            const endTime = addMinutes(selectedTime, selectedDuration);
+            try {
+                await apiCall('POST', '/api/appointments', {
+                    patientId: currentUser.id,
+                    staffId: selectedTherapist,
+                    dateStr: selectedDate,
+                    startTime: selectedTime,
+                    endTime: endTime,
+                    duration: selectedDuration,
+                    status: 'confirmed'
+                });
+                showToast('نوبت ثبت شد ✅', 'success');
+                selectedTime = '';
+                await fetchAllData();
+                renderBooking();
+            } catch(e) { showToast('خطا در ثبت نوبت'); }
+        }
+
+        function renderPayment() {
+            const content = document.getElementById('pageContent');
+            const myPayments = cachedData.payments.filter(p => p.patient_id === currentUser.id);
+
+            content.innerHTML = `
+                <h3>💳 ارسال رسید پرداخت</h3>
+                <div class="info-box" style="background:#fef3c7;padding:12px;border-radius:12px;margin-bottom:15px;">
+                    <small>💰 مبلغ را کارت‌به‌کارت کنید و تصویر رسید را بارگذاری کنید</small>
+                </div>
+                <div class="input-group"><label>مبلغ (تومان)</label><input type="text" id="payAmount" placeholder="مبلغ"></div>
+                <div class="input-group"><label>توضیحات</label><input type="text" id="payDesc" placeholder="توضیحات"></div>
+                <div class="input-group"><label>تصویر رسید</label><input type="file" id="payFile" accept="image/*" onchange="previewReceipt()"></div>
+                <div id="receiptPreview"></div>
+                <button class="btn" onclick="submitPayment()">📤 ارسال رسید</button>
+                <h3 style="margin-top:20px;">📋 تاریخچه پرداخت‌ها</h3>
+                ${myPayments.length === 0 ? '<div class="empty-state">پرداختی ثبت نشده</div>' :
+                    myPayments.map(p => `
+                        <div class="appt-card">
+                            <div><strong>${p.amount || 'بدون مبلغ'} تومان</strong><br><small>${p.description || ''}</small></div>
+                            <span class="badge ${p.status === 'pending' ? '' : 'badge-admin'}">${p.status === 'pending' ? 'در انتظار' : 'تأیید'}</span>
+                        </div>
+                    `).join('')}
+            `;
+        }
+
         function previewReceipt() {
-            const file = document.getElementById('paymentFile').files[0];
+            const file = document.getElementById('payFile').files[0];
             if (!file) return;
-            if (file.size > 5 * 1024 * 1024) { showToast('حجم فایل نباید بیشتر از ۵ مگابایت باشد'); return; }
             const reader = new FileReader();
-            reader.onloadend = () => { receiptBase64 = reader.result; document.getElementById('receiptPreview').src = receiptBase64; document.getElementById('receiptPreview').classList.remove('hidden'); };
+            reader.onloadend = () => {
+                receiptBase64 = reader.result;
+                document.getElementById('receiptPreview').innerHTML = `<img src="${receiptBase64}" style="max-width:100%;border-radius:12px;margin:10px 0;">`;
+            };
             reader.readAsDataURL(file);
         }
-        
-        function submitPayment() {
-            if (!receiptBase64) { showToast('لطفا تصویر رسید پرداخت را بارگذاری کنید'); return; }
-            const payments = getData('payments');
-            payments.push({ id: Date.now(), patientId: currentUser.id, amount: document.getElementById('paymentAmount').value || null, description: document.getElementById('paymentDesc').value || null, receiptImage: receiptBase64, status: 'pending', createdAt: new Date().toISOString() });
-            setData('payments', payments);
-            showToast('رسید پرداخت ارسال شد ✅', 'success');
-            document.getElementById('paymentAmount').value = '';
-            document.getElementById('paymentDesc').value = '';
-            document.getElementById('paymentFile').value = '';
-            document.getElementById('receiptPreview').classList.add('hidden');
-            receiptBase64 = '';
-            loadMyPayments();
+
+        async function submitPayment() {
+            if (!receiptBase64) { showToast('لطفا تصویر رسید را بارگذاری کنید'); return; }
+            try {
+                await apiCall('POST', '/api/payments', {
+                    patientId: currentUser.id,
+                    amount: document.getElementById('payAmount').value || null,
+                    description: document.getElementById('payDesc').value || null,
+                    receiptImage: receiptBase64,
+                    status: 'pending'
+                });
+                showToast('رسید ارسال شد ✅', 'success');
+                receiptBase64 = '';
+                document.getElementById('payAmount').value = '';
+                document.getElementById('payDesc').value = '';
+                document.getElementById('payFile').value = '';
+                document.getElementById('receiptPreview').innerHTML = '';
+                await fetchAllData();
+                renderPayment();
+            } catch(e) { showToast('خطا در ارسال رسید'); }
         }
-        
-        function loadMyPayments() {
-            const payments = getData('payments').filter(p => p.patientId === currentUser.id);
-            if (payments.length === 0) { document.getElementById('myPayments').innerHTML = '<div class="empty-state">پرداختی ثبت نشده</div>'; return; }
-            document.getElementById('myPayments').innerHTML = payments.map(p => `<div class="list-item"><div><div style="font-weight: 600; font-size: 14px;">${p.amount ? p.amount + ' تومان' : 'بدون مبلغ'}</div>${p.description ? `<div style="font-size: 12px; color: var(--text-light);">${p.description}</div>` : ''}</div><span class="badge badge-${p.status}">${p.status === 'pending' ? 'در انتظار' : p.status === 'approved' ? 'تأیید شده' : 'رد شده'}</span></div>`).join('');
-        }
-        
-        function loadAdminPatients() { filterPatients(); }
-        
-        function filterPatients() {
-            const search = document.getElementById('patientSearch').value.toLowerCase();
-            let patients = getData('patients');
-            if (search) patients = patients.filter(p => p.name.toLowerCase().includes(search) || p.phone.includes(search) || p.diagnosis.toLowerCase().includes(search));
-            if (patients.length === 0) { document.getElementById('patientsList').innerHTML = '<div class="empty-state">بیماری یافت نشد</div>'; return; }
-            document.getElementById('patientsList').innerHTML = patients.map(p => `<div class="appt-card"><div style="display: flex; justify-content: space-between; align-items: flex-start;"><div><div style="font-weight: 600; font-size: 14px;">👤 ${p.name}</div><div style="font-size: 12px; color: var(--text-light); margin-top: 4px;">📞 ${p.phone}</div><div style="font-size: 12px; color: var(--text-light);">🏥 ${p.diagnosis}</div></div><a href="tel:${p.phone}" class="btn btn-primary btn-sm">📞 تماس</a></div></div>`).join('');
-        }
-        
-        function loadAdminPayments() {
-            const payments = getData('payments');
-            const patients = getData('patients');
-            if (payments.length === 0) { document.getElementById('allPayments').innerHTML = '<div class="empty-state">پرداختی ثبت نشده</div>'; return; }
-            document.getElementById('allPayments').innerHTML = payments.map(p => {
-                const patient = patients.find(pt => pt.id === p.patientId) || {};
-                return `<div class="appt-card"><div class="appt-header"><div><div class="appt-patient">${patient.name || 'نامشخص'}</div><div class="appt-staff">📞 ${patient.phone || ''}</div></div><span class="badge badge-${p.status}">${p.status === 'pending' ? 'در انتظار' : p.status === 'approved' ? 'تأیید شده' : 'رد شده'}</span></div>${p.amount ? `<div style="font-size: 14px; margin-top: 8px;">💰 ${p.amount} تومان</div>` : ''}${p.description ? `<div style="font-size: 12px; color: var(--text-light);">${p.description}</div>` : ''}${p.receiptImage ? `<img src="${p.receiptImage}" class="receipt-preview" style="margin-top: 8px;">` : ''}${p.status === 'pending' ? `<div class="appt-actions"><button class="appt-action-btn" style="background: #dcfce7; color: #166534;" onclick="updatePaymentStatus(${p.id}, 'approved')">✅ تأیید</button><button class="appt-action-btn cancel" onclick="updatePaymentStatus(${p.id}, 'rejected')">❌ رد</button></div>` : ''}</div>`;
-            }).join('');
-        }
-        
-        function updatePaymentStatus(id, status) {
-            const payments = getData('payments');
-            const idx = payments.findIndex(p => p.id === id);
-            if (idx !== -1) { payments[idx].status = status; setData('payments', payments); showToast(status === 'approved' ? 'پرداخت تأیید شد' : 'پرداخت رد شد', 'success'); loadAdminPayments(); }
-        }
-        
-        function loadAllAppointments() {
-            const today = todayJalaali();
-            const days = getNext30Days();
-            const staff = getData('staff').filter(s => s.role !== 'secretary');
-            const filterDate = document.getElementById('filterDate');
-            const filterStaff = document.getElementById('filterStaff');
-            if (filterDate.options.length <= 1) filterDate.innerHTML = '<option value="">همه تاریخ‌ها</option>' + days.map(d => `<option value="${d.dateStr}" ${d.dateStr === today ? 'selected' : ''}>${d.dayName} - ${d.dateStr}</option>`).join('');
-            if (filterStaff.options.length <= 1) filterStaff.innerHTML = '<option value="">همه</option>' + staff.map(s => `<option value="${s.id}">${s.name} - ${ROLE_LABELS[s.role]}</option>`).join('');
-            let appointments = getData('appointments');
-            const patients = getData('patients');
-            const allStaff = getData('staff');
-            const selectedDate = filterDate.value;
-            const selectedStaff = filterStaff.value;
-            if (selectedDate) appointments = appointments.filter(a => a.dateStr === selectedDate);
-            if (selectedStaff) appointments = appointments.filter(a => a.staffId === parseInt(selectedStaff));
-            if (appointments.length === 0) { document.getElementById('filteredAppts').innerHTML = '<div class="empty-state">نوبتی یافت نشد</div>'; return; }
-            document.getElementById('filteredAppts').innerHTML = appointments.map(a => {
-                const patient = patients.find(p => p.id === a.patientId) || {};
-                const staffMember = allStaff.find(s => s.id === a.staffId) || {};
-                return `<div class="appt-card"><div class="appt-header"><div><div class="appt-patient">${ROLE_ICONS[staffMember.role] || ''} ${patient.name || 'نامشخص'}</div><div class="appt-staff">${staffMember.name || ''} - ${ROLE_LABELS[staffMember.role] || ''}</div><div style="font-size: 11px; color: var(--text-light);">📞 ${patient.phone || ''}</div></div><span class="badge ${a.status === 'confirmed' ? 'badge-confirmed' : 'badge-cancelled'}">${a.status === 'confirmed' ? 'تأیید' : 'لغو'}</span></div><div class="appt-details"><span>📅 ${a.dateStr}</span><span>🕐 ${a.startTime}-${a.endTime}</span><span>⏱️ ${a.duration}د</span></div>${a.status === 'confirmed' ? `<div class="appt-actions"><button class="appt-action-btn edit" onclick="openEditModal(${a.id})">✏️ ویرایش</button><button class="appt-action-btn cancel" onclick="cancelAppointment(${a.id})">🚫 لغو</button><button class="appt-action-btn delete" onclick="deleteAppointment(${a.id})">🗑️ حذف</button></div>` : ''}</div>`;
-            }).join('');
-        }
-        
-        function cancelAppointment(id) {
-            const appointments = getData('appointments');
-            const idx = appointments.findIndex(a => a.id === id);
-            if (idx !== -1) { appointments[idx].status = 'cancelled'; setData('appointments', appointments); showToast('نوبت لغو شد', 'success'); if (currentPage === 'adminAllAppts') loadAllAppointments(); else if (currentPage === 'staffAppointments') loadStaffAppointments(); }
-        }
-        
-        function deleteAppointment(id) { setData('appointments', getData('appointments').filter(a => a.id !== id)); showToast('نوبت حذف شد', 'success'); loadAllAppointments(); }
-        
-        let editingApptId = null, editDuration = 30;
-        
-        function openEditModal(id) {
-            const appointments = getData('appointments');
-            const patients = getData('patients');
-            const staff = getData('staff');
-            const appt = appointments.find(a => a.id === id);
-            if (!appt) return;
-            editingApptId = id;
-            editDuration = appt.duration;
-            const patient = patients.find(p => p.id === appt.patientId) || {};
-            const staffMember = staff.find(s => s.id === appt.staffId) || {};
-            document.getElementById('editModalInfo').textContent = `بیمار: ${patient.name || 'نامشخص'} | درمانگر: ${staffMember.name || 'نامشخص'}`;
-            const days = getNext30Days();
-            document.getElementById('editDate').innerHTML = days.map(d => `<option value="${d.dateStr}" ${d.dateStr === appt.dateStr ? 'selected' : ''}>${d.dayName} - ${d.dateStr}</option>`).join('');
-            document.getElementById('editTime').value = appt.startTime;
-            document.getElementById('editDur30').classList.toggle('selected', editDuration === 30);
-            document.getElementById('editDur45').classList.toggle('selected', editDuration === 45);
-            document.getElementById('editModal').classList.remove('hidden');
-        }
-        
-        function closeEditModal(event) { if (!event || event.target === document.getElementById('editModal')) { document.getElementById('editModal').classList.add('hidden'); editingApptId = null; } }
-        
-        function setEditDuration(dur) { editDuration = dur; document.getElementById('editDur30').classList.toggle('selected', dur === 30); document.getElementById('editDur45').classList.toggle('selected', dur === 45); }
-        
-        function saveEditedAppt() {
-            if (!editingApptId) return;
-            const appointments = getData('appointments');
-            const idx = appointments.findIndex(a => a.id === editingApptId);
-            if (idx === -1) return;
-            const newDate = document.getElementById('editDate').value;
-            const newTime = document.getElementById('editTime').value;
-            const newEnd = addMinutes(newTime, editDuration);
-            appointments[idx].dateStr = newDate;
-            appointments[idx].startTime = newTime;
-            appointments[idx].endTime = newEnd;
-            appointments[idx].duration = editDuration;
-            setData('appointments', appointments);
-            showToast('نوبت ویرایش شد', 'success');
-            closeEditModal();
-            loadAllAppointments();
-        }
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            initData();
-            const savedUser = localStorage.getItem('sepanta_currentUser');
-            if (savedUser) { try { currentUser = JSON.parse(savedUser); initApp(); } catch { showPage('loginPage'); } }
-            else showPage('loginPage');
+
+        // ============================================================
+        // راه‌اندازی اولیه
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', async () => {
+            const saved = localStorage.getItem('sepanta_user');
+            if (saved) {
+                try {
+                    currentUser = JSON.parse(saved);
+                    await initApp();
+                    return;
+                } catch(e) {}
+            }
+            showLogin();
         });
     </script>
 </body>
