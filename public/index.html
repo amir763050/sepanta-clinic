@@ -4,450 +4,763 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>کلینیک سپنتا</title>
+    <!-- فونت وزیرمتن زیبا -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tahoma', sans-serif; }
-        body { background: #f0fdf4; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
-        .container { width: 100%; max-width: 400px; padding: 20px; }
-        .card { background: white; border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .logo { text-align: center; margin-bottom: 20px; }
-        .logo .icon { font-size: 60px; display: block; }
-        .logo h1 { color: #0f766e; font-size: 22px; }
-        .logo p { color: #64748b; font-size: 13px; }
-        .toggle-group { display: flex; gap: 8px; background: #f1f5f9; padding: 4px; border-radius: 12px; margin-bottom: 20px; }
-        .toggle-btn { flex: 1; padding: 10px; border: none; border-radius: 10px; background: transparent; cursor: pointer; font-weight: 500; color: #64748b; }
-        .toggle-btn.active { background: white; color: #0f766e; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        .input-group { margin-bottom: 15px; }
-        .input-group label { display: block; font-size: 13px; color: #64748b; margin-bottom: 5px; }
-        .input-group input { width: 100%; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 14px; }
-        .input-group input:focus { outline: none; border-color: #0d9488; }
-        .btn { width: 100%; padding: 14px; background: #0d9488; color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; }
-        .btn:hover { background: #0f766e; }
-        .text-link { background: none; border: none; color: #0d9488; cursor: pointer; font-size: 13px; margin-top: 15px; }
-        .hidden { display: none !important; }
-        .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); padding: 12px 24px; border-radius: 12px; z-index: 999; font-weight: 500; }
-        .toast.success { background: #22c55e; color: white; }
-        .toast.error { background: #ef4444; color: white; }
-        .page { display: none; }
-        .page.active { display: block; }
-        .header { background: white; padding: 15px 20px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
-        .header h2 { font-size: 16px; color: #0f766e; }
-        .header button { background: none; border: none; color: #ef4444; cursor: pointer; }
-        .content { padding: 20px; max-width: 500px; margin: 0 auto; }
-        .welcome-card { background: linear-gradient(135deg, #0d9488, #0f766e); color: white; border-radius: 16px; padding: 20px; margin-bottom: 20px; }
-        .welcome-card h2 { font-size: 18px; }
-        .welcome-card p { font-size: 13px; opacity: 0.9; }
-        .stats { display: flex; gap: 10px; margin-top: 15px; }
-        .stats .stat { flex: 1; background: rgba(255,255,255,0.2); border-radius: 12px; padding: 10px; text-align: center; }
-        .stats .stat .num { font-size: 22px; font-weight: 700; }
-        .stats .stat .label { font-size: 10px; opacity: 0.8; }
-        .staff-item, .appt-card { background: #f8fafc; border-radius: 12px; padding: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
-        .badge { padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', 'Tahoma', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(13, 148, 136, 0.85), rgba(15, 118, 110, 0.9)), 
+                        url('/1782413754791.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* کانتینر اصلی با شیشه‌ای (Glassmorphism) */
+        .glass-container {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 32px;
+            padding: 24px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* کارت‌های داخلی با پس‌زمینه سفید شفاف */
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(4px);
+            border-radius: 24px;
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo .icon {
+            font-size: 64px;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .logo h1 {
+            color: #0f766e;
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .logo p {
+            color: #475569;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        /* دکمه‌ها و ورودی‌ها با استایل نرم */
+        .input-group {
+            margin-bottom: 16px;
+        }
+        .input-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 6px;
+        }
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.9);
+        }
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: #0d9488;
+            box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.15);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #0d9488, #0f766e);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(13, 148, 136, 0.4);
+        }
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        }
+        .btn-danger:hover {
+            box-shadow: 0 8px 24px rgba(239, 68, 68, 0.4);
+        }
+
+        .toggle-group {
+            display: flex;
+            gap: 8px;
+            background: #f1f5f9;
+            padding: 6px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+        }
+        .toggle-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 12px;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 600;
+            color: #64748b;
+            transition: all 0.3s ease;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        .toggle-btn.active {
+            background: white;
+            color: #0f766e;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .badge {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
         .badge-admin { background: #ccfbf1; color: #0f766e; }
         .badge-ot { background: #dbeafe; color: #1e40af; }
         .badge-slp { background: #f3e8ff; color: #7c3aed; }
-        .empty-state { text-align: center; padding: 30px; color: #94a3b8; font-size: 14px; }
-        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; border-top: 1px solid #e2e8f0; display: flex; padding: 8px 0; }
-        .bottom-nav .nav-item { flex: 1; text-align: center; background: none; border: none; cursor: pointer; padding: 4px 0; color: #94a3b8; font-size: 11px; }
-        .bottom-nav .nav-item.active { color: #0d9488; }
-        .bottom-nav .nav-item .icon { font-size: 20px; display: block; }
-        .date-grid { display: flex; flex-wrap: wrap; gap: 8px; }
-        .date-item { padding: 8px 12px; border: 2px solid #e2e8f0; border-radius: 10px; cursor: pointer; font-size: 12px; }
-        .date-item.selected { border-color: #0d9488; background: #ccfbf1; }
-        .therapist-btn { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 12px; background: white; cursor: pointer; margin-bottom: 8px; text-align: right; }
-        .therapist-btn.selected { border-color: #0d9488; background: #ccfbf1; }
-        .duration-btn { padding: 10px 16px; border: 2px solid #e2e8f0; border-radius: 10px; background: white; cursor: pointer; }
-        .duration-btn.selected { border-color: #0d9488; background: #ccfbf1; }
-        .time-grid { display: flex; flex-wrap: wrap; gap: 8px; }
-        .time-item { padding: 8px 14px; border: 2px solid #e2e8f0; border-radius: 10px; cursor: pointer; font-size: 12px; }
-        .time-item.selected { border-color: #0d9488; background: #0d9488; color: white; }
+        .badge-pending { background: #fef3c7; color: #92400e; }
+        .badge-approved { background: #dcfce7; color: #166534; }
+
+        .staff-item, .appt-card, .payment-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(4px);
+            border-radius: 16px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.2s ease;
+        }
+        .staff-item:hover, .appt-card:hover, .payment-card:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 30px 16px;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .bottom-nav {
+            display: flex;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
+            padding: 6px;
+            margin-top: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .bottom-nav .nav-item {
+            flex: 1;
+            text-align: center;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px 4px;
+            border-radius: 14px;
+            color: #94a3b8;
+            font-size: 11px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        .bottom-nav .nav-item.active {
+            background: #0d9488;
+            color: white;
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+        }
+        .bottom-nav .nav-item .icon {
+            font-size: 20px;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .date-grid, .time-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .date-item, .time-item {
+            padding: 10px 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 14px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s ease;
+            background: rgba(255,255,255,0.6);
+            text-align: center;
+            flex: 1 0 auto;
+            min-width: 60px;
+        }
+        .date-item:hover, .time-item:hover {
+            border-color: #0d9488;
+            background: rgba(13, 148, 136, 0.08);
+        }
+        .date-item.selected, .time-item.selected {
+            border-color: #0d9488;
+            background: #0d9488;
+            color: white;
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 14px 28px;
+            border-radius: 16px;
+            z-index: 999;
+            font-weight: 600;
+            font-size: 14px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            animation: slideDown 0.3s ease;
+        }
+        .toast.success { background: rgba(34, 197, 94, 0.95); color: white; }
+        .toast.error { background: rgba(239, 68, 68, 0.95); color: white; }
+        .toast.info { background: rgba(59, 130, 246, 0.95); color: white; }
+
+        @keyframes slideDown {
+            from { transform: translate(-50%, -20px); opacity: 0; }
+            to { transform: translate(-50%, 0); opacity: 1; }
+        }
+
+        .hidden { display: none !important; }
+        .mt-10 { margin-top: 10px; }
+        .mt-20 { margin-top: 20px; }
+        .flex-between { display: flex; justify-content: space-between; align-items: center; }
+        .gap-8 { gap: 8px; }
+        .text-center { text-align: center; }
+        .w-full { width: 100%; }
+
+        /* استایل جستجوی بیمار */
+        .search-box {
+            margin-bottom: 16px;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            font-size: 14px;
+            background: rgba(255,255,255,0.8);
+        }
+        .search-box input:focus {
+            outline: none;
+            border-color: #0d9488;
+        }
+
+        /* بخش رسید بیماران */
+        .patient-payment-group {
+            margin-bottom: 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .patient-payment-header {
+            background: #f8fafc;
+            padding: 12px 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .patient-payment-header:hover {
+            background: #f1f5f9;
+        }
+        .patient-payment-body {
+            padding: 12px 16px;
+            background: white;
+        }
+        .payment-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .payment-item:last-child {
+            border-bottom: none;
+        }
+        .payment-receipt-img {
+            max-width: 80px;
+            max-height: 80px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* دکمه تایم کاری */
+        .time-selector {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .time-selector input {
+            flex: 1;
+        }
     </style>
 </head>
 <body>
-    <div id="toast" class="toast hidden"></div>
 
-    <!-- صفحه ورود -->
-    <div id="loginPage" class="container">
-        <div class="card">
-            <div class="logo">
-                <span class="icon">🏥</span>
-                <h1>کلینیک سپنتا</h1>
-                <p>کاردرمانی، گفتاردرمانی و روانشناسی</p>
-            </div>
-            <div class="toggle-group">
-                <button class="toggle-btn active" onclick="setLoginType('patient')">🧑‍⚕️ بیمار</button>
-                <button class="toggle-btn" onclick="setLoginType('staff')">👨‍💼 کادر درمان</button>
-            </div>
-            <div class="input-group">
-                <label>شماره تماس</label>
-                <input type="text" id="loginPhone" placeholder="09xxxxxxxxx">
-            </div>
-            <div class="input-group">
-                <label>رمز عبور</label>
-                <input type="password" id="loginPassword" placeholder="رمز عبور">
-            </div>
-            <button class="btn" onclick="login()">ورود</button>
-            <div style="text-align:center;margin-top:12px;">
-                <button class="text-link" onclick="showRegister()">حساب ندارید؟ ثبت‌نام کنید</button>
-            </div>
+<div id="toast" class="toast hidden"></div>
+
+<!-- ===================== صفحه ورود ===================== -->
+<div id="loginPage" class="glass-container">
+    <div class="card">
+        <div class="logo">
+            <span class="icon">🏥</span>
+            <h1>کلینیک سپنتا</h1>
+            <p>کاردرمانی، گفتاردرمانی و روانشناسی</p>
+        </div>
+        <div class="toggle-group">
+            <button class="toggle-btn active" onclick="setLoginType('patient')">🧑‍⚕️ بیمار</button>
+            <button class="toggle-btn" onclick="setLoginType('staff')">👨‍💼 کادر درمان</button>
+        </div>
+        <div class="input-group">
+            <label>شماره تماس</label>
+            <input type="text" id="loginPhone" placeholder="09xxxxxxxxx">
+        </div>
+        <div class="input-group">
+            <label>رمز عبور</label>
+            <input type="password" id="loginPassword" placeholder="رمز عبور">
+        </div>
+        <button class="btn" onclick="login()">ورود</button>
+        <div class="text-center mt-10">
+            <button class="text-link" style="background:none;border:none;color:#0d9488;cursor:pointer;font-size:13px;" onclick="showRegister()">حساب ندارید؟ ثبت‌نام کنید</button>
         </div>
     </div>
+</div>
 
-    <!-- صفحه ثبت‌نام -->
-    <div id="registerPage" class="container hidden">
-        <div class="card">
-            <div class="logo">
-                <span class="icon">📝</span>
-                <h1>ثبت‌نام بیمار</h1>
-            </div>
-            <div class="input-group"><label>نام و نام خانوادگی</label><input type="text" id="regName" placeholder="نام کامل"></div>
-            <div class="input-group"><label>شماره تماس</label><input type="text" id="regPhone" placeholder="09xxxxxxxxx"></div>
-            <div class="input-group"><label>تشخیص</label><input type="text" id="regDiagnosis" placeholder="توضیحات بیماری"></div>
-            <div class="input-group"><label>رمز عبور</label><input type="password" id="regPassword" placeholder="رمز عبور"></div>
-            <button class="btn" onclick="register()">ثبت‌نام</button>
-            <div style="text-align:center;margin-top:12px;">
-                <button class="text-link" onclick="showLogin()">بازگشت به ورود</button>
-            </div>
+<!-- ===================== صفحه ثبت‌نام ===================== -->
+<div id="registerPage" class="glass-container hidden">
+    <div class="card">
+        <div class="logo">
+            <span class="icon">📝</span>
+            <h1>ثبت‌نام بیمار</h1>
+        </div>
+        <div class="input-group"><label>نام و نام خانوادگی</label><input type="text" id="regName" placeholder="نام کامل"></div>
+        <div class="input-group"><label>شماره تماس</label><input type="text" id="regPhone" placeholder="09xxxxxxxxx"></div>
+        <div class="input-group"><label>تشخیص</label><input type="text" id="regDiagnosis" placeholder="توضیحات بیماری"></div>
+        <div class="input-group"><label>رمز عبور</label><input type="password" id="regPassword" placeholder="رمز عبور"></div>
+        <button class="btn" onclick="register()">ثبت‌نام</button>
+        <div class="text-center mt-10">
+            <button class="text-link" style="background:none;border:none;color:#0d9488;cursor:pointer;font-size:13px;" onclick="showLogin()">بازگشت به ورود</button>
         </div>
     </div>
+</div>
 
-    <!-- اپ اصلی -->
-    <div id="mainApp" class="hidden">
-        <div class="header">
-            <h2>🏥 کلینیک سپنتا</h2>
-            <div>
-                <span id="headerUser" style="font-size:13px;color:#64748b;margin-left:10px;"></span>
-                <button onclick="logout()">خروج</button>
-            </div>
+<!-- ===================== اپ اصلی ===================== -->
+<div id="mainApp" class="glass-container hidden">
+    <!-- هدر -->
+    <div class="card" style="padding:16px 20px;display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <div>
+            <h2 style="font-size:18px;color:#0f766e;">🏥 کلینیک سپنتا</h2>
+            <span id="headerUser" style="font-size:13px;color:#475569;"></span>
         </div>
-        <div class="content" id="pageContent">
-            <!-- صفحات توسط جاوااسکریپت پر می‌شوند -->
-        </div>
-        <div class="bottom-nav" id="bottomNav"></div>
+        <button onclick="logout()" style="background:#fee2e2;border:none;padding:8px 16px;border-radius:12px;color:#dc2626;font-weight:600;cursor:pointer;">خروج</button>
     </div>
 
-    <script>
-        // ============================================================
-        // داده‌های پیش‌فرض
-        // ============================================================
-        const DEFAULT_STAFF = [
-            { id: 1, name: 'فاطمه بغدادی', role: 'admin', phone: '09120000001', password: 'admin123' },
-            { id: 2, name: 'آقای رحمانی', role: 'ot', phone: '09120000002', password: 'staff123' },
-            { id: 3, name: 'خانم شهسواری', role: 'slp', phone: '09120000003', password: 'staff123' },
-            { id: 4, name: 'خانم شعبانی', role: 'psychologist', phone: '09120000004', password: 'staff123' },
-            { id: 5, name: 'خانم علیخانی', role: 'secretary', phone: '09120000005', password: 'staff123' }
-        ];
+    <!-- محتوای صفحات -->
+    <div id="pageContent"></div>
 
-        const ROLE_LABELS = {
-            admin: 'مدیر',
-            ot: 'کاردرمانگر',
-            slp: 'گفتاردرمانگر',
-            psychologist: 'روانشناس',
-            secretary: 'منشی'
-        };
-        const ROLE_ICONS = { admin: '🧠', ot: '🤲', slp: '🗣️', psychologist: '💆', secretary: '📋' };
-        const ROLE_BADGES = { admin: 'badge-admin', ot: 'badge-ot', slp: 'badge-slp', psychologist: 'badge-admin', secretary: 'badge-admin' };
+    <!-- منوی پایین -->
+    <div class="bottom-nav" id="bottomNav"></div>
+</div>
 
-        // ============================================================
-        // متغیرهای عمومی
-        // ============================================================
-        let currentUser = null;
-        let loginType = 'patient';
-        let cachedData = { staff: [], patients: [], schedules: [], appointments: [], payments: [] };
-        let selectedTherapist = 0, selectedDuration = 30, selectedDate = '', selectedTime = '';
-        let editingId = null, editDuration = 30;
-        let receiptBase64 = '';
+<script>
+    // ============================================================
+    // داده‌های پیش‌فرض (کاربران اولیه)
+    // ============================================================
+    const DEFAULT_STAFF = [
+        { id: 1, name: 'فاطمه بغدادی', role: 'admin', phone: '09120000001', password: 'admin123' },
+        { id: 2, name: 'آقای رحمانی', role: 'ot', phone: '09120000002', password: 'staff123' },
+        { id: 3, name: 'خانم شهسواری', role: 'slp', phone: '09120000003', password: 'staff123' },
+        { id: 4, name: 'خانم شعبانی', role: 'psychologist', phone: '09120000004', password: 'staff123' },
+        { id: 5, name: 'خانم علیخانی', role: 'secretary', phone: '09120000005', password: 'staff123' }
+    ];
 
-        // ============================================================
-        // توابع کمکی
-        // ============================================================
-        function showToast(msg, type = 'error') {
-            const t = document.getElementById('toast');
-            t.textContent = msg;
-            t.className = `toast ${type}`;
-            t.classList.remove('hidden');
-            setTimeout(() => t.classList.add('hidden'), 3000);
-        }
+    const ROLE_LABELS = {
+        admin: 'مدیر',
+        ot: 'کاردرمانگر',
+        slp: 'گفتاردرمانگر',
+        psychologist: 'روانشناس',
+        secretary: 'منشی'
+    };
+    const ROLE_ICONS = { admin: '🧠', ot: '🤲', slp: '🗣️', psychologist: '💆', secretary: '📋' };
+    const ROLE_BADGES = { admin: 'badge-admin', ot: 'badge-ot', slp: 'badge-slp', psychologist: 'badge-admin', secretary: 'badge-admin' };
 
-        function showLogin() {
-            document.getElementById('loginPage').classList.remove('hidden');
-            document.getElementById('registerPage').classList.add('hidden');
-            document.getElementById('mainApp').classList.add('hidden');
-        }
+    // ============================================================
+    // متغیرهای عمومی
+    // ============================================================
+    let currentUser = null;
+    let loginType = 'patient';
+    let cachedData = { staff: [], patients: [], schedules: [], appointments: [], payments: [] };
+    let selectedTherapist = 0, selectedDuration = 30, selectedDate = '', selectedTime = '';
+    let editingId = null, editDuration = 30;
+    let receiptBase64 = '';
+    let selectedScheduleDate = '';
 
-        function showRegister() {
-            document.getElementById('loginPage').classList.add('hidden');
-            document.getElementById('registerPage').classList.remove('hidden');
-            document.getElementById('mainApp').classList.add('hidden');
-        }
+    // ============================================================
+    // توابع کمکی
+    // ============================================================
+    function showToast(msg, type = 'error') {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.className = `toast ${type}`;
+        t.classList.remove('hidden');
+        setTimeout(() => t.classList.add('hidden'), 4000);
+    }
 
-        function setLoginType(type) {
-            loginType = type;
-            document.querySelectorAll('.toggle-btn').forEach((b, i) => {
-                b.classList.toggle('active', (i === 0 && type === 'patient') || (i === 1 && type === 'staff'));
-            });
-        }
+    function showLogin() {
+        document.getElementById('loginPage').classList.remove('hidden');
+        document.getElementById('registerPage').classList.add('hidden');
+        document.getElementById('mainApp').classList.add('hidden');
+    }
 
-        // ============================================================
-        // توابع تاریخ شمسی
-        // ============================================================
-        function todayJalaali() {
-            const d = new Date();
+    function showRegister() {
+        document.getElementById('loginPage').classList.add('hidden');
+        document.getElementById('registerPage').classList.remove('hidden');
+        document.getElementById('mainApp').classList.add('hidden');
+    }
+
+    function setLoginType(type) {
+        loginType = type;
+        document.querySelectorAll('.toggle-btn').forEach((b, i) => {
+            b.classList.toggle('active', (i === 0 && type === 'patient') || (i === 1 && type === 'staff'));
+        });
+    }
+
+    // ============================================================
+    // توابع تاریخ شمسی
+    // ============================================================
+    function todayJalaali() {
+        const d = new Date();
+        const j = gregorianToJalaali(d.getFullYear(), d.getMonth() + 1, d.getDate());
+        return `${j.jy}/${String(j.jm).padStart(2,'0')}/${String(j.jd).padStart(2,'0')}`;
+    }
+
+    function gregorianToJalaali(gy, gm, gd) {
+        const g_d_m = [0,31,59,90,120,151,181,212,243,273,304,334];
+        let gy2 = gm > 2 ? gy + 1 : gy;
+        let days = 355666 + 365 * gy + Math.floor((gy2 + 3) / 4) - Math.floor((gy2 + 99) / 100) + Math.floor((gy2 + 399) / 400) + gd + g_d_m[gm-1];
+        let jy = -1595 + 33 * Math.floor(days / 12053);
+        days %= 12053;
+        jy += 4 * Math.floor(days / 1461);
+        days %= 1461;
+        if (days > 365) { jy += Math.floor((days - 1) / 365); days = (days - 1) % 365; }
+        let jm, jd;
+        if (days < 186) { jm = 1 + Math.floor(days / 31); jd = 1 + (days % 31); }
+        else { jm = 7 + Math.floor((days - 186) / 30); jd = 1 + ((days - 186) % 30); }
+        return { jy, jm, jd };
+    }
+
+    function jalaaliDayName(jy, jm, jd) {
+        const g = jalaaliToGregorian(jy, jm, jd);
+        const d = new Date(g.gy, g.gm - 1, g.gd);
+        return ['یکشنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنجشنبه','جمعه','شنبه'][d.getDay()];
+    }
+
+    function jalaaliToGregorian(jy, jm, jd) {
+        let jy2 = jy + 979;
+        const j_days_in_month = [31,31,31,31,31,31,30,30,30,30,30,29];
+        const g_days_in_month = [31,28,31,30,31,30,31,31,30,31,30,31];
+        let j_day_no = 365 * jy2 + Math.floor(jy2 / 33) * 8 + Math.floor(((jy2 % 33) + 3) / 4);
+        for (let i = 0; i < jm - 1; ++i) j_day_no += j_days_in_month[i];
+        j_day_no += jd - 1;
+        let g_day_no = j_day_no - 79;
+        let gy = 1600 + 400 * Math.floor(g_day_no / 146097);
+        g_day_no %= 146097;
+        let leap = true;
+        if (g_day_no >= 36525) { g_day_no--; gy += 100 * Math.floor(g_day_no / 36524); g_day_no %= 36524; if (g_day_no >= 365) g_day_no++; else leap = false; }
+        gy += 4 * Math.floor(g_day_no / 1461);
+        g_day_no %= 1461;
+        if (g_day_no >= 366) { leap = false; g_day_no--; gy += Math.floor(g_day_no / 365); g_day_no %= 365; }
+        const g_d_m2 = [...g_days_in_month];
+        if (leap) g_d_m2[1] = 29;
+        let gm = 0;
+        for (let i = 0; i < 12 && g_day_no >= g_d_m2[i]; ++i) { g_day_no -= g_d_m2[i]; gm++; }
+        return { gy, gm: gm + 1, gd: g_day_no + 1 };
+    }
+
+    function getNext30Days() {
+        const result = [];
+        const today = new Date();
+        for (let i = 0; i < 30; i++) {
+            const d = new Date(today); d.setDate(d.getDate() + i);
             const j = gregorianToJalaali(d.getFullYear(), d.getMonth() + 1, d.getDate());
-            return `${j.jy}/${String(j.jm).padStart(2,'0')}/${String(j.jd).padStart(2,'0')}`;
+            const dateStr = `${j.jy}/${String(j.jm).padStart(2,'0')}/${String(j.jd).padStart(2,'0')}`;
+            result.push({ dateStr, dayName: jalaaliDayName(j.jy, j.jm, j.jd) });
         }
+        return result;
+    }
 
-        function gregorianToJalaali(gy, gm, gd) {
-            const g_d_m = [0,31,59,90,120,151,181,212,243,273,304,334];
-            let gy2 = gm > 2 ? gy + 1 : gy;
-            let days = 355666 + 365 * gy + Math.floor((gy2 + 3) / 4) - Math.floor((gy2 + 99) / 100) + Math.floor((gy2 + 399) / 400) + gd + g_d_m[gm-1];
-            let jy = -1595 + 33 * Math.floor(days / 12053);
-            days %= 12053;
-            jy += 4 * Math.floor(days / 1461);
-            days %= 1461;
-            if (days > 365) { jy += Math.floor((days - 1) / 365); days = (days - 1) % 365; }
-            let jm, jd;
-            if (days < 186) { jm = 1 + Math.floor(days / 31); jd = 1 + (days % 31); }
-            else { jm = 7 + Math.floor((days - 186) / 30); jd = 1 + ((days - 186) % 30); }
-            return { jy, jm, jd };
+    function addMinutes(time, mins) {
+        const [h, m] = time.split(':').map(Number);
+        const total = h * 60 + m + mins;
+        return `${String(Math.floor(total / 60)).padStart(2, '0')}:${String(total % 60).padStart(2, '0')}`;
+    }
+
+    // ============================================================
+    // توابع API
+    // ============================================================
+    async function apiCall(method, url, data) {
+        try {
+            const options = { method, headers: { 'Content-Type': 'application/json' } };
+            if (data) options.body = JSON.stringify(data);
+            const res = await fetch(url, options);
+            if (!res.ok) throw new Error('خطا در ارتباط با سرور');
+            return await res.json();
+        } catch(e) {
+            showToast('❌ ' + e.message);
+            throw e;
         }
+    }
 
-        function jalaaliDayName(jy, jm, jd) {
-            const g = jalaaliToGregorian(jy, jm, jd);
-            const d = new Date(g.gy, g.gm - 1, g.gd);
-            return ['یکشنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنجشنبه','جمعه','شنبه'][d.getDay()];
+    async function fetchAllData() {
+        try {
+            const [staff, patients, schedules, appointments, payments] = await Promise.all([
+                apiCall('GET', '/api/staff'),
+                apiCall('GET', '/api/patients'),
+                apiCall('GET', '/api/schedules'),
+                apiCall('GET', '/api/appointments'),
+                apiCall('GET', '/api/payments')
+            ]);
+            cachedData = { staff, patients, schedules, appointments, payments };
+            return cachedData;
+        } catch(e) {
+            return null;
         }
+    }
 
-        function jalaaliToGregorian(jy, jm, jd) {
-            let jy2 = jy + 979;
-            const j_days_in_month = [31,31,31,31,31,31,30,30,30,30,30,29];
-            const g_days_in_month = [31,28,31,30,31,30,31,31,30,31,30,31];
-            let j_day_no = 365 * jy2 + Math.floor(jy2 / 33) * 8 + Math.floor(((jy2 % 33) + 3) / 4);
-            for (let i = 0; i < jm - 1; ++i) j_day_no += j_days_in_month[i];
-            j_day_no += jd - 1;
-            let g_day_no = j_day_no - 79;
-            let gy = 1600 + 400 * Math.floor(g_day_no / 146097);
-            g_day_no %= 146097;
-            let leap = true;
-            if (g_day_no >= 36525) { g_day_no--; gy += 100 * Math.floor(g_day_no / 36524); g_day_no %= 36524; if (g_day_no >= 365) g_day_no++; else leap = false; }
-            gy += 4 * Math.floor(g_day_no / 1461);
-            g_day_no %= 1461;
-            if (g_day_no >= 366) { leap = false; g_day_no--; gy += Math.floor(g_day_no / 365); g_day_no %= 365; }
-            const g_d_m2 = [...g_days_in_month];
-            if (leap) g_d_m2[1] = 29;
-            let gm = 0;
-            for (let i = 0; i < 12 && g_day_no >= g_d_m2[i]; ++i) { g_day_no -= g_d_m2[i]; gm++; }
-            return { gy, gm: gm + 1, gd: g_day_no + 1 };
+    // ============================================================
+    // توابع ورود و خروج
+    // ============================================================
+    async function login() {
+        const phone = document.getElementById('loginPhone').value.trim();
+        const password = document.getElementById('loginPassword').value.trim();
+        if (!phone || !password) { showToast('لطفا شماره و رمز را وارد کنید'); return; }
+
+        try {
+            const result = await apiCall('POST', '/api/login', { phone, password, type: loginType });
+            if (result.error) { showToast(result.error); return; }
+            currentUser = { ...result, userType: loginType };
+            localStorage.setItem('sepanta_user', JSON.stringify(currentUser));
+            showToast('✅ ورود موفق', 'success');
+            await initApp();
+        } catch(e) {
+            showToast('❌ خطا در ورود');
         }
+    }
 
-        function getNext30Days() {
-            const result = [];
-            const today = new Date();
-            for (let i = 0; i < 30; i++) {
-                const d = new Date(today); d.setDate(d.getDate() + i);
-                const j = gregorianToJalaali(d.getFullYear(), d.getMonth() + 1, d.getDate());
-                const dateStr = `${j.jy}/${String(j.jm).padStart(2,'0')}/${String(j.jd).padStart(2,'0')}`;
-                result.push({ dateStr, dayName: jalaaliDayName(j.jy, j.jm, j.jd) });
-            }
-            return result;
+    async function register() {
+        const name = document.getElementById('regName').value.trim();
+        const phone = document.getElementById('regPhone').value.trim();
+        const diagnosis = document.getElementById('regDiagnosis').value.trim();
+        const password = document.getElementById('regPassword').value.trim();
+        if (!name || !phone || !diagnosis || !password) { showToast('لطفا تمام فیلدها را پر کنید'); return; }
+
+        try {
+            const result = await apiCall('POST', '/api/patients', { name, phone, diagnosis, password });
+            if (result.error) { showToast(result.error); return; }
+            currentUser = { ...result, userType: 'patient' };
+            localStorage.setItem('sepanta_user', JSON.stringify(currentUser));
+            showToast('✅ ثبت‌نام موفق', 'success');
+            await initApp();
+        } catch(e) {
+            showToast('❌ خطا در ثبت‌نام');
         }
+    }
 
-        function addMinutes(time, mins) {
-            const [h, m] = time.split(':').map(Number);
-            const total = h * 60 + m + mins;
-            return `${String(Math.floor(total / 60)).padStart(2, '0')}:${String(total % 60).padStart(2, '0')}`;
-        }
+    function logout() {
+        currentUser = null;
+        localStorage.removeItem('sepanta_user');
+        document.getElementById('loginPage').classList.remove('hidden');
+        document.getElementById('mainApp').classList.add('hidden');
+        showToast('✅ خارج شدید', 'success');
+    }
 
-        // ============================================================
-        // توابع API (ساده شده)
-        // ============================================================
-        async function apiCall(method, url, data) {
-            try {
-                const options = { method, headers: { 'Content-Type': 'application/json' } };
-                if (data) options.body = JSON.stringify(data);
-                const res = await fetch(url, options);
-                if (!res.ok) throw new Error('خطا در ارتباط با سرور');
-                return await res.json();
-            } catch(e) {
-                showToast('❌ ' + e.message);
-                throw e;
-            }
-        }
+    // ============================================================
+    // راه‌اندازی اپ
+    // ============================================================
+    async function initApp() {
+        document.getElementById('loginPage').classList.add('hidden');
+        document.getElementById('registerPage').classList.add('hidden');
+        document.getElementById('mainApp').classList.remove('hidden');
 
-        async function fetchAllData() {
-            try {
-                const [staff, patients, schedules, appointments, payments] = await Promise.all([
-                    apiCall('GET', '/api/staff'),
-                    apiCall('GET', '/api/patients'),
-                    apiCall('GET', '/api/schedules'),
-                    apiCall('GET', '/api/appointments'),
-                    apiCall('GET', '/api/payments')
-                ]);
-                cachedData = { staff, patients, schedules, appointments, payments };
-                return cachedData;
-            } catch(e) {
-                return null;
-            }
-        }
+        const data = await fetchAllData();
+        if (!data) { showToast('❌ خطا در دریافت داده‌ها'); return; }
 
-        // ============================================================
-        // توابع ورود و خروج
-        // ============================================================
-        async function login() {
-            const phone = document.getElementById('loginPhone').value.trim();
-            const password = document.getElementById('loginPassword').value.trim();
-            if (!phone || !password) { showToast('لطفا شماره و رمز را وارد کنید'); return; }
+        document.getElementById('headerUser').textContent = currentUser.name;
 
-            try {
-                const result = await apiCall('POST', '/api/login', { phone, password, type: loginType });
-                if (result.error) { showToast(result.error); return; }
-                currentUser = { ...result, userType: loginType };
-                localStorage.setItem('sepanta_user', JSON.stringify(currentUser));
-                showToast('ورود موفق ✅', 'success');
-                await initApp();
-            } catch(e) {
-                showToast('خطا در ورود');
-            }
-        }
-
-        async function register() {
-            const name = document.getElementById('regName').value.trim();
-            const phone = document.getElementById('regPhone').value.trim();
-            const diagnosis = document.getElementById('regDiagnosis').value.trim();
-            const password = document.getElementById('regPassword').value.trim();
-            if (!name || !phone || !diagnosis || !password) { showToast('لطفا تمام فیلدها را پر کنید'); return; }
-
-            try {
-                const result = await apiCall('POST', '/api/patients', { name, phone, diagnosis, password });
-                if (result.error) { showToast(result.error); return; }
-                currentUser = { ...result, userType: 'patient' };
-                localStorage.setItem('sepanta_user', JSON.stringify(currentUser));
-                showToast('ثبت‌نام موفق ✅', 'success');
-                await initApp();
-            } catch(e) {
-                showToast('خطا در ثبت‌نام');
-            }
-        }
-
-        function logout() {
-            currentUser = null;
-            localStorage.removeItem('sepanta_user');
-            document.getElementById('loginPage').classList.remove('hidden');
-            document.getElementById('mainApp').classList.add('hidden');
-            showToast('خارج شدید', 'success');
-        }
-
-        // ============================================================
-        // راه‌اندازی اپ
-        // ============================================================
-        async function initApp() {
-            document.getElementById('loginPage').classList.add('hidden');
-            document.getElementById('registerPage').classList.add('hidden');
-            document.getElementById('mainApp').classList.remove('hidden');
-
-            const data = await fetchAllData();
-            if (!data) { showToast('خطا در دریافت داده‌ها'); return; }
-
-            document.getElementById('headerUser').textContent = currentUser.name;
-
-            // منوی پایین
-            const nav = document.getElementById('bottomNav');
-            let items = [];
-            if (currentUser.userType === 'staff') {
-                if (currentUser.role === 'admin' || currentUser.role === 'secretary') {
-                    items = [
-                        { id: 'dashboard', icon: '📊', label: 'داشبورد' },
-                        { id: 'appointments', icon: '📅', label: 'نوبت‌ها' },
-                        { id: 'patients', icon: '👥', label: 'بیماران' },
-                        { id: 'payments', icon: '💳', label: 'پرداخت‌ها' }
-                    ];
-                } else {
-                    items = [
-                        { id: 'schedule', icon: '🕐', label: 'برنامه' },
-                        { id: 'myappts', icon: '📋', label: 'نوبت‌ها' }
-                    ];
-                }
+        const nav = document.getElementById('bottomNav');
+        let items = [];
+        if (currentUser.userType === 'staff') {
+            if (currentUser.role === 'admin' || currentUser.role === 'secretary') {
+                items = [
+                    { id: 'dashboard', icon: '📊', label: 'داشبورد' },
+                    { id: 'appointments', icon: '📅', label: 'نوبت‌ها' },
+                    { id: 'patients', icon: '👥', label: 'بیماران' },
+                    { id: 'payments', icon: '💳', label: 'پرداخت‌ها' },
+                    { id: 'schedule', icon: '🕐', label: 'تایم کاری' }
+                ];
             } else {
                 items = [
-                    { id: 'booking', icon: '📅', label: 'رزرو' },
-                    { id: 'myappts', icon: '📋', label: 'نوبت‌ها' },
-                    { id: 'payment', icon: '💳', label: 'پرداخت' }
+                    { id: 'myappts', icon: '📋', label: 'نوبت‌ها' }
                 ];
             }
-            nav.innerHTML = items.map(item =>
-                `<button class="nav-item" onclick="navigateTo('${item.id}')">
-                    <span class="icon">${item.icon}</span>
-                    ${item.label}
-                </button>`
-            ).join('');
-
-            navigateTo(items[0].id);
+        } else {
+            items = [
+                { id: 'booking', icon: '📅', label: 'رزرو' },
+                { id: 'myappts', icon: '📋', label: 'نوبت‌ها' },
+                { id: 'payment', icon: '💳', label: 'پرداخت' }
+            ];
         }
+        nav.innerHTML = items.map(item =>
+            `<button class="nav-item" onclick="navigateTo('${item.id}')">
+                <span class="icon">${item.icon}</span>
+                ${item.label}
+            </button>`
+        ).join('');
 
-        // ============================================================
-        // هدایت بین صفحات
-        // ============================================================
-        function navigateTo(pageId) {
-            document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(b => {
-                if (b.textContent.trim().includes(pageId) || b.querySelector('.icon')?.textContent ===
-                    document.querySelector(`[onclick="navigateTo('${pageId}')"]`)?.querySelector('.icon')?.textContent) {
-                    b.classList.add('active');
-                }
-            });
+        navigateTo(items[0].id);
+    }
 
-            const content = document.getElementById('pageContent');
-            switch(pageId) {
-                case 'dashboard': renderDashboard(); break;
-                case 'appointments': renderAllAppointments(); break;
-                case 'patients': renderPatients(); break;
-                case 'payments': renderAllPayments(); break;
-                case 'schedule': renderSchedule(); break;
-                case 'myappts': renderMyAppointments(); break;
-                case 'booking': renderBooking(); break;
-                case 'payment': renderPayment(); break;
-                default: content.innerHTML = '<div class="empty-state">صفحه‌ای یافت نشد</div>';
+    // ============================================================
+    // هدایت بین صفحات
+    // ============================================================
+    function navigateTo(pageId) {
+        document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.nav-item').forEach(b => {
+            if (b.textContent.trim().includes(pageId) || b.querySelector('.icon')?.textContent ===
+                document.querySelector(`[onclick="navigateTo('${pageId}')"]`)?.querySelector('.icon')?.textContent) {
+                b.classList.add('active');
             }
+        });
+
+        const content = document.getElementById('pageContent');
+        switch(pageId) {
+            case 'dashboard': renderDashboard(); break;
+            case 'appointments': renderAllAppointments(); break;
+            case 'patients': renderPatients(); break;
+            case 'payments': renderAllPayments(); break;
+            case 'schedule': renderSchedule(); break;
+            case 'myappts': renderMyAppointments(); break;
+            case 'booking': renderBooking(); break;
+            case 'payment': renderPayment(); break;
+            default: content.innerHTML = '<div class="empty-state">صفحه‌ای یافت نشد</div>';
         }
+    }
 
-        // ============================================================
-        // رندر صفحات
-        // ============================================================
-        function renderDashboard() {
-            const content = document.getElementById('pageContent');
-            const today = todayJalaali();
-            const todayAppts = cachedData.appointments.filter(a => a.date_str === today && a.status === 'confirmed');
+    // ============================================================
+    // رندر صفحات
+    // ============================================================
+    function renderDashboard() {
+        const content = document.getElementById('pageContent');
+        const today = todayJalaali();
+        const todayAppts = cachedData.appointments.filter(a => a.date_str === today && a.status === 'confirmed');
 
-            content.innerHTML = `
-                <div class="welcome-card">
-                    <h2>سلام ${currentUser.name} 👋</h2>
-                    <p>امروز ${today}</p>
-                    <div class="stats">
-                        <div class="stat"><div class="num">${todayAppts.length}</div><div class="label">نوبت امروز</div></div>
-                        <div class="stat"><div class="num">${cachedData.patients.length}</div><div class="label">بیماران</div></div>
-                        <div class="stat"><div class="num">${cachedData.staff.length}</div><div class="label">کادر</div></div>
+        content.innerHTML = `
+            <div class="card" style="background:linear-gradient(135deg,#0d9488,#0f766e);color:white;border:none;">
+                <h2 style="font-size:20px;">سلام ${currentUser.name} 👋</h2>
+                <p style="opacity:0.9;">امروز ${today}</p>
+                <div style="display:flex;gap:10px;margin-top:16px;">
+                    <div style="flex:1;background:rgba(255,255,255,0.2);border-radius:16px;padding:12px;text-align:center;">
+                        <div style="font-size:22px;font-weight:700;">${todayAppts.length}</div>
+                        <div style="font-size:10px;opacity:0.8;">نوبت امروز</div>
+                    </div>
+                    <div style="flex:1;background:rgba(255,255,255,0.2);border-radius:16px;padding:12px;text-align:center;">
+                        <div style="font-size:22px;font-weight:700;">${cachedData.patients.length}</div>
+                        <div style="font-size:10px;opacity:0.8;">بیماران</div>
+                    </div>
+                    <div style="flex:1;background:rgba(255,255,255,0.2);border-radius:16px;padding:12px;text-align:center;">
+                        <div style="font-size:22px;font-weight:700;">${cachedData.staff.length}</div>
+                        <div style="font-size:10px;opacity:0.8;">کادر</div>
                     </div>
                 </div>
-                <h3 style="margin-bottom:10px;">👥 کادر درمان</h3>
+            </div>
+            <div class="card">
+                <h3 style="margin-bottom:12px;">👥 کادر درمان</h3>
                 ${cachedData.staff.map(s => `
                     <div class="staff-item">
                         <span>${ROLE_ICONS[s.role]} ${s.name}</span>
                         <span class="badge ${ROLE_BADGES[s.role]}">${ROLE_LABELS[s.role]}</span>
                     </div>
                 `).join('')}
-                <h3 style="margin:15px 0 10px;">📅 نوبت‌های امروز</h3>
+            </div>
+            <div class="card">
+                <h3 style="margin-bottom:12px;">📅 نوبت‌های امروز</h3>
                 ${todayAppts.length === 0 ? '<div class="empty-state">نوبتی ثبت نشده</div>' :
                     todayAppts.map(a => {
                         const p = cachedData.patients.find(pt => pt.id === a.patient_id) || {};
                         const s = cachedData.staff.find(st => st.id === a.staff_id) || {};
                         return `<div class="appt-card"><div><strong>${p.name || 'نامشخص'}</strong><br><small>${s.name} - ${a.start_time} تا ${a.end_time}</small></div><span class="badge badge-admin">تأیید</span></div>`;
                     }).join('')}
-            `;
-        }
+            </div>
+        `;
+    }
 
-        function renderAllAppointments() {
-            const content = document.getElementById('pageContent');
-            const appts = cachedData.appointments;
-            content.innerHTML = `
+    function renderAllAppointments() {
+        const content = document.getElementById('pageContent');
+        const appts = cachedData.appointments;
+        content.innerHTML = `
+            <div class="card">
                 <h3>📅 همه نوبت‌ها</h3>
                 ${appts.length === 0 ? '<div class="empty-state">نوبتی ثبت نشده</div>' :
                     appts.map(a => {
@@ -458,105 +771,195 @@
                             <span class="badge ${a.status === 'confirmed' ? 'badge-admin' : ''}">${a.status === 'confirmed' ? 'تأیید' : 'لغو'}</span>
                         </div>`;
                     }).join('')}
-            `;
-        }
+            </div>
+        `;
+    }
 
-        function renderPatients() {
-            const content = document.getElementById('pageContent');
-            content.innerHTML = `
+    function renderPatients() {
+        const content = document.getElementById('pageContent');
+        content.innerHTML = `
+            <div class="card">
                 <h3>👥 لیست بیماران</h3>
-                ${cachedData.patients.length === 0 ? '<div class="empty-state">بیماری ثبت نشده</div>' :
-                    cachedData.patients.map(p => `
-                        <div class="appt-card">
-                            <div><strong>${p.name}</strong><br><small>📞 ${p.phone}</small></div>
-                            <span class="badge badge-admin">${p.diagnosis || 'بدون تشخیص'}</span>
+                <div class="search-box">
+                    <input type="text" id="patientSearch" placeholder="🔍 جستجوی بیمار..." oninput="filterPatients()">
+                </div>
+                <div id="patientsList">
+                    ${cachedData.patients.length === 0 ? '<div class="empty-state">بیماری ثبت نشده</div>' :
+                        cachedData.patients.map(p => `
+                            <div class="appt-card">
+                                <div><strong>${p.name}</strong><br><small>📞 ${p.phone}</small></div>
+                                <span class="badge badge-admin">${p.diagnosis || 'بدون تشخیص'}</span>
+                            </div>
+                        `).join('')}
+                </div>
+            </div>
+        `;
+    }
+
+    function filterPatients() {
+        const search = document.getElementById('patientSearch').value.toLowerCase();
+        const filtered = cachedData.patients.filter(p => 
+            p.name.toLowerCase().includes(search) || 
+            p.phone.includes(search) ||
+            (p.diagnosis && p.diagnosis.toLowerCase().includes(search))
+        );
+        const list = document.getElementById('patientsList');
+        if (filtered.length === 0) {
+            list.innerHTML = '<div class="empty-state">بیماری یافت نشد</div>';
+        } else {
+            list.innerHTML = filtered.map(p => `
+                <div class="appt-card">
+                    <div><strong>${p.name}</strong><br><small>📞 ${p.phone}</small></div>
+                    <span class="badge badge-admin">${p.diagnosis || 'بدون تشخیص'}</span>
+                </div>
+            `).join('');
+        }
+    }
+
+    // ============================================================
+    // بخش پرداخت‌ها (طبقه‌بندی شده بر اساس بیمار)
+    // ============================================================
+    function renderAllPayments() {
+        const content = document.getElementById('pageContent');
+        const payments = cachedData.payments;
+        
+        // گروه‌بندی بر اساس بیمار
+        const grouped = {};
+        payments.forEach(p => {
+            const patient = cachedData.patients.find(pt => pt.id === p.patient_id);
+            const name = patient ? patient.name : 'نامشخص';
+            if (!grouped[name]) grouped[name] = [];
+            grouped[name].push(p);
+        });
+
+        let html = `<div class="card"><h3>💳 مدیریت پرداخت‌ها</h3>`;
+        if (Object.keys(grouped).length === 0) {
+            html += `<div class="empty-state">پرداختی ثبت نشده</div>`;
+        } else {
+            for (const [patientName, patientPayments] of Object.entries(grouped)) {
+                html += `
+                    <div class="patient-payment-group">
+                        <div class="patient-payment-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'">
+                            <span>👤 ${patientName}</span>
+                            <span>${patientPayments.length} رسید</span>
                         </div>
-                    `).join('')}
-            `;
+                        <div class="patient-payment-body">
+                `;
+                patientPayments.forEach(p => {
+                    html += `
+                        <div class="payment-item">
+                            <div>
+                                <div style="font-weight:600;">${p.amount || 'بدون مبلغ'} تومان</div>
+                                <div style="font-size:12px;color:#64748b;">${p.description || ''}</div>
+                                <span class="badge ${p.status === 'pending' ? 'badge-pending' : 'badge-approved'}">
+                                    ${p.status === 'pending' ? 'در انتظار' : 'تأیید شده'}
+                                </span>
+                            </div>
+                            ${p.receipt_image ? `<img src="${p.receipt_image}" class="payment-receipt-img" onclick="window.open('${p.receipt_image}')">` : ''}
+                            ${p.status === 'pending' ? `
+                                <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                                    <button onclick="updatePaymentStatus(${p.id}, 'approved')" style="background:#dcfce7;border:none;padding:4px 12px;border-radius:8px;color:#166534;cursor:pointer;font-size:12px;">✅ تأیید</button>
+                                    <button onclick="updatePaymentStatus(${p.id}, 'rejected')" style="background:#fee2e2;border:none;padding:4px 12px;border-radius:8px;color:#991b1b;cursor:pointer;font-size:12px;">❌ رد</button>
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                });
+                html += `</div></div>`;
+            }
         }
+        html += `</div>`;
+        content.innerHTML = html;
+    }
 
-        function renderAllPayments() {
-            const content = document.getElementById('pageContent');
-            const payments = cachedData.payments;
-            content.innerHTML = `
-                <h3>💳 مدیریت پرداخت‌ها</h3>
-                ${payments.length === 0 ? '<div class="empty-state">پرداختی ثبت نشده</div>' :
-                    payments.map(p => {
-                        const patient = cachedData.patients.find(pt => pt.id === p.patient_id) || {};
-                        return `<div class="appt-card">
-                            <div><strong>${patient.name || 'نامشخص'}</strong><br><small>${p.amount || 'بدون مبلغ'} تومان</small></div>
-                            <span class="badge ${p.status === 'pending' ? '' : 'badge-admin'}">${p.status === 'pending' ? 'در انتظار' : 'تأیید'}</span>
-                        </div>`;
-                    }).join('')}
-            `;
-        }
+    async function updatePaymentStatus(id, status) {
+        try {
+            await apiCall('PUT', `/api/payments/${id}`, { status });
+            showToast(status === 'approved' ? '✅ پرداخت تأیید شد' : 'پرداخت رد شد', 'success');
+            await fetchAllData();
+            renderAllPayments();
+        } catch(e) { showToast('❌ خطا در تغییر وضعیت'); }
+    }
 
-        function renderSchedule() {
-            const content = document.getElementById('pageContent');
-            const days = getNext30Days();
-            const mySchedules = cachedData.schedules.filter(s => s.staff_id === currentUser.id);
+    // ============================================================
+    // بخش تایم کاری (فقط برای مدیر)
+    // ============================================================
+    function renderSchedule() {
+        const content = document.getElementById('pageContent');
+        const days = getNext30Days();
+        const mySchedules = cachedData.schedules.filter(s => s.staff_id === currentUser.id);
 
-            content.innerHTML = `
-                <h3>🕐 تنظیم برنامه کاری</h3>
+        content.innerHTML = `
+            <div class="card">
+                <h3>🕐 تنظیم تایم کاری</h3>
+                <p style="font-size:13px;color:#64748b;margin-bottom:12px;">تاریخی که می‌خواهید تایم کاری را ثبت کنید انتخاب کنید.</p>
                 <div class="date-grid">
                     ${days.map(d => `
-                        <div class="date-item" onclick="selectScheduleDate('${d.dateStr}')">${d.dayName}<br>${d.dateStr.split('/').slice(1).join('/')}</div>
+                        <div class="date-item ${selectedScheduleDate === d.dateStr ? 'selected' : ''}" onclick="selectScheduleDate('${d.dateStr}')">
+                            ${d.dayName}<br><span style="font-size:11px;">${d.dateStr.split('/').slice(1).join('/')}</span>
+                        </div>
                     `).join('')}
                 </div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0;">
-                    <div class="input-group"><label>شروع</label><input type="time" id="schedStart" value="08:00"></div>
-                    <div class="input-group"><label>پایان</label><input type="time" id="schedEnd" value="17:00"></div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;">
+                    <div class="input-group"><label>⏰ شروع</label><input type="time" id="schedStart" value="08:00"></div>
+                    <div class="input-group"><label>⏰ پایان</label><input type="time" id="schedEnd" value="17:00"></div>
                 </div>
-                <button class="btn" onclick="saveSchedule()">ذخیره برنامه</button>
-                <h3 style="margin-top:20px;">📋 برنامه‌های ثبت شده</h3>
-                ${mySchedules.length === 0 ? '<div class="empty-state">برنامه‌ای ثبت نشده</div>' :
+                <button class="btn" onclick="saveSchedule()">✅ ذخیره تایم کاری</button>
+            </div>
+            <div class="card">
+                <h3>📋 تایم‌های ثبت شده</h3>
+                ${mySchedules.length === 0 ? '<div class="empty-state">تایم کاری ثبت نشده</div>' :
                     mySchedules.map(s => `
                         <div class="appt-card">
                             <div><strong>📅 ${s.date_str}</strong><br><small>${s.start_time} - ${s.end_time}</small></div>
-                            <button onclick="deleteSchedule(${s.id})" style="background:#fee2e2;border:none;padding:4px 12px;border-radius:8px;color:#991b1b;cursor:pointer;">🗑️</button>
+                            <button onclick="deleteSchedule(${s.id})" style="background:#fee2e2;border:none;padding:6px 14px;border-radius:10px;color:#991b1b;cursor:pointer;font-weight:600;">🗑️</button>
                         </div>
                     `).join('')}
-            `;
-        }
+            </div>
+        `;
+    }
 
-        let selectedScheduleDate = '';
+    function selectScheduleDate(date) {
+        selectedScheduleDate = date;
+        renderSchedule();
+    }
 
-        function selectScheduleDate(date) {
-            selectedScheduleDate = date;
+    async function saveSchedule() {
+        if (!selectedScheduleDate) { showToast('لطفا تاریخ را انتخاب کنید'); return; }
+        const start = document.getElementById('schedStart').value;
+        const end = document.getElementById('schedEnd').value;
+        if (!start || !end) { showToast('لطفا ساعت شروع و پایان را وارد کنید'); return; }
+        try {
+            await apiCall('POST', '/api/schedules', { staffId: currentUser.id, dateStr: selectedScheduleDate, startTime: start, endTime: end });
+            showToast('✅ تایم کاری ذخیره شد', 'success');
+            await fetchAllData();
             renderSchedule();
+        } catch(e) { showToast('❌ خطا در ذخیره'); }
+    }
+
+    async function deleteSchedule(id) {
+        try {
+            await apiCall('DELETE', `/api/schedules/${id}`);
+            showToast('تایم کاری حذف شد', 'success');
+            await fetchAllData();
+            renderSchedule();
+        } catch(e) { showToast('❌ خطا در حذف'); }
+    }
+
+    // ============================================================
+    // نوبت‌های من (برای بیمار و کادر)
+    // ============================================================
+    function renderMyAppointments() {
+        const content = document.getElementById('pageContent');
+        let appts = [];
+        if (currentUser.userType === 'staff') {
+            appts = cachedData.appointments.filter(a => a.staff_id === currentUser.id);
+        } else {
+            appts = cachedData.appointments.filter(a => a.patient_id === currentUser.id);
         }
 
-        async function saveSchedule() {
-            if (!selectedScheduleDate) { showToast('لطفا تاریخ را انتخاب کنید'); return; }
-            const start = document.getElementById('schedStart').value;
-            const end = document.getElementById('schedEnd').value;
-            try {
-                await apiCall('POST', '/api/schedules', { staffId: currentUser.id, dateStr: selectedScheduleDate, startTime: start, endTime: end });
-                showToast('برنامه ذخیره شد ✅', 'success');
-                await fetchAllData();
-                renderSchedule();
-            } catch(e) { showToast('خطا در ذخیره'); }
-        }
-
-        async function deleteSchedule(id) {
-            try {
-                await apiCall('DELETE', `/api/schedules/${id}`);
-                showToast('برنامه حذف شد', 'success');
-                await fetchAllData();
-                renderSchedule();
-            } catch(e) { showToast('خطا در حذف'); }
-        }
-
-        function renderMyAppointments() {
-            const content = document.getElementById('pageContent');
-            let appts = [];
-            if (currentUser.userType === 'staff') {
-                appts = cachedData.appointments.filter(a => a.staff_id === currentUser.id);
-            } else {
-                appts = cachedData.appointments.filter(a => a.patient_id === currentUser.id);
-            }
-
-            content.innerHTML = `
+        content.innerHTML = `
+            <div class="card">
                 <h3>📋 نوبت‌های من</h3>
                 ${appts.length === 0 ? '<div class="empty-state">نوبتی ثبت نشده</div>' :
                     appts.map(a => {
@@ -567,27 +970,32 @@
                             <span class="badge ${a.status === 'confirmed' ? 'badge-admin' : ''}">${a.status === 'confirmed' ? 'تأیید' : 'لغو'}</span>
                         </div>`;
                     }).join('')}
-            `;
-        }
+            </div>
+        `;
+    }
 
-        function renderBooking() {
-            const content = document.getElementById('pageContent');
-            const staff = cachedData.staff.filter(s => s.role !== 'secretary');
-            const days = getNext30Days();
+    // ============================================================
+    // رزرو نوبت (برای بیمار)
+    // ============================================================
+    function renderBooking() {
+        const content = document.getElementById('pageContent');
+        const staff = cachedData.staff.filter(s => s.role !== 'secretary');
+        const days = getNext30Days();
 
-            content.innerHTML = `
+        content.innerHTML = `
+            <div class="card">
                 <h3>📅 رزرو نوبت</h3>
                 <div class="input-group"><label>۱. انتخاب درمانگر</label>
                     ${staff.map(s => `
-                        <button class="therapist-btn ${selectedTherapist === s.id ? 'selected' : ''}" onclick="selectTherapist(${s.id})">
+                        <button class="therapist-btn ${selectedTherapist === s.id ? 'selected' : ''}" onclick="selectTherapist(${s.id})" style="width:100%;padding:12px;border:2px solid #e2e8f0;border-radius:14px;background:${selectedTherapist === s.id ? '#ccfbf1' : 'white'};cursor:pointer;margin-bottom:6px;text-align:right;font-family:Vazirmatn;">
                             ${ROLE_ICONS[s.role]} ${s.name} - ${ROLE_LABELS[s.role]}
                         </button>
                     `).join('')}
                 </div>
                 <div class="input-group"><label>۲. مدت جلسه</label>
                     <div style="display:flex;gap:10px;">
-                        <button class="duration-btn ${selectedDuration === 30 ? 'selected' : ''}" onclick="setDuration(30)">۳۰ دقیقه</button>
-                        <button class="duration-btn ${selectedDuration === 45 ? 'selected' : ''}" onclick="setDuration(45)">۴۵ دقیقه</button>
+                        <button class="duration-btn ${selectedDuration === 30 ? 'selected' : ''}" onclick="setDuration(30)" style="padding:10px 16px;border:2px solid #e2e8f0;border-radius:12px;background:${selectedDuration === 30 ? '#ccfbf1' : 'white'};cursor:pointer;font-family:Vazirmatn;">⏱️ ۳۰ دقیقه</button>
+                        <button class="duration-btn ${selectedDuration === 45 ? 'selected' : ''}" onclick="setDuration(45)" style="padding:10px 16px;border:2px solid #e2e8f0;border-radius:12px;background:${selectedDuration === 45 ? '#ccfbf1' : 'white'};cursor:pointer;font-family:Vazirmatn;">⏱️ ۴۵ دقیقه</button>
                     </div>
                 </div>
                 ${selectedTherapist ? `
@@ -595,7 +1003,7 @@
                         <div class="date-grid">
                             ${days.map(d => `
                                 <div class="date-item ${selectedDate === d.dateStr ? 'selected' : ''}" onclick="selectDate('${d.dateStr}')">
-                                    ${d.dayName}<br>${d.dateStr.split('/').slice(1).join('/')}
+                                    ${d.dayName}<br><span style="font-size:11px;">${d.dateStr.split('/').slice(1).join('/')}</span>
                                 </div>
                             `).join('')}
                         </div>
@@ -606,144 +1014,177 @@
                         <div class="time-grid" id="timeGrid"></div>
                     </div>
                 ` : ''}
-                ${selectedTime ? `<button class="btn" onclick="bookAppointment()">✅ ثبت نوبت</button>` : ''}
-            `;
+                ${selectedTime ? `<button class="btn mt-10" onclick="bookAppointment()">✅ ثبت نوبت</button>` : ''}
+            </div>
+        `;
 
-            if (selectedDate) loadAvailableSlots();
+        if (selectedDate) loadAvailableSlots();
+    }
+
+    function selectTherapist(id) { selectedTherapist = id; selectedDate = ''; selectedTime = ''; renderBooking(); }
+    function setDuration(d) { selectedDuration = d; renderBooking(); }
+    function selectDate(d) { selectedDate = d; selectedTime = ''; renderBooking(); }
+
+    function loadAvailableSlots() {
+        const schedule = cachedData.schedules.find(s => s.staff_id === selectedTherapist && s.date_str === selectedDate);
+        if (!schedule) {
+            document.getElementById('timeGrid').innerHTML = '<div class="empty-state">⏰ تایم کاری برای این تاریخ ثبت نشده است</div>';
+            return;
         }
 
-        function selectTherapist(id) { selectedTherapist = id; selectedDate = ''; selectedTime = ''; renderBooking(); }
-        function setDuration(d) { selectedDuration = d; renderBooking(); }
-        function selectDate(d) { selectedDate = d; selectedTime = ''; renderBooking(); }
+        const existing = cachedData.appointments.filter(a => a.staff_id === selectedTherapist && a.date_str === selectedDate && a.status === 'confirmed');
+        const slots = [];
+        const toMin = t => { const [h,m] = t.split(':').map(Number); return h*60+m; };
+        const toTime = m => `${String(Math.floor(m/60)).padStart(2,'0')}:${String(m%60).padStart(2,'0')}`;
+        let current = toMin(schedule.start_time);
+        const end = toMin(schedule.end_time);
 
-        function loadAvailableSlots() {
-            const schedule = cachedData.schedules.find(s => s.staff_id === selectedTherapist && s.date_str === selectedDate);
-            if (!schedule) {
-                document.getElementById('timeGrid').innerHTML = '<div class="empty-state">زمان خالی نیست</div>';
-                return;
+        while (current + selectedDuration <= end) {
+            const start = toTime(current);
+            const endTime = toTime(current + selectedDuration);
+            let conflict = false;
+            for (const a of existing) {
+                const as = toMin(a.start_time);
+                const ae = toMin(a.end_time);
+                if (current < ae && current + selectedDuration > as) { conflict = true; break; }
             }
-
-            const existing = cachedData.appointments.filter(a => a.staff_id === selectedTherapist && a.date_str === selectedDate && a.status === 'confirmed');
-            const slots = [];
-            const toMin = t => { const [h,m] = t.split(':').map(Number); return h*60+m; };
-            const toTime = m => `${String(Math.floor(m/60)).padStart(2,'0')}:${String(m%60).padStart(2,'0')}`;
-            let current = toMin(schedule.start_time);
-            const end = toMin(schedule.end_time);
-
-            while (current + selectedDuration <= end) {
-                const start = toTime(current);
-                const endTime = toTime(current + selectedDuration);
-                let conflict = false;
-                for (const a of existing) {
-                    const as = toMin(a.start_time);
-                    const ae = toMin(a.end_time);
-                    if (current < ae && current + selectedDuration > as) { conflict = true; break; }
-                }
-                if (!conflict) slots.push({ start, end: endTime });
-                current += 15;
-            }
-
-            document.getElementById('timeGrid').innerHTML = slots.length === 0 ? '<div class="empty-state">زمان خالی نیست</div>' :
-                slots.map(s => `
-                    <div class="time-item ${selectedTime === s.start ? 'selected' : ''}" onclick="selectTime('${s.start}')">
-                        ${s.start} - ${s.end}
-                    </div>
-                `).join('');
+            if (!conflict) slots.push({ start, end: endTime });
+            current += 15;
         }
 
-        function selectTime(time) { selectedTime = time; renderBooking(); }
-
-        async function bookAppointment() {
-            if (!selectedTherapist || !selectedDate || !selectedTime) { showToast('لطفا همه موارد را انتخاب کنید'); return; }
-            const endTime = addMinutes(selectedTime, selectedDuration);
-            try {
-                await apiCall('POST', '/api/appointments', {
-                    patientId: currentUser.id,
-                    staffId: selectedTherapist,
-                    dateStr: selectedDate,
-                    startTime: selectedTime,
-                    endTime: endTime,
-                    duration: selectedDuration,
-                    status: 'confirmed'
-                });
-                showToast('نوبت ثبت شد ✅', 'success');
-                selectedTime = '';
-                await fetchAllData();
-                renderBooking();
-            } catch(e) { showToast('خطا در ثبت نوبت'); }
-        }
-
-        function renderPayment() {
-            const content = document.getElementById('pageContent');
-            const myPayments = cachedData.payments.filter(p => p.patient_id === currentUser.id);
-
-            content.innerHTML = `
-                <h3>💳 ارسال رسید پرداخت</h3>
-                <div class="info-box" style="background:#fef3c7;padding:12px;border-radius:12px;margin-bottom:15px;">
-                    <small>💰 مبلغ را کارت‌به‌کارت کنید و تصویر رسید را بارگذاری کنید</small>
+        document.getElementById('timeGrid').innerHTML = slots.length === 0 ? '<div class="empty-state">⏰ زمان خالی در این تاریخ وجود ندارد</div>' :
+            slots.map(s => `
+                <div class="time-item ${selectedTime === s.start ? 'selected' : ''}" onclick="selectTime('${s.start}')" style="padding:10px 16px;border:2px solid #e2e8f0;border-radius:12px;cursor:pointer;background:${selectedTime === s.start ? '#0d9488' : 'white'};color:${selectedTime === s.start ? 'white' : '#1e293b'};">
+                    ${s.start} - ${s.end}
                 </div>
-                <div class="input-group"><label>مبلغ (تومان)</label><input type="text" id="payAmount" placeholder="مبلغ"></div>
-                <div class="input-group"><label>توضیحات</label><input type="text" id="payDesc" placeholder="توضیحات"></div>
+            `).join('');
+    }
+
+    function selectTime(time) { selectedTime = time; renderBooking(); }
+
+    async function bookAppointment() {
+        if (!selectedTherapist || !selectedDate || !selectedTime) { showToast('لطفا همه موارد را انتخاب کنید'); return; }
+        const endTime = addMinutes(selectedTime, selectedDuration);
+        try {
+            await apiCall('POST', '/api/appointments', {
+                patientId: currentUser.id,
+                staffId: selectedTherapist,
+                dateStr: selectedDate,
+                startTime: selectedTime,
+                endTime: endTime,
+                duration: selectedDuration,
+                status: 'confirmed'
+            });
+            showToast('✅ نوبت با موفقیت ثبت شد', 'success');
+            selectedTime = '';
+            await fetchAllData();
+            renderBooking();
+        } catch(e) { showToast('❌ خطا در ثبت نوبت'); }
+    }
+
+    // ============================================================
+    // بخش پرداخت بیمار (با پیام انتظار)
+    // ============================================================
+    function renderPayment() {
+        const content = document.getElementById('pageContent');
+        const myPayments = cachedData.payments.filter(p => p.patient_id === currentUser.id);
+
+        content.innerHTML = `
+            <div class="card">
+                <h3>💳 ارسال رسید پرداخت</h3>
+                <div style="background:#fef3c7;padding:14px;border-radius:16px;margin-bottom:16px;border:1px solid #fcd34d;">
+                    <small style="color:#92400e;">💰 مبلغ را کارت‌به‌کارت کنید و تصویر رسید را بارگذاری کنید</small>
+                </div>
+                <div class="input-group"><label>مبلغ (تومان)</label><input type="text" id="payAmount" placeholder="مبلغ واریزی"></div>
+                <div class="input-group"><label>توضیحات</label><input type="text" id="payDesc" placeholder="توضیحات (اختیاری)"></div>
                 <div class="input-group"><label>تصویر رسید</label><input type="file" id="payFile" accept="image/*" onchange="previewReceipt()"></div>
                 <div id="receiptPreview"></div>
-                <button class="btn" onclick="submitPayment()">📤 ارسال رسید</button>
-                <h3 style="margin-top:20px;">📋 تاریخچه پرداخت‌ها</h3>
+                <button class="btn" onclick="submitPayment()" id="submitPayBtn">📤 ارسال رسید</button>
+                <div id="paymentStatus" style="margin-top:10px;font-size:14px;text-align:center;"></div>
+            </div>
+            <div class="card">
+                <h3>📋 تاریخچه پرداخت‌ها</h3>
                 ${myPayments.length === 0 ? '<div class="empty-state">پرداختی ثبت نشده</div>' :
                     myPayments.map(p => `
                         <div class="appt-card">
                             <div><strong>${p.amount || 'بدون مبلغ'} تومان</strong><br><small>${p.description || ''}</small></div>
-                            <span class="badge ${p.status === 'pending' ? '' : 'badge-admin'}">${p.status === 'pending' ? 'در انتظار' : 'تأیید'}</span>
+                            <span class="badge ${p.status === 'pending' ? 'badge-pending' : 'badge-approved'}">${p.status === 'pending' ? 'در انتظار' : 'تأیید شده'}</span>
                         </div>
                     `).join('')}
-            `;
-        }
+            </div>
+        `;
+    }
 
-        function previewReceipt() {
-            const file = document.getElementById('payFile').files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                receiptBase64 = reader.result;
-                document.getElementById('receiptPreview').innerHTML = `<img src="${receiptBase64}" style="max-width:100%;border-radius:12px;margin:10px 0;">`;
-            };
-            reader.readAsDataURL(file);
-        }
+    function previewReceipt() {
+        const file = document.getElementById('payFile').files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            receiptBase64 = reader.result;
+            document.getElementById('receiptPreview').innerHTML = `<img src="${receiptBase64}" style="max-width:100%;border-radius:16px;margin:10px 0;border:2px solid #e2e8f0;">`;
+        };
+        reader.readAsDataURL(file);
+    }
 
-        async function submitPayment() {
-            if (!receiptBase64) { showToast('لطفا تصویر رسید را بارگذاری کنید'); return; }
+    async function submitPayment() {
+        if (!receiptBase64) { showToast('لطفا تصویر رسید را بارگذاری کنید'); return; }
+        
+        const btn = document.getElementById('submitPayBtn');
+        const statusDiv = document.getElementById('paymentStatus');
+        
+        // نمایش پیام انتظار
+        btn.disabled = true;
+        btn.textContent = '⏳ در حال ارسال...';
+        statusDiv.innerHTML = '⏳ لطفاً منتظر بمانید...';
+        statusDiv.style.color = '#0d9488';
+
+        try {
+            await apiCall('POST', '/api/payments', {
+                patientId: currentUser.id,
+                amount: document.getElementById('payAmount').value || null,
+                description: document.getElementById('payDesc').value || null,
+                receiptImage: receiptBase64,
+                status: 'pending'
+            });
+            
+            // پیام موفقیت
+            statusDiv.innerHTML = '✅ رسید با موفقیت ارسال شد!';
+            statusDiv.style.color = '#166534';
+            showToast('✅ رسید پرداخت ارسال شد', 'success');
+            
+            // پاک کردن فرم
+            document.getElementById('payAmount').value = '';
+            document.getElementById('payDesc').value = '';
+            document.getElementById('payFile').value = '';
+            document.getElementById('receiptPreview').innerHTML = '';
+            receiptBase64 = '';
+            
+            await fetchAllData();
+            renderPayment();
+        } catch(e) {
+            statusDiv.innerHTML = '❌ خطا در ارسال رسید';
+            statusDiv.style.color = '#dc2626';
+            showToast('❌ خطا در ارسال رسید');
+        } finally {
+            btn.disabled = false;
+            btn.textContent = '📤 ارسال رسید';
+        }
+    }
+
+    // ============================================================
+    // راه‌اندازی اولیه
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', async () => {
+        const saved = localStorage.getItem('sepanta_user');
+        if (saved) {
             try {
-                await apiCall('POST', '/api/payments', {
-                    patientId: currentUser.id,
-                    amount: document.getElementById('payAmount').value || null,
-                    description: document.getElementById('payDesc').value || null,
-                    receiptImage: receiptBase64,
-                    status: 'pending'
-                });
-                showToast('رسید ارسال شد ✅', 'success');
-                receiptBase64 = '';
-                document.getElementById('payAmount').value = '';
-                document.getElementById('payDesc').value = '';
-                document.getElementById('payFile').value = '';
-                document.getElementById('receiptPreview').innerHTML = '';
-                await fetchAllData();
-                renderPayment();
-            } catch(e) { showToast('خطا در ارسال رسید'); }
+                currentUser = JSON.parse(saved);
+                await initApp();
+                return;
+            } catch(e) {}
         }
-
-        // ============================================================
-        // راه‌اندازی اولیه
-        // ============================================================
-        document.addEventListener('DOMContentLoaded', async () => {
-            const saved = localStorage.getItem('sepanta_user');
-            if (saved) {
-                try {
-                    currentUser = JSON.parse(saved);
-                    await initApp();
-                    return;
-                } catch(e) {}
-            }
-            showLogin();
-        });
-    </script>
+        showLogin();
+    });
+</script>
 </body>
 </html>
