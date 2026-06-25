@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>کلینیک سپنتا</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+        }
+        
+        :root {
+            --primary: #0d9488;
+            --primary-dark: #0f766e;
+            --primary-light: #ccfbf1;
+            --secondary: #6366f1;
+            --danger: #ef4444;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --bg: linear-gradient(135deg, #f0fdf4 0%, #ecfeff 50%, #f0f9ff 100%);
+            --card: rgba(255, 255, 255, 0.9);
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+        }
+        
+        body {
+            background: var(--bg);
+            min-height: 100vh;
+            color: var(--text);
+            padding-bottom: 80px;
+        }
+        
+        .hidden { display: none !important; }
+        
+        .header {
+            background: var(--card);
+            backdrop-filter: blur(12px);
+            padding: 12px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .header-content {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon { font-size: 28px; }
+        
+        .logo-text h1 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+        
+        .logo-text p {
+            font-size: 10px;
+            color: var(--text-light);
+        }
+        
+        .logout-btn {
+            background: none;
+            border: none;
+            color: var(--danger);
+            font-size: 13px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        
+        .main {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+        
+        .card {
+            background: var(--card);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,0.6);
+        }
+        
+        .card-title {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .welcome-card {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+        
+        .welcome-card h2 {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+        
+        .welcome-card .date {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+        
+        .stats-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        
+        .stat-box {
+            flex: 1;
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+        }
+        
+        .stat-box .num {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .stat-box .label {
+            font-size: 10px;
+            opacity: 0.9;
+        }
+        
+        .input-group { margin-bottom: 16px; }
+        
+        .input-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-light);
+            margin-bottom: 6px;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+            background: white;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        textarea.input-field {
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger), #dc2626);
+            color: white;
+            padding: 8px 16px;
+            font-size: 12px;
+        }
+        
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 12px;
+        }
+        
+        .toggle-group {
+            display: flex;
+            gap: 8px;
+            background: #f1f5f9;
+            padding: 4px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .toggle-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background: transparent;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.3s;
+            color: var(--text-light);
+        }
+        
+        .toggle-btn.active {
+            background: white;
+            color: var(--primary-dark);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .staff-item, .list-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 12px;
+            margin-bottom: 8px;
+        }
+        
+        .staff-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .staff-icon { font-size: 24px; }
+        
+        .staff-name {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .staff-role {
+            font-size: 11px;
+            color: var(--text-light);
+        }
+        
+        .badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .badge-ot { background: #dbeafe; color: #1e40af; }
+        .badge-slp { background: #f3e8ff; color: #7c3aed; }
+        .badge-psy { background: #fef3c7; color: #92400e; }
+        .badge-admin { background: #ccfbf1; color: #0f766e; }
+        .badge-sec { background: #f1f5f9; color: #475569; }
+        .badge-confirmed { background: #dcfce7; color: #166534; }
+        .badge-cancelled { background: #fee2e2; color: #991b1b; }
+        .badge-pending { background: #fef3c7; color: #92400e; }
+        
+        .date-grid, .time-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            max-height: 150px;
+            overflow-y: auto;
+            padding: 4px;
+        }
+        
+        .date-item, .time-item {
+            padding: 8px 12px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+        }
+        
+        .date-item:hover, .time-item:hover {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+        
+        .date-item.selected, .time-item.selected {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+        
+        .date-item .day-name {
+            font-size: 10px;
+            opacity: 0.8;
+        }
+        
+        .therapist-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            border: 2px solid var(--border);
+            border-radius: 14px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 8px;
+            text-align: right;
+        }
+        
+        .therapist-btn:hover { border-color: var(--primary); }
+        
+        .therapist-btn.selected {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+        
+        .duration-toggle {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .duration-btn {
+            flex: 1;
+            padding: 14px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            background: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        
+        .duration-btn.selected {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            color: var(--primary-dark);
+        }
+        
+        .appt-card {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border);
+        }
+        
+        .appt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        
+        .appt-patient {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .appt-staff {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+        
+        .appt-details {
+            display: flex;
+            gap: 16px;
+            font-size: 12px;
+            color: var(--text-light);
+        }
+        
+        .appt-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .appt-action-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 11px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        
+        .appt-action-btn.edit { background: #dbeafe; color: #1e40af; }
+        .appt-action-btn.cancel { background: #fee2e2; color: #991b1b; }
+        .appt-action-btn.delete { background: #fecaca; color: #b91c1c; }
+        
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--card);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid var(--border);
+            padding: 8px 0;
+            z-index: 100;
+        }
+        
+        .nav-content {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            padding: 8px 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: none;
+            border: none;
+            font-family: inherit;
+            color: var(--text-light);
+            min-width: 60px;
+        }
+        
+        .nav-item.active {
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+        
+        .nav-item .nav-icon { font-size: 20px; }
+        .nav-item .nav-label { font-size: 10px; font-weight: 500; }
+        
+        .toast {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            right: 16px;
+            padding: 14px 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 1000;
+            animation: slideDown 0.3s ease;
+        }
+        
+        .toast.error { background: var(--danger); color: white; }
+        .toast.success { background: var(--success); color: white; }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .login-card {
+            width: 100%;
+            max-width: 380px;
+        }
+        
+        .login-logo {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        
+        .login-logo .icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #2dd4bf, var(--primary-dark));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 12px;
+            box-shadow: 0 8px 24px rgba(13, 148, 136, 0.3);
+        }
+        
+        .login-logo h1 {
+            font-size: 20px;
+            color: var(--primary-dark);
+        }
+        
+        .login-logo p {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+        
+        .text-link {
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 13px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 500;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #fef3c7, #fef9c3);
+            border: 1px solid #fcd34d;
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 16px;
+        }
+        
+        .info-box .title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 4px;
+        }
+        
+        .info-box .text {
+            font-size: 12px;
+            color: #a16207;
+        }
+        
+        .receipt-preview {
+            width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            margin-top: 10px;
+        }
+        
+        .filter-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        select.input-field { cursor: pointer; }
+        
+        .empty-state {
+            text-align: center;
+            padding: 32px 16px;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            width: 100%;
+            max-width: 400px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div id="toast" class="toast hidden"></div>
+    
+    <div id="loginPage" class="login-container">
+        <div class="card login-card">
+            <div class="login-logo">
+                <div class="icon">🏥</div>
+                <h1>کلینیک سپنتا</h1>
+                <p>کاردرمانی، گفتاردرمانی و روانشناسی</p>
+            </div>
+            
+            <div class="toggle-group">
+                <button class="toggle-btn active" onclick="setLoginType('patient')">🧑‍⚕️ بیمار</button>
+                <button class="toggle-btn" onclick="setLoginType('staff')">👨‍💼 کادر درمان</button>
+            </div>
+            
+            <div class="input-group">
+                <label>شماره تماس</label>
+                <input type="tel" id="loginPhone" class="input-field" placeholder="09xxxxxxxxx" dir="ltr">
+            </div>
+            
+            <div class="input-group">
+                <label>رمز عبور</label>
+                <input type="password" id="loginPassword" class="input-field" placeholder="رمز عبور">
+            </div>
+            
+            <button class="btn btn-primary" onclick="login()">ورود</button>
+            
+            <div id="registerLink" style="text-align: center; margin-top: 16px;">
+                <button class="text-link" onclick="showPage('registerPage')">حساب ندارید؟ ثبت‌نام کنید ←</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="registerPage" class="login-container hidden">
+        <div class="card login-card">
+            <div class="login-logo">
+                <div class="icon">📝</div>
+                <h1>ثبت‌نام بیمار</h1>
+                <p>کلینیک سپنتا</p>
+            </div>
+            
+            <div class="input-group">
+                <label>نام و نام خانوادگی</label>
+                <input type="text" id="regName" class="input-field" placeholder="نام کامل">
+            </div>
+            
+            <div class="input-group">
+                <label>شماره تماس</label>
+                <input type="tel" id="regPhone" class="input-field" placeholder="09xxxxxxxxx" dir="ltr">
+            </div>
+            
+            <div class="input-group">
+                <label>تشخیص / بیماری</label>
+                <textarea id="regDiagnosis" class="input-field" placeholder="توضیحات بیماری"></textarea>
+            </div>
+            
+            <div class="input-group">
+                <label>رمز عبور</label>
+                <input type="password" id="regPassword" class="input-field" placeholder="یک رمز عبور انتخاب کنید">
+            </div>
+            
+            <button class="btn btn-primary" onclick="register()">ثبت‌نام</button>
+            
+            <div style="text-align: center; margin-top: 16px;">
+                <button class="text-link" onclick="showPage('loginPage')">بازگشت به ورود ←</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="mainApp" class="hidden">
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <span class="logo-icon">🏥</span>
+                    <div class="logo-text">
+                        <h1>کلینیک سپنتا</h1>
+                        <p id="headerUserInfo"></p>
+                    </div>
+                </div>
+                <button class="logout-btn" onclick="logout()">خروج ↩</button>
+            </div>
+        </header>
+        
+        <main class="main">
+            <div id="adminDashboard" class="page hidden">
+                <div class="welcome-card">
+                    <h2 id="welcomeName">سلام! 👋</h2>
+                    <p class="date" id="todayDate"></p>
+                    <div class="stats-row">
+                        <div class="stat-box">
+                            <div class="num" id="statTodayAppts">0</div>
+                            <div class="label">نوبت امروز</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="num" id="statPatients">0</div>
+                            <div class="label">بیمار ثبت‌شده</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="num" id="statStaff">5</div>
+                            <div class="label">کادر درمان</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">👥 کادر درمان</h3>
+                    <div id="staffList"></div>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">📅 نوبت‌های امروز</h3>
+                    <div id="todayAppointments"></div>
+                </div>
+            </div>
+            
+            <div id="staffSchedule" class="page hidden">
+                <div class="card">
+                    <h3 class="card-title">🕐 تنظیم برنامه کاری</h3>
+                    
+                    <div class="input-group">
+                        <label>انتخاب تاریخ</label>
+                        <div class="date-grid" id="scheduleDateGrid"></div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <div class="input-group">
+                            <label>ساعت شروع</label>
+                            <input type="time" id="scheduleStart" class="input-field" value="08:00" dir="ltr">
+                        </div>
+                        <div class="input-group">
+                            <label>ساعت پایان</label>
+                            <input type="time" id="scheduleEnd" class="input-field" value="17:00" dir="ltr">
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="saveSchedule()">ذخیره برنامه</button>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">📋 برنامه‌های ثبت شده</h3>
+                    <div id="mySchedules"></div>
+                </div>
+            </div>
+            
+            <div id="staffAppointments" class="page hidden">
+                <div class="card">
+                    <h3 class="card-title">📅 نوبت‌های من</h3>
+                    <div id="myStaffAppts"></div>
+                </div>
+            </div>
+            
+            <div id="patientBooking" class="page hidden">
+                <div class="card">
+                    <h3 class="card-title">📅 رزرو نوبت</h3>
+                    
+                    <div class="input-group">
+                        <label>۱. انتخاب درمانگر</label>
+                        <div id="therapistList"></div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>۲. مدت جلسه</label>
+                        <div class="duration-toggle">
+                            <button class="duration-btn selected" onclick="setDuration(30)">⏱️ ۳۰ دقیقه</button>
+                            <button class="duration-btn" onclick="setDuration(45)">⏱️ ۴۵ دقیقه</button>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group" id="bookingDateSection" style="display: none;">
+                        <label>۳. انتخاب تاریخ</label>
+                        <div class="date-grid" id="bookingDateGrid"></div>
+                    </div>
+                    
+                    <div class="input-group" id="bookingTimeSection" style="display: none;">
+                        <label>۴. انتخاب ساعت</label>
+                        <div class="time-grid" id="bookingTimeGrid"></div>
+                    </div>
+                    
+                    <button class="btn btn-primary" id="bookBtn" style="display: none;" onclick="bookAppointment()">✅ ثبت نوبت</button>
+                </div>
+            </div>
+            
+            <div id="patientAppointments" class="page hidden">
+                <div class="card">
+                    <h3 class="card-title">📋 نوبت‌های من</h3>
+                    <div id="myPatientAppts"></div>
+                </div>
+            </div>
+            
+            <div id="patientPayment" class="page hidden">
+                <div class="card">
+                    <h3 class="card-title">💳 ارسال رسید پرداخت</h3>
+                    
+                    <div class="info-box">
+                        <div class="title">💡 راهنمای پرداخت</div>
+                        <div class="text">لطفا مبلغ جلسه را کارت‌به‌کارت کرده و تصویر رسید را بارگذاری کنید</div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>مبلغ (تومان)</label>
+                        <input type="text" id="paymentAmount" class="input-field" placeholder="مبلغ واریزی" dir="ltr">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>توضیحات</label>
+                        <textarea id="paymentDesc" class="input-field" placeholder="توضیحات (اختیاری)"></textarea>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>تصویر رسید پرداخت</label>
+                        <input type="file" id="paymentFile" class="input-field" accept="image/*" onchange="previewReceipt()">
+                        <img id="receiptPreview" class="receipt-preview hidden">
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="submitPayment()">📤 ارسال رسید</button>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">📋 تاریخچه پرداخت‌ها</h3>
+                    <div id="myPayments"></div>
+                </div>
+            </div>
+            
+            <div id="adminPatients" class="page hidden">
+                <div class="card">
+                    <h3 class="card-title">👥 لیست بیماران</h3>
+                    <div class="input-group">
+                        <input type="text" id="patientSearch" class="input-field" placeholder="🔍 جستجو نام، شماره یا تشخیص..." oninput="filterPatients()">
+                    </div>
+                    <div id="patientsList"></div>
+                </div>
+            </div>
+            
+            <div id="adminPayments" class="page hidden">
+                <div class="card">
+                    <h3 class="card-title">💳 مدیریت پرداخت‌ها</h3>
+                    <div id="allPayments"></div>
+                </div>
+            </div>
+            
+            <div id="adminAllAppts" class="page hidden">
+                <div class="card">
+                    <h3 class="card-title">🔍 فیلتر نوبت‌ها</h3>
+                    <div class="filter-row">
+                        <div class="input-group" style="margin: 0;">
+                            <label>تاریخ</label>
+                            <select id="filterDate" class="input-field" onchange="loadAllAppointments()"></select>
+                        </div>
+                        <div class="input-group" style="margin: 0;">
+                            <label>درمانگر</label>
+                            <select id="filterStaff" class="input-field" onchange="loadAllAppointments()"></select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">📅 نوبت‌ها</h3>
+                    <div id="filteredAppts"></div>
+                </div>
+            </div>
+        </main>
+        
+        <nav class="bottom-nav">
+            <div class="nav-content" id="bottomNav"></div>
+        </nav>
+    </div>
+    
+    <div id="editModal" class="modal-overlay hidden" onclick="closeEditModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <h3 class="modal-title">✏️ ویرایش نوبت</h3>
+            <p id="editModalInfo" style="font-size: 13px; margin-bottom: 16px; color: var(--text-light);"></p>
+            
+            <div class="input-group">
+                <label>تاریخ</label>
+                <select id="editDate" class="input-field"></select>
+            </div>
+            
+            <div class="input-group">
+                <label>ساعت شروع</label>
+                <input type="time" id="editTime" class="input-field" dir="ltr">
+            </div>
+            
+            <div class="input-group">
+                <label>مدت</label>
+                <div class="duration-toggle">
+                    <button class="duration-btn" id="editDur30" onclick="setEditDuration(30)">۳۰ دقیقه</button>
+                    <button class="duration-btn" id="editDur45" onclick="setEditDuration(45)">۴۵ دقیقه</button>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 12px;">
+                <button class="btn btn-primary" style="flex: 1;" onclick="saveEditedAppt()">ذخیره</button>
+                <button class="btn btn-danger" style="flex: 1;" onclick="closeEditModal()">انصراف</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // 1. تنظیمات اولیه و داده‌های پیش‌فرض
+        // ============================================================
+        
+        const DEFAULT_STAFF = [
+            { id: 1, name: 'فاطمه بغدادی', role: 'admin', phone: '09120000001', password: 'admin123' },
+            { id: 2, name: 'آقای رحمانی', role: 'ot', phone: '09120000002', password: 'staff123' },
+            { id: 3, name: 'خانم شهسواری', role: 'slp', phone: '09120000003', password: 'staff123' },
+            { id: 4, name: 'خانم شعبانی', role: 'psychologist', phone: '09120000004', password: 'staff123' },
+            { id: 5, name: 'خانم علیخانی', role: 'secretary', phone: '09120000005', password: 'staff123' }
+        ];
+        
+        const ROLE_LABELS = {
+            admin: 'کاردرمانگر (مدیر)',
+            ot: 'کاردرمانگر',
+            slp: 'گفتاردرمانگر',
+            psychologist: 'روانشناس',
+            secretary: 'منشی'
+        };
+        
+        const ROLE_ICONS = { admin: '🧠', ot: '🤲', slp: '🗣️', psychologist: '💆', secretary: '📋' };
+        const ROLE_BADGES = { admin: 'badge-admin', ot: 'badge-ot', slp: 'badge-slp', psychologist: 'badge-psy', secretary: 'badge-sec' };
+        
+        // ============================================================
+        // 2. توابع کمکی برای تاریخ شمسی
+        // ============================================================
+        
+        function gregorianToJalaali(gy, gm, gd) {
+            const g_d_m = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+            let gy2 = gm > 2 ? gy + 1 : gy;
+            let days = 355666 + 365 * gy + Math.floor((gy2 + 3) / 4) - Math.floor((gy2 + 99) / 100) + Math.floor((gy2 + 399) / 400) + gd + g_d_m[gm - 1];
+            let jy = -1595 + 33 * Math.floor(days / 12053);
+            days %= 12053;
+            jy += 4 * Math.floor(days / 1461);
+            days %= 1461;
+            if (days > 365) { jy += Math.floor((days - 1) / 365); days = (days - 1) % 365; }
+            let jm, jd;
+            if (days < 186) { jm = 1 + Math.floor(days / 31); jd = 1 + (days % 31); }
+            else { jm = 7 + Math.floor((days - 186) / 30); jd = 1 + ((days - 186) % 30); }
+            return { jy, jm, jd };
+        }
+        
+        function jalaaliToGregorian(jy, jm, jd) {
+            let jy2 = jy + 979;
+            const j_days_in_month = [31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29];
+            const g_days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+            let j_day_no = 365 * jy2 + Math.floor(jy2 / 33) * 8 + Math.floor(((jy2 % 33) + 3) / 4);
+            for (let i = 0; i < jm - 1; ++i) j_day_no += j_days_in_month[i];
+            j_day_no += jd - 1;
+            let g_day_no = j_day_no - 79;
+            let gy = 1600 + 400 * Math.floor(g_day_no / 146097);
+            g_day_no %= 146097;
+            let leap = true;
+            if (g_day_no >= 36525) { g_day_no--; gy += 100 * Math.floor(g_day_no / 36524); g_day_no %= 36524; if (g_day_no >= 365) g_day_no++; else leap = false; }
+            gy += 4 * Math.floor(g_day_no / 1461);
+            g_day_no %= 1461;
+            if (g_day_no >= 366) { leap = false; g_day_no--; gy += Math.floor(g_day_no / 365); g_day_no %= 365; }
+            const g_d_m2 = [...g_days_in_month];
+            if (leap) g_d_m2[1] = 29;
+            let gm = 0;
+            for (let i = 0; i < 12 && g_day_no >= g_d_m2[i]; ++i) { g_day_no -= g_d_m2[i]; gm++; }
+            return { gy, gm: gm + 1, gd: g_day_no + 1 };
+        }
+        
+        function todayJalaali() {
+            const d = new Date();
+            const { jy, jm, jd } = gregorianToJalaali(d.getFullYear(), d.getMonth() + 1, d.getDate());
+            return `${jy}/${String(jm).padStart(2, '0')}/${String(jd).padStart(2, '0')}`;
+        }
+        
+        function jalaaliDayName(jy, jm, jd) {
+            const { gy, gm, gd } = jalaaliToGregorian(jy, jm, jd);
+            const d = new Date(gy, gm - 1, gd);
+            const days = ['یکشنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه', 'شنبه'];
+            return days[d.getDay()];
+        }
+        
+        function getNext30Days() {
+            const result = [];
+            const today = new Date();
+            for (let i = 0; i < 30; i++) {
+                const d = new Date(today); d.setDate(d.getDate() + i);
+                const { jy, jm, jd } = gregorianToJalaali(d.getFullYear(), d.getMonth() + 1, d.getDate());
+                const dateStr = `${jy}/${String(jm).padStart(2, '0')}/${String(jd).padStart(2, '0')}`;
+                result.push({ dateStr, dayName: jalaaliDayName(jy, jm, jd) });
+            }
+            return result;
+        }
+        
+        function addMinutes(time, mins) {
+            const [h, m] = time.split(':').map(Number);
+            const total = h * 60 + m + mins;
+            return `${String(Math.floor(total / 60)).padStart(2, '0')}:${String(total % 60).padStart(2, '0')}`;
+        }
+        
+        // ============================================================
+        // 3. توابع ارتباط با سرور (جایگزین localStorage)
+        // ============================================================
+        
+        async function apiCall(method, url, data = null) {
+            try {
+                const options = {
+                    method: method,
+                    headers: { 'Content-Type': 'application/json' }
+                };
+                if (data) options.body = JSON.stringify(data);
+                const response = await fetch(url, options);
+                if (!response.ok) throw new Error('خطا در ارتباط با سرور');
+                return await response.json();
+            } catch (error) {
+                showToast('خطا در ارتباط با سرور: ' + error.message);
+                throw error;
+            }
+        }
+        
+        // دریافت همه داده‌ها از سرور
+        async function fetchAllData() {
+            try {
+                const [staff, patients, schedules, appointments, payments] = await Promise.all([
+                    apiCall('GET', '/api/staff'),
+                    apiCall('GET', '/api/patients'),
+                    apiCall('GET', '/api/schedules'),
+                    apiCall('GET', '/api/appointments'),
+                    apiCall('GET', '/api/payments')
+                ]);
+                return { staff, patients, schedules, appointments, payments };
+            } catch (error) {
+                return null;
+            }
+        }
+        
+        // ============================================================
+        // 4. توابع عمومی (Toast، نمایش صفحه، لاگین و ...)
+        // ============================================================
+        
+        function showToast(message, type = 'error') {
+            const toast = document.getElementById('toast');
+            toast.textContent = (type === 'error' ? '❌ ' : '✅ ') + message;
+            toast.className = `toast ${type}`;
+            toast.classList.remove('hidden');
+            setTimeout(() => toast.classList.add('hidden'), 3000);
+        }
+        
+        function showPage(pageId) {
+            document.querySelectorAll('.login-container, #mainApp').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.page').forEach(el => el.classList.add('hidden'));
+            if (pageId === 'loginPage' || pageId === 'registerPage') {
+                document.getElementById(pageId).classList.remove('hidden');
+            } else {
+                document.getElementById('mainApp').classList.remove('hidden');
+                document.getElementById(pageId).classList.remove('hidden');
+            }
+        }
+        
+        let currentUser = null;
+        let loginType = 'patient';
+        let cachedData = null;
+        
+        function setLoginType(type) {
+            loginType = type;
+            document.querySelectorAll('.toggle-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', (i === 0 && type === 'patient') || (i === 1 && type === 'staff'));
+            });
+            document.getElementById('registerLink').style.display = type === 'patient' ? 'block' : 'none';
+        }
+        
+        async function login() {
+            const phone = document.getElementById('loginPhone').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            if (!phone || !password) {
+                showToast('لطفا شماره تماس و رمز عبور را وارد کنید');
+                return;
+            }
+            
+            try {
+                const result = await apiCall('POST', '/api/login', { phone, password, type: loginType });
+                if (result.error) {
+                    showToast(result.error);
+                    return;
+                }
+                currentUser = { ...result, userType: loginType };
+                localStorage.setItem('sepanta_currentUser', JSON.stringify(currentUser));
+                showToast('ورود موفقیت‌آمیز ✅', 'success');
+                await initApp();
+            } catch (error) {
+                showToast('خطا در ورود');
+            }
+        }
+        
+        async function register() {
+            const name = document.getElementById('regName').value.trim();
+            const phone = document.getElementById('regPhone').value.trim();
+            const diagnosis = document.getElementById('regDiagnosis').value.trim();
+            const password = document.getElementById('regPassword').value;
+            
+            if (!name || !phone || !diagnosis || !password) {
+                showToast('لطفا تمام فیلدها را تکمیل کنید');
+                return;
+            }
+            
+            try {
+                const result = await apiCall('POST', '/api/patients', { name, phone, diagnosis, password });
+                if (result.error) {
+                    showToast(result.error);
+                    return;
+                }
+                currentUser = { ...result, userType: 'patient' };
+                localStorage.setItem('sepanta_currentUser', JSON.stringify(currentUser));
+                showToast('ثبت‌نام موفقیت‌آمیز بود ✅', 'success');
+                await initApp();
+            } catch (error) {
+                showToast('خطا در ثبت‌نام');
+            }
+        }
+        
+        function logout() {
+            currentUser = null;
+            cachedData = null;
+            localStorage.removeItem('sepanta_currentUser');
+            showPage('loginPage');
+            document.getElementById('loginPhone').value = '';
+            document.getElementById('loginPassword').value = '';
+            showToast('خارج شدید', 'success');
+        }
+        
+        // ============================================================
+        // 5. راه‌اندازی اولیه اپلیکیشن
+        // ============================================================
+        
+        async function initApp() {
+            // دریافت همه داده‌ها از سرور
+            const data = await fetchAllData();
+            if (!data) {
+                showToast('خطا در دریافت داده‌ها از سرور');
+                return;
+            }
+            cachedData = data;
+            
+            document.getElementById('headerUserInfo').textContent = 
+                `${currentUser.name} | ${currentUser.userType === 'staff' ? ROLE_LABELS[currentUser.role] : 'بیمار'}`;
+            
+            setupNavigation();
+            
+            if (currentUser.userType === 'staff') {
+                if (currentUser.role === 'admin' || currentUser.role === 'secretary') {
+                    navigateTo('adminDashboard');
+                } else {
+                    navigateTo('staffSchedule');
+                }
+            } else {
+                navigateTo('patientBooking');
+            }
+        }
+        
+        function setupNavigation() {
+            const nav = document.getElementById('bottomNav');
+            let items = [];
+            if (currentUser.userType === 'staff') {
+                if (currentUser.role === 'admin' || currentUser.role === 'secretary') {
+                    items = [
+                        { id: 'adminDashboard', icon: '📊', label: 'داشبورد' },
+                        { id: 'adminAllAppts', icon: '📅', label: 'نوبت‌ها' },
+                        { id: 'adminPatients', icon: '👥', label: 'بیماران' },
+                        { id: 'adminPayments', icon: '💳', label: 'پرداخت‌ها' }
+                    ];
+                    if (currentUser.role === 'admin') {
+                        items.push({ id: 'staffSchedule', icon: '🕐', label: 'برنامه کاری' });
+                    }
+                } else {
+                    items = [
+                        { id: 'staffSchedule', icon: '🕐', label: 'برنامه کاری' },
+                        { id: 'staffAppointments', icon: '📅', label: 'نوبت‌های من' }
+                    ];
+                }
+            } else {
+                items = [
+                    { id: 'patientBooking', icon: '📅', label: 'رزرو نوبت' },
+                    { id: 'patientAppointments', icon: '📋', label: 'نوبت‌های من' },
+                    { id: 'patientPayment', icon: '💳', label: 'پرداخت' }
+                ];
+            }
+            nav.innerHTML = items.map(item => 
+                `<button class="nav-item" data-page="${item.id}" onclick="navigateTo('${item.id}')">
+                    <span class="nav-icon">${item.icon}</span>
+                    <span class="nav-label">${item.label}</span>
+                </button>`
+            ).join('');
+        }
+        
+        let currentPage = '';
+        
+        async function navigateTo(pageId) {
+            currentPage = pageId;
+            document.querySelectorAll('.page').forEach(el => el.classList.add('hidden'));
+            document.getElementById(pageId).classList.remove('hidden');
+            document.querySelectorAll('.nav-item').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.page === pageId);
+            });
+            
+            // دوباره داده‌ها رو از سرور بگیر
+            const data = await fetchAllData();
+            if (data) cachedData = data;
+            
+            switch(pageId) {
+                case 'adminDashboard': loadAdminDashboard(); break;
+                case 'staffSchedule': loadStaffSchedule(); break;
+                case 'staffAppointments': loadStaffAppointments(); break;
+                case 'patientBooking': loadPatientBooking(); break;
+                case 'patientAppointments': loadPatientAppointments(); break;
+                case 'patientPayment': loadPatientPayment(); break;
+                case 'adminPatients': loadAdminPatients(); break;
+                case 'adminPayments': loadAdminPayments(); break;
+                case 'adminAllAppts': loadAllAppointments(); break;
+            }
+        }
+        
+        // ============================================================
+        // 6. توابع صفحات مختلف
+        // ============================================================
+        
+        // ---------- داشبورد مدیر ----------
+        function loadAdminDashboard() {
+            if (!cachedData) return;
+            const { staff, patients, appointments } = cachedData;
+            const today = todayJalaali();
+            
+            document.getElementById('welcomeName').textContent = `سلام، ${currentUser.name} 👋`;
+            document.getElementById('todayDate').textContent = `امروز ${today}`;
+            
+            const todayAppts = appointments.filter(a => a.date_str === today && a.status === 'confirmed');
+            document.getElementById('statTodayAppts').textContent = todayAppts.length;
+            document.getElementById('statPatients').textContent = patients.length;
+            document.getElementById('statStaff').textContent = staff.length;
+            
+            document.getElementById('staffList').innerHTML = staff.map(s => 
+                `<div class="staff-item">
+                    <div class="staff-info">
+                        <span class="staff-icon">${ROLE_ICONS[s.role]}</span>
+                        <div>
+                            <div class="staff-name">${s.name}</div>
+                            <div class="staff-role">${s.phone}</div>
+                        </div>
+                    </div>
+                    <span class="badge ${ROLE_BADGES[s.role]}">${ROLE_LABELS[s.role]}</span>
+                </div>`
+            ).join('');
+            
+            if (todayAppts.length === 0) {
+                document.getElementById('todayAppointments').innerHTML = '<div class="empty-state">نوبتی برای امروز ثبت نشده</div>';
+            } else {
+                document.getElementById('todayAppointments').innerHTML = todayAppts.map(a => {
+                    const patient = patients.find(p => p.id === a.patient_id) || {};
+                    const staffMember = staff.find(s => s.id === a.staff_id) || {};
+                    return `<div class="appt-card">
+                        <div class="appt-header">
+                            <div>
+                                <div class="appt-patient">${ROLE_ICONS[staffMember.role] || ''} ${patient.name || 'نامشخص'}</div>
+                                <div class="appt-staff">${staffMember.name || ''} - ${ROLE_LABELS[staffMember.role] || ''}</div>
+                            </div>
+                            <span class="badge badge-confirmed">تأیید شده</span>
+                        </div>
+                        <div class="appt-details">
+                            <span>🕐 ${a.start_time} - ${a.end_time}</span>
+                            <span>⏱️ ${a.duration} دقیقه</span>
+                        </div>
+                    </div>`;
+                }).join('');
+            }
+        }
+        
+        // ---------- برنامه کاری ----------
+        let selectedScheduleDate = '';
+        
+        function loadStaffSchedule() {
+            if (!cachedData) return;
+            const days = getNext30Days();
+            document.getElementById('scheduleDateGrid').innerHTML = days.map(d => 
+                `<div class="date-item ${selectedScheduleDate === d.dateStr ? 'selected' : ''}" 
+                      onclick="selectScheduleDate('${d.dateStr}')">
+                    <div class="day-name">${d.dayName}</div>
+                    <div>${d.dateStr.split('/').slice(1).join('/')}</div>
+                </div>`
+            ).join('');
+            loadMySchedules();
+        }
+        
+        function selectScheduleDate(dateStr) {
+            selectedScheduleDate = dateStr;
+            loadStaffSchedule();
+        }
+        
+        async function saveSchedule() {
+            if (!selectedScheduleDate) {
+                showToast('لطفا تاریخ را انتخاب کنید');
+                return;
+            }
+            const startTime = document.getElementById('scheduleStart').value;
+            const endTime = document.getElementById('scheduleEnd').value;
+            
+            try {
+                await apiCall('POST', '/api/schedules', {
+                    staffId: currentUser.id,
+                    dateStr: selectedScheduleDate,
+                    startTime,
+                    endTime
+                });
+                showToast('برنامه کاری ذخیره شد ✅', 'success');
+                await navigateTo('staffSchedule');
+            } catch (error) {
+                showToast('خطا در ذخیره برنامه');
+            }
+        }
+        
+        function loadMySchedules() {
+            if (!cachedData) return;
+            const schedules = cachedData.schedules.filter(s => s.staff_id === currentUser.id);
+            if (schedules.length === 0) {
+                document.getElementById('mySchedules').innerHTML = '<div class="empty-state">برنامه‌ای ثبت نشده</div>';
+                return;
+            }
+            document.getElementById('mySchedules').innerHTML = schedules.map(s => 
+                `<div class="list-item">
+                    <div>
+                        <div style="font-weight: 600; font-size: 14px;">📅 ${s.date_str}</div>
+                        <div style="font-size: 12px; color: var(--text-light);" dir="ltr">${s.start_time} - ${s.end_time}</div>
+                    </div>
+                    <button class="btn btn-danger btn-sm" onclick="deleteSchedule(${s.id})">🗑️ حذف</button>
+                </div>`
+            ).join('');
+        }
+        
+        async function deleteSchedule(id) {
+            try {
+                await apiCall('DELETE', `/api/schedules/${id}`);
+                showToast('برنامه حذف شد', 'success');
+                await navigateTo('staffSchedule');
+            } catch (error) {
+                showToast('خطا در حذف برنامه');
+            }
+        }
+        
+        // ---------- نوبت‌های کاردرمان ----------
+        function loadStaffAppointments() {
+            if (!cachedData) return;
+            const { appointments, patients } = cachedData;
+            const myAppts = appointments.filter(a => a.staff_id === currentUser.id);
+            
+            if (myAppts.length === 0) {
+                document.getElementById('myStaffAppts').innerHTML = '<div class="empty-state">نوبتی ثبت نشده</div>';
+                return;
+            }
+            document.getElementById('myStaffAppts').innerHTML = myAppts.map(a => {
+                const patient = patients.find(p => p.id === a.patient_id) || {};
+                return `<div class="appt-card">
+                    <div class="appt-header">
+                        <div>
+                            <div class="appt-patient">👤 ${patient.name || 'نامشخص'}</div>
+                            <div class="appt-staff">📞 ${patient.phone || ''}</div>
+                        </div>
+                        <span class="badge ${a.status === 'confirmed' ? 'badge-confirmed' : 'badge-cancelled'}">
+                            ${a.status === 'confirmed' ? 'تأیید شده' : 'لغو شده'}
+                        </span>
+                    </div>
+                    <div class="appt-details">
+                        <span>📅 ${a.date_str}</span>
+                        <span>🕐 ${a.start_time} - ${a.end_time}</span>
+                        <span>⏱️ ${a.duration} دقیقه</span>
+                    </div>
+                    ${a.status === 'confirmed' ? `<div class="appt-actions">
+                        <button class="appt-action-btn cancel" onclick="cancelAppointment(${a.id})">🚫 لغو</button>
+                    </div>` : ''}
+                </div>`;
+            }).join('');
+        }
+        
+        // ---------- رزرو نوبت بیمار ----------
+        let selectedTherapist = 0, selectedDuration = 30, selectedBookingDate = '', selectedBookingTime = '';
+        
+        function loadPatientBooking() {
+            if (!cachedData) return;
+            const staff = cachedData.staff.filter(s => s.role !== 'secretary');
+            document.getElementById('therapistList').innerHTML = staff.map(s => 
+                `<button class="therapist-btn ${selectedTherapist === s.id ? 'selected' : ''}" 
+                         onclick="selectTherapist(${s.id})">
+                    <span style="font-size: 24px;">${ROLE_ICONS[s.role]}</span>
+                    <div>
+                        <div style="font-weight: 600; font-size: 14px;">${s.name}</div>
+                        <div style="font-size: 12px; color: var(--text-light);">${ROLE_LABELS[s.role]}</div>
+                    </div>
+                </button>`
+            ).join('');
+            updateBookingUI();
+        }
+        
+        function selectTherapist(id) {
+            selectedTherapist = id;
+            selectedBookingDate = '';
+            selectedBookingTime = '';
+            loadPatientBooking();
+        }
+        
+        function setDuration(dur) {
+            selectedDuration = dur;
+            document.querySelectorAll('.duration-btn').forEach((btn, i) => {
+                btn.classList.toggle('selected', (i === 0 && dur === 30) || (i === 1 && dur === 45));
+            });
+            if (selectedBookingDate) loadAvailableSlots();
+        }
+        
+        function updateBookingUI() {
+            const dateSection = document.getElementById('bookingDateSection');
+            const timeSection = document.getElementById('bookingTimeSection');
+            const bookBtn = document.getElementById('bookBtn');
+            
+            if (selectedTherapist) {
+                dateSection.style.display = 'block';
+                const days = getNext30Days();
+                document.getElementById('bookingDateGrid').innerHTML = days.map(d => 
+                    `<div class="date-item ${selectedBookingDate === d.dateStr ? 'selected' : ''}" 
+                          onclick="selectBookingDate('${d.dateStr}')">
+                        <div class="day-name">${d.dayName}</div>
+                        <div>${d.dateStr.split('/').slice(1).join('/')}</div>
+                    </div>`
+                ).join('');
+            } else {
+                dateSection.style.display = 'none';
+            }
+            
+            if (selectedBookingDate) {
+                timeSection.style.display = 'block';
+                loadAvailableSlots();
+            } else {
+                timeSection.style.display = 'none';
+            }
+            
+            bookBtn.style.display = selectedBookingTime ? 'block' : 'none';
+        }
+        
+        function selectBookingDate(dateStr) {
+            selectedBookingDate = dateStr;
+            selectedBookingTime = '';
+            updateBookingUI();
+        }
+        
+        function loadAvailableSlots() {
+            if (!cachedData) return;
+            const { schedules, appointments } = cachedData;
+            const schedule = schedules.find(s => s.staff_id === selectedTherapist && s.date_str === selectedBookingDate);
+            
+            if (!schedule) {
+                document.getElementById('bookingTimeGrid').innerHTML = '<div class="empty-state">⚠️ زمان خالی در این تاریخ وجود ندارد</div>';
+                return;
+            }
+            
+            const existingAppts = appointments.filter(a => 
+                a.staff_id === selectedTherapist && 
+                a.date_str === selectedBookingDate && 
+                a.status === 'confirmed'
+            );
+            
+            const slots = [];
+            const toMin = t => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
+            const toTime = m => `${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
+            
+            let current = toMin(schedule.start_time);
+            const end = toMin(schedule.end_time);
+            
+            while (current + selectedDuration <= end) {
+                const startTime = toTime(current);
+                const endTime = toTime(current + selectedDuration);
+                let conflict = false;
+                for (const appt of existingAppts) {
+                    const apptStart = toMin(appt.start_time);
+                    const apptEnd = toMin(appt.end_time);
+                    if (current < apptEnd && current + selectedDuration > apptStart) {
+                        conflict = true;
+                        break;
+                    }
+                }
+                if (!conflict) slots.push({ startTime, endTime });
+                current += 15;
+            }
+            
+            if (slots.length === 0) {
+                document.getElementById('bookingTimeGrid').innerHTML = '<div class="empty-state">⚠️ زمان خالی در این تاریخ وجود ندارد</div>';
+                return;
+            }
+            
+            document.getElementById('bookingTimeGrid').innerHTML = slots.map(s => 
+                `<div class="time-item ${selectedBookingTime === s.startTime ? 'selected' : ''}" 
+                      onclick="selectBookingTime('${s.startTime}')">
+                    ${s.startTime} - ${s.endTime}
+                </div>`
+            ).join('');
+        }
+        
+        function selectBookingTime(time) {
+            selectedBookingTime = time;
+            updateBookingUI();
+        }
+        
+        async function bookAppointment() {
+            if (!selectedTherapist || !selectedBookingDate || !selectedBookingTime) {
+                showToast('لطفا درمانگر، تاریخ و ساعت را انتخاب کنید');
+                return;
+            }
+            
+            const endTime = addMinutes(selectedBookingTime, selectedDuration);
+            
+            try {
+                await apiCall('POST', '/api/appointments', {
+                    patientId: currentUser.id,
+                    staffId: selectedTherapist,
+                    dateStr: selectedBookingDate,
+                    startTime: selectedBookingTime,
+                    endTime: endTime,
+                    duration: selectedDuration,
+                    status: 'confirmed'
+                });
+                showToast('نوبت با موفقیت ثبت شد ✅', 'success');
+                selectedBookingTime = '';
+                updateBookingUI();
+                await navigateTo('patientAppointments');
+            } catch (error) {
+                showToast('خطا در ثبت نوبت');
+            }
+        }
+        
+        // ---------- نوبت‌های بیمار ----------
+        function loadPatientAppointments() {
+            if (!cachedData) return;
+            const { appointments, staff } = cachedData;
+            const myAppts = appointments.filter(a => a.patient_id === currentUser.id);
+            
+            if (myAppts.length === 0) {
+                document.getElementById('myPatientAppts').innerHTML = '<div class="empty-state">نوبتی ثبت نشده</div>';
+                return;
+            }
+            
+            document.getElementById('myPatientAppts').innerHTML = myAppts.map(a => {
+                const staffMember = staff.find(s => s.id === a.staff_id) || {};
+                return `<div class="appt-card">
+                    <div class="appt-header">
+                        <div>
+                            <div class="appt-patient">${ROLE_ICONS[staffMember.role] || ''} ${staffMember.name || 'نامشخص'}</div>
+                            <div class="appt-staff">${ROLE_LABELS[staffMember.role] || ''}</div>
+                        </div>
+                        <span class="badge ${a.status === 'confirmed' ? 'badge-confirmed' : 'badge-cancelled'}">
+                            ${a.status === 'confirmed' ? 'تأیید شده' : 'لغو شده'}
+                        </span>
+                    </div>
+                    <div class="appt-details">
+                        <span>📅 ${a.date_str}</span>
+                        <span>🕐 ${a.start_time} - ${a.end_time}</span>
+                        <span>⏱️ ${a.duration} دقیقه</span>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+        
+        // ---------- پرداخت بیمار ----------
+        let receiptBase64 = '';
+        
+        function loadPatientPayment() {
+            loadMyPayments();
+        }
+        
+        function previewReceipt() {
+            const file = document.getElementById('paymentFile').files[0];
+            if (!file) return;
+            if (file.size > 5 * 1024 * 1024) {
+                showToast('حجم فایل نباید بیشتر از ۵ مگابایت باشد');
+                return;
+            }
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                receiptBase64 = reader.result;
+                document.getElementById('receiptPreview').src = receiptBase64;
+                document.getElementById('receiptPreview').classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        async function submitPayment() {
+            if (!receiptBase64) {
+                showToast('لطفا تصویر رسید پرداخت را بارگذاری کنید');
+                return;
+            }
+            
+            try {
+                await apiCall('POST', '/api/payments', {
+                    patientId: currentUser.id,
+                    amount: document.getElementById('paymentAmount').value || null,
+                    description: document.getElementById('paymentDesc').value || null,
+                    receiptImage: receiptBase64,
+                    status: 'pending'
+                });
+                showToast('رسید پرداخت ارسال شد ✅', 'success');
+                document.getElementById('paymentAmount').value = '';
+                document.getElementById('paymentDesc').value = '';
+                document.getElementById('paymentFile').value = '';
+                document.getElementById('receiptPreview').classList.add('hidden');
+                receiptBase64 = '';
+                await navigateTo('patientPayment');
+            } catch (error) {
+                showToast('خطا در ارسال رسید');
+            }
+        }
+        
+        function loadMyPayments() {
+            if (!cachedData) return;
+            const payments = cachedData.payments.filter(p => p.patient_id === currentUser.id);
+            if (payments.length === 0) {
+                document.getElementById('myPayments').innerHTML = '<div class="empty-state">پرداختی ثبت نشده</div>';
+                return;
+            }
+            document.getElementById('myPayments').innerHTML = payments.map(p => 
+                `<div class="list-item">
+                    <div>
+                        <div style="font-weight: 600; font-size: 14px;">${p.amount ? p.amount + ' تومان' : 'بدون مبلغ'}</div>
+                        ${p.description ? `<div style="font-size: 12px; color: var(--text-light);">${p.description}</div>` : ''}
+                    </div>
+                    <span class="badge badge-${p.status}">
+                        ${p.status === 'pending' ? 'در انتظار' : p.status === 'approved' ? 'تأیید شده' : 'رد شده'}
+                    </span>
+                </div>`
+            ).join('');
+        }
+        
+        // ---------- مدیریت بیماران توسط مدیر ----------
+        function loadAdminPatients() {
+            filterPatients();
+        }
+        
+        function filterPatients() {
+            if (!cachedData) return;
+            const search = document.getElementById('patientSearch').value.toLowerCase();
+            let patients = cachedData.patients;
+            if (search) {
+                patients = patients.filter(p => 
+                    p.name.toLowerCase().includes(search) || 
+                    p.phone.includes(search) || 
+                    (p.diagnosis && p.diagnosis.toLowerCase().includes(search))
+                );
+            }
+            if (patients.length === 0) {
+                document.getElementById('patientsList').innerHTML = '<div class="empty-state">بیماری یافت نشد</div>';
+                return;
+            }
+            document.getElementById('patientsList').innerHTML = patients.map(p => 
+                `<div class="appt-card">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <div style="font-weight: 600; font-size: 14px;">👤 ${p.name}</div>
+                            <div style="font-size: 12px; color: var(--text-light); margin-top: 4px;">📞 ${p.phone}</div>
+                            ${p.diagnosis ? `<div style="font-size: 12px; color: var(--text-light);">🏥 ${p.diagnosis}</div>` : ''}
+                        </div>
+                        <a href="tel:${p.phone}" class="btn btn-primary btn-sm">📞 تماس</a>
+                    </div>
+                </div>`
+            ).join('');
+        }
+        
+        // ---------- مدیریت پرداخت‌ها توسط مدیر ----------
+        function loadAdminPayments() {
+            if (!cachedData) return;
+            const { payments, patients } = cachedData;
+            if (payments.length === 0) {
+                document.getElementById('allPayments').innerHTML = '<div class="empty-state">پرداختی ثبت نشده</div>';
+                return;
+            }
+            document.getElementById('allPayments').innerHTML = payments.map(p => {
+                const patient = patients.find(pt => pt.id === p.patient_id) || {};
+                return `<div class="appt-card">
+                    <div class="appt-header">
+                        <div>
+                            <div class="appt-patient">${patient.name || 'نامشخص'}</div>
+                            <div class="appt-staff">📞 ${patient.phone || ''}</div>
+                        </div>
+                        <span class="badge badge-${p.status}">
+                            ${p.status === 'pending' ? 'در انتظار' : p.status === 'approved' ? 'تأیید شده' : 'رد شده'}
+                        </span>
+                    </div>
+                    ${p.amount ? `<div style="font-size: 14px; margin-top: 8px;">💰 ${p.amount} تومان</div>` : ''}
+                    ${p.description ? `<div style="font-size: 12px; color: var(--text-light);">${p.description}</div>` : ''}
+                    ${p.receipt_image ? `<img src="${p.receipt_image}" class="receipt-preview" style="margin-top: 8px;">` : ''}
+                    ${p.status === 'pending' ? `<div class="appt-actions">
+                        <button class="appt-action-btn" style="background: #dcfce7; color: #166534;" 
+                                onclick="updatePaymentStatus(${p.id}, 'approved')">✅ تأیید</button>
+                        <button class="appt-action-btn cancel" onclick="updatePaymentStatus(${p.id}, 'rejected')">❌ رد</button>
+                    </div>` : ''}
+                </div>`;
+            }).join('');
+        }
+        
+        async function updatePaymentStatus(id, status) {
+            try {
+                await apiCall('PUT', `/api/payments/${id}`, { status });
+                showToast(status === 'approved' ? 'پرداخت تأیید شد ✅' : 'پرداخت رد شد', 'success');
+                await navigateTo('adminPayments');
+            } catch (error) {
+                showToast('خطا در تغییر وضعیت');
+            }
+        }
+        
+        // ---------- مدیریت همه نوبت‌ها توسط مدیر ----------
+        async function loadAllAppointments() {
+            if (!cachedData) return;
+            const today = todayJalaali();
+            const days = getNext30Days();
+            const staff = cachedData.staff.filter(s => s.role !== 'secretary');
+            
+            const filterDate = document.getElementById('filterDate');
+            const filterStaff = document.getElementById('filterStaff');
+            
+            if (filterDate.options.length <= 1) {
+                filterDate.innerHTML = '<option value="">همه تاریخ‌ها</option>' + 
+                    days.map(d => `<option value="${d.dateStr}" ${d.dateStr === today ? 'selected' : ''}>
+                        ${d.dayName} - ${d.dateStr}
+                    </option>`).join('');
+            }
+            if (filterStaff.options.length <= 1) {
+                filterStaff.innerHTML = '<option value="">همه</option>' + 
+                    staff.map(s => `<option value="${s.id}">${s.name} - ${ROLE_LABELS[s.role]}</option>`).join('');
+            }
+            
+            let appointments = cachedData.appointments;
+            const selectedDate = filterDate.value;
+            const selectedStaff = filterStaff.value;
+            
+            if (selectedDate) appointments = appointments.filter(a => a.date_str === selectedDate);
+            if (selectedStaff) appointments = appointments.filter(a => a.staff_id === parseInt(selectedStaff));
+            
+            if (appointments.length === 0) {
+                document.getElementById('filteredAppts').innerHTML = '<div class="empty-state">نوبتی یافت نشد</div>';
+                return;
+            }
+            
+            document.getElementById('filteredAppts').innerHTML = appointments.map(a => {
+                const patient = cachedData.patients.find(p => p.id === a.patient_id) || {};
+                const staffMember = cachedData.staff.find(s => s.id === a.staff_id) || {};
+                return `<div class="appt-card">
+                    <div class="appt-header">
+                        <div>
+                            <div class="appt-patient">${ROLE_ICONS[staffMember.role] || ''} ${patient.name || 'نامشخص'}</div>
+                            <div class="appt-staff">${staffMember.name || ''} - ${ROLE_LABELS[staffMember.role] || ''}</div>
+                            <div style="font-size: 11px; color: var(--text-light);">📞 ${patient.phone || ''}</div>
+                        </div>
+                        <span class="badge ${a.status === 'confirmed' ? 'badge-confirmed' : 'badge-cancelled'}">
+                            ${a.status === 'confirmed' ? 'تأیید' : 'لغو'}
+                        </span>
+                    </div>
+                    <div class="appt-details">
+                        <span>📅 ${a.date_str}</span>
+                        <span>🕐 ${a.start_time}-${a.end_time}</span>
+                        <span>⏱️ ${a.duration}د</span>
+                    </div>
+                    ${a.status === 'confirmed' ? `<div class="appt-actions">
+                        <button class="appt-action-btn edit" onclick="openEditModal(${a.id})">✏️ ویرایش</button>
+                        <button class="appt-action-btn cancel" onclick="cancelAppointment(${a.id})">🚫 لغو</button>
+                        <button class="appt-action-btn delete" onclick="deleteAppointment(${a.id})">🗑️ حذف</button>
+                    </div>` : ''}
+                </div>`;
+            }).join('');
+        }
+        
+        // ---------- عملیات روی نوبت‌ها ----------
+        async function cancelAppointment(id) {
+            try {
+                await apiCall('PUT', `/api/appointments/${id}`, { status: 'cancelled' });
+                showToast('نوبت لغو شد', 'success');
+                await navigateTo(currentPage);
+            } catch (error) {
+                showToast('خطا در لغو نوبت');
+            }
+        }
+        
+        async function deleteAppointment(id) {
+            try {
+                await apiCall('DELETE', `/api/appointments/${id}`);
+                showToast('نوبت حذف شد', 'success');
+                await navigateTo(currentPage);
+            } catch (error) {
+                showToast('خطا در حذف نوبت');
+            }
+        }
+        
+        // ---------- ویرایش نوبت ----------
+        let editingApptId = null, editDuration = 30;
+        
+        function openEditModal(id) {
+            if (!cachedData) return;
+            const appt = cachedData.appointments.find(a => a.id === id);
+            if (!appt) return;
+            
+            editingApptId = id;
+            editDuration = appt.duration;
+            
+            const patient = cachedData.patients.find(p => p.id === appt.patient_id) || {};
+            const staffMember = cachedData.staff.find(s => s.id === appt.staff_id) || {};
+            
+            document.getElementById('editModalInfo').textContent = 
+                `بیمار: ${patient.name || 'نامشخص'} | درمانگر: ${staffMember.name || 'نامشخص'}`;
+            
+            const days = getNext30Days();
+            document.getElementById('editDate').innerHTML = days.map(d => 
+                `<option value="${d.dateStr}" ${d.dateStr === appt.date_str ? 'selected' : ''}>
+                    ${d.dayName} - ${d.dateStr}
+                </option>`
+            ).join('');
+            
+            document.getElementById('editTime').value = appt.start_time;
+            document.getElementById('editDur30').classList.toggle('selected', editDuration === 30);
+            document.getElementById('editDur45').classList.toggle('selected', editDuration === 45);
+            document.getElementById('editModal').classList.remove('hidden');
+        }
+        
+        function closeEditModal(event) {
+            if (!event || event.target === document.getElementById('editModal')) {
+                document.getElementById('editModal').classList.add('hidden');
+                editingApptId = null;
+            }
+        }
+        
+        function setEditDuration(dur) {
+            editDuration = dur;
+            document.getElementById('editDur30').classList.toggle('selected', dur === 30);
+            document.getElementById('editDur45').classList.toggle('selected', dur === 45);
+        }
+        
+        async function saveEditedAppt() {
+            if (!editingApptId) return;
+            const newDate = document.getElementById('editDate').value;
+            const newTime = document.getElementById('editTime').value;
+            const newEnd = addMinutes(newTime, editDuration);
+            
+            try {
+                await apiCall('PUT', `/api/appointments/${editingApptId}`, {
+                    dateStr: newDate,
+                    startTime: newTime,
+                    endTime: newEnd,
+                    duration: editDuration,
+                    status: 'confirmed'
+                });
+                showToast('نوبت ویرایش شد ✅', 'success');
+                closeEditModal();
+                await navigateTo(currentPage);
+            } catch (error) {
+                showToast('خطا در ویرایش نوبت');
+            }
+        }
+        
+        // ============================================================
+        // 7. راه‌اندازی اولیه
+        // ============================================================
+        
+        document.addEventListener('DOMContentLoaded', async () => {
+            // صفحه ورود رو نشون بده
+            showPage('loginPage');
+            
+            // اگه کاربر قبلاً لاگین کرده بود
+            const savedUser = localStorage.getItem('sepanta_currentUser');
+            if (savedUser) {
+                try {
+                    currentUser = JSON.parse(savedUser);
+                    await initApp();
+                } catch {
+                    showPage('loginPage');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
